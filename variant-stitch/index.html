@@ -930,6 +930,97 @@
       flex-shrink: 0;
     }
 
+    /* Webshop category list overrides */
+    .ws-category-list {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      background: white;
+    }
+
+    .ws-deals-link {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 16px;
+      height: 56px;
+      border-bottom: 1px solid #dadfe3;
+      cursor: pointer;
+      background: white;
+    }
+
+    .ws-deals-link:active {
+      background: var(--neutral-50);
+    }
+
+    .ws-deals-link svg {
+      width: 24px;
+      height: 24px;
+      color: var(--brand-darkblue);
+      flex-shrink: 0;
+    }
+
+    .ws-deals-link span {
+      font-size: 16px;
+      color: var(--brand-darkblue);
+    }
+
+    .ws-category-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--brand-darkblue);
+      padding: 16px 16px 8px;
+      letter-spacing: -0.5px;
+    }
+
+    .ws-category-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 8px 16px;
+      height: 64px;
+      border-bottom: 1px solid #dadfe3;
+      cursor: pointer;
+      background: white;
+    }
+
+    .ws-category-item:active {
+      background: var(--neutral-50);
+    }
+
+    .ws-category-item-img {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: #b2e9f8;
+      overflow: hidden;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .ws-category-item-img img {
+      width: 65%;
+      height: 65%;
+      object-fit: contain;
+    }
+
+    .ws-category-item-name {
+      font-size: 16px;
+      font-weight: 400;
+      color: var(--brand-darkblue);
+      line-height: 22px;
+    }
+
+    .producten-winkel, .producten-online {
+      width: 100%;
+    }
+
+    .producten-online {
+      display: none;
+    }
+
     /* ===== Mijn Action page ===== */
     .myaction-page {
       background: #d9edf9;
@@ -1811,6 +1902,58 @@
 
     <!-- ===== PAGE: Producten ===== -->
     <div class="page-view" id="page-producten">
+      <!-- Online mode -->
+      <div class="producten-online">
+        <div class="ws-category-list">
+          <div class="ws-deals-link">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M21.41 11.58l-9-9C12.05 2.22 11.55 2 11 2H4c-1.1 0-2 .9-2 2v7c0 .55.22 1.05.59 1.42l9 9c.36.36.86.58 1.41.58.55 0 1.05-.22 1.41-.59l7-7c.37-.36.59-.86.59-1.41 0-.55-.23-1.06-.59-1.42zM5.5 7C4.67 7 4 6.33 4 5.5S4.67 4 5.5 4 7 4.67 7 5.5 6.33 7 5.5 7z"/></svg>
+            <span>Alle tijdelijke deals</span>
+          </div>
+          <div class="ws-category-title">Producten</div>
+          <div class="ws-category-item">
+            <div class="ws-category-item-img"><img src="images/ws-cat-tuin.png" alt=""></div>
+            <span class="ws-category-item-name">Tuin</span>
+          </div>
+          <div class="ws-category-item">
+            <div class="ws-category-item-img"><img src="images/ws-cat-wonen.png" alt=""></div>
+            <span class="ws-category-item-name">Wonen</span>
+          </div>
+          <div class="ws-category-item">
+            <div class="ws-category-item-img"><img src="images/ws-cat-keuken.png" alt=""></div>
+            <span class="ws-category-item-name">Keuken</span>
+          </div>
+          <div class="ws-category-item">
+            <div class="ws-category-item-img"><img src="images/ws-cat-slapen.png" alt=""></div>
+            <span class="ws-category-item-name">Slapen</span>
+          </div>
+          <div class="ws-category-item">
+            <div class="ws-category-item-img"><img src="images/ws-cat-dhz.png" alt=""></div>
+            <span class="ws-category-item-name">Doe het zelf</span>
+          </div>
+          <div class="ws-category-item">
+            <div class="ws-category-item-img"><img src="images/ws-cat-smarthome.png" alt=""></div>
+            <span class="ws-category-item-name">Smart home</span>
+          </div>
+          <div class="ws-category-item">
+            <div class="ws-category-item-img"><img src="images/ws-cat-multimedia.png" alt=""></div>
+            <span class="ws-category-item-name">Multimedia</span>
+          </div>
+          <div class="ws-category-item">
+            <div class="ws-category-item-img"><img src="images/ws-cat-vrijetijd.png" alt=""></div>
+            <span class="ws-category-item-name">Vrije tijd</span>
+          </div>
+          <div class="ws-category-item">
+            <div class="ws-category-item-img"><img src="images/ws-cat-sport.png" alt=""></div>
+            <span class="ws-category-item-name">Sport &amp; verzorging</span>
+          </div>
+          <div class="ws-category-item">
+            <div class="ws-category-item-img"><img src="images/ws-cat-lsc.png" alt=""></div>
+            <span class="ws-category-item-name">LSC smart connect</span>
+          </div>
+        </div>
+      </div>
+      <!-- Winkel mode -->
+      <div class="producten-winkel">
       <div class="category-list">
         <div class="category-list-title">Producten</div>
         <div class="category-list-item">
@@ -1918,6 +2061,7 @@
           </div>
           <svg class="category-list-item-arrow" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M7.5 15l5-5-5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </div>
+      </div>
       </div>
     </div>
 
@@ -2188,6 +2332,14 @@
         winkelContent.classList.add('active');
         onlineContent.classList.remove('active');
       }
+    }
+
+    // Toggle producten page content
+    const productenWinkel = document.querySelector('.producten-winkel');
+    const productenOnline = document.querySelector('.producten-online');
+    if (productenWinkel && productenOnline) {
+      productenWinkel.style.display = isOnline ? 'none' : 'block';
+      productenOnline.style.display = isOnline ? 'block' : 'none';
     }
 
     // Animate header backgrounds, status bar, toggle, and loyalty btn
