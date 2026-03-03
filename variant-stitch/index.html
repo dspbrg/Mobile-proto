@@ -1097,6 +1097,170 @@
       cursor: pointer;
     }
 
+    /* ===== Weekactie page ===== */
+    .weekactie-page {
+      width: 100%;
+      background: white;
+    }
+
+    .weekactie-header {
+      width: 100%;
+      height: 48px;
+      background: var(--brand-orange);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .weekactie-header-logo {
+      height: 28px;
+      object-fit: contain;
+    }
+
+    .weekactie-header-bell {
+      position: absolute;
+      right: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 24px;
+      height: 24px;
+      color: white;
+    }
+
+    .weekactie-date {
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--brand-orange);
+      background: white;
+    }
+
+    .weekactie-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      background: #d4d5d6;
+      gap: 1px;
+      border-top: 1px solid #d4d5d6;
+    }
+
+    .wa-card {
+      background: white;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .wa-card-img {
+      width: 124px;
+      height: 124px;
+      object-fit: contain;
+      align-self: center;
+      margin-top: 12px;
+    }
+
+    .wa-card-badge {
+      position: absolute;
+      top: 0;
+      left: 0;
+      background: var(--brand-orange);
+      color: white;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 14px 3px 6px;
+      clip-path: polygon(0 0, 100% 0, calc(100% - 8px) 100%, 0 100%);
+    }
+
+    .wa-card-heart {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      width: 24px;
+      height: 24px;
+    }
+
+    .wa-card-info {
+      padding: 4px 10px 0;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .wa-card-name {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--brand-darkblue);
+      line-height: 1.2;
+    }
+
+    .wa-card-desc {
+      font-size: 12px;
+      color: #54585a;
+      line-height: 1;
+    }
+
+    .wa-card-pricing {
+      padding: 0 10px 12px;
+      margin-top: auto;
+    }
+
+    .wa-price-unit {
+      font-size: 11px;
+      color: #54585a;
+      margin-top: 16px;
+      margin-bottom: 2px;
+    }
+
+    .wa-card-price {
+      display: flex;
+      align-items: flex-start;
+    }
+
+    .wa-price-euros {
+      font-size: 48px;
+      font-weight: 700;
+      color: var(--brand-orange);
+      line-height: 0.77;
+      letter-spacing: -2px;
+    }
+
+    .wa-price-cents {
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--brand-orange);
+      line-height: 0.85;
+    }
+
+    .wa-card-cta {
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: var(--brand-orange);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .wa-card-cta svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    .weekactie-winkel, .weekactie-online {
+      width: 100%;
+    }
+
+    .weekactie-online {
+      display: none;
+    }
+
     /* ===== Mijn lijstjes (winkel) ===== */
     .mijn-lijstjes {
       padding: 24px 16px;
@@ -1538,7 +1702,7 @@
       position: absolute;
       top: 0;
       left: 0;
-      background: var(--brand-orange);
+      background: #00b6e7;
       color: white;
       font-size: 9px;
       font-weight: 700;
@@ -2244,37 +2408,149 @@
 
     <!-- ===== PAGE: Weekactie ===== -->
     <div class="page-view" id="page-weekactie">
-      <div class="section-header">
-        <div class="layout-navbar">
-          <div class="toggle-app" id="toggle-switch-3">
-            <div class="toggle-option active" data-toggle="winkel">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M19.6536 2C20.2788 2.00007 20.8384 2.38822 21.0579 2.97363L23.6829 9.97363C24.0504 10.9541 23.3258 11.9999 22.2786 12H20.9803V22H18.9803V12H13.9803V22H2.98031V12H1.72101C0.674079 11.9997-0.0506501 10.954 0.316717 9.97363L2.94172 2.97363C3.16121 2.38832 3.72093 2.00019 4.34601 2H19.6536ZM4.98031 20H11.9803V17H4.98031V20ZM4.98031 15H11.9803V12H4.98031V15ZM2.44367 10H21.556L19.306 4H4.69367L2.44367 10Z" transform="translate(0, 2)"/></svg>
-              <span class="toggle-label">In de winkel</span>
-            </div>
-            <div class="toggle-option" data-toggle="online">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M13.5839 1.63194C14.0634 1.35793 14.6741 1.52449 14.9481 2.00401L18.6601 8.5001H20.4394C21.4152 8.5001 22.1311 9.41764 21.8944 10.3644L19.4286 20.2276C19.0947 21.5631 17.8951 22.5001 16.5185 22.5001H5.64151C4.26492 22.5001 3.06522 21.5631 2.73135 20.2276L0.265531 10.3644C0.0288506 9.41764 0.744754 8.5001 1.72061 8.5001H2.49991L6.21182 2.00401C6.48583 1.52449 7.09656 1.35793 7.57608 1.63194C8.0556 1.90595 8.22216 2.51668 7.94815 2.99619L4.80264 8.5001H16.3573L13.2118 2.99619C12.9378 2.51668 13.1044 1.90595 13.5839 1.63194ZM4.67178 19.7423C4.78307 20.1874 5.18265 20.5001 5.64151 20.5001H16.5185C16.9773 20.5001 17.3769 20.1874 17.4882 19.7423L19.7997 10.5001H2.36026L4.67178 19.7423Z" transform="translate(1, 0)"/></svg>
-              <span class="toggle-label">Online deals</span>
-            </div>
-          </div>
-          <div class="loyalty-btn">
-            <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><g transform="rotate(90,12,12) translate(2,0)"><path fill-rule="evenodd" clip-rule="evenodd" d="M17 2H3C2.44772 2 2 2.44772 2 3V21C2 21.5523 2.44772 22 3 22H17C17.5523 22 18 21.5523 18 21V3C18 2.44771 17.5523 2 17 2ZM3 0C1.34315 0 0 1.34315 0 3V21C0 22.6569 1.34315 24 3 24H17C18.6569 24 20 22.6569 20 21V3C20 1.34315 18.6569 0 17 0H3Z" fill="#001489"/></g><svg x="5" y="8" width="7" height="7.8" viewBox="0 0 7.01567 7.80371"><path d="M2.84921 0C2.9114 0 2.94619 0.0484489 2.92636 0.107422L0.377531 7.69629C0.353123 7.76863 0.316677 7.80371 0.241789 7.80371H0.0826091C0.020672 7.80356-0.0141236 7.75503 0.00546067 7.69629L2.55527 0.107422C2.57995 0.039617 2.61401 0 2.69101 0H2.84921ZM4.70566 0C4.76762 3.85542e-05 4.80211 0.0478243 4.7828 0.106445L2.233 7.69531C2.21321 7.75417 2.14668 7.80254 2.08456 7.80273H1.56796C1.50582 7.80263 1.471 7.75422 1.49081 7.69531L4.04062 0.106445C4.06073 0.0480036 4.12726 0.000258766 4.18905 0H4.70566ZM6.9332 0C6.99507 7.03894e-05 7.02959 0.0478523 7.01034 0.106445L4.46054 7.69531C4.44075 7.75415 4.3742 7.80251 4.3121 7.80273H3.42441C3.36231 7.80263 3.32749 7.75422 3.34726 7.69531L5.89609 0.106445C5.91614 0.047829 5.98356 0.000141417 6.0455 0H6.9332Z" fill="#001489"/></svg><svg x="11" y="8" width="7.3" height="7.8" viewBox="0 0 7.30998 7.80339"><path fill-rule="evenodd" clip-rule="evenodd" d="M5.29935 1.77084L4.99625 3.65312C4.98638 3.71454 4.92736 3.7648 4.86514 3.7648H3.28812C3.22594 3.7648 3.19121 3.71654 3.21104 3.65757L3.84493 1.77084C3.89427 1.62366 4.06617 1.50439 4.22872 1.50439H5.048C5.21046 1.50439 5.32303 1.62366 5.29935 1.77084M2.31324 0.826465L0.00558473 7.69612C-0.0142469 7.75513 0.0204384 7.80339 0.0827033 7.80339H1.7052C1.76743 7.80339 1.83455 7.75513 1.85438 7.69612L2.6336 5.3765C2.65343 5.31749 2.72055 5.26923 2.78278 5.26923H4.62298C4.68525 5.26923 4.72804 5.31949 4.71817 5.38092L4.34614 7.6917C4.33627 7.75312 4.3791 7.80339 4.44133 7.80339H6.06387C6.12613 7.80339 6.18511 7.75312 6.19502 7.6917L7.30021 0.826465C7.37368 0.370097 7.02454 0 6.5204 0H3.50386C2.9996 0 2.46659 0.370097 2.31324 0.826465" fill="#001489"/></svg></svg>
-          </div>
+      <!-- Winkel mode -->
+      <div class="weekactie-winkel">
+      <div class="weekactie-page">
+        <div class="weekactie-header">
+          <img class="weekactie-header-logo" src="images/weekactie-logo.png" alt="Weekactie">
+          <svg class="weekactie-header-bell" viewBox="0 0 24 24" fill="none"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M13.73 21a2 2 0 01-3.46 0" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="18" cy="4" r="3" fill="#FF8200" stroke="white" stroke-width="1.5"/></svg>
         </div>
-        <div class="search-bar">
-          <img class="search-trapeze left" src="images/search-trapeze-left.svg" alt="">
-          <div class="search-center">
-            <span class="search-label">Waar ben je naar op zoek?</span>
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M21 22C20.7441 22 20.4883 21.9023 20.293 21.707L14.9033 16.3174C13.5478 17.3716 11.8457 18 10 18C5.5889 18 2 14.4111 2 10C2 5.5889 5.5889 2 10 2C14.4111 2 18 5.5889 18 10C18 11.8457 17.3711 13.5479 16.3174 14.9033L21.707 20.2929C22.0976 20.6835 22.0976 21.3163 21.707 21.707C21.5117 21.9023 21.2559 22 21 22ZM10 4C6.6914 4 4 6.6914 4 10C4 13.3086 6.6914 16 10 16C13.3086 16 16 13.3086 16 10C16 6.6914 13.3086 4 10 4Z"/></svg>
+        <div class="weekactie-date">28 september t/m 4 oktober</div>
+        <div class="weekactie-grid">
+          <div class="wa-card">
+            <span class="wa-card-badge">Weekactie</span>
+            <svg class="wa-card-heart" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+            <img class="wa-card-img" src="images/wa-prod1.png" alt="Tulpenbollen">
+            <div class="wa-card-info"><span class="wa-card-name">Tulpenbollen</span><span class="wa-card-desc">15 stuks | diverse varianten</span></div>
+            <div class="wa-card-pricing"><div class="wa-price-unit">&euro; 0,11/st</div><div class="wa-card-price"><span class="wa-price-euros">1</span><span class="wa-price-cents">69</span></div></div>
           </div>
-          <img class="search-trapeze right" src="images/search-trapeze-right.svg" alt="">
+          <div class="wa-card">
+            <span class="wa-card-badge">Weekactie</span>
+            <svg class="wa-card-heart" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+            <img class="wa-card-img" src="images/wa-prod2.png" alt="Deurmat">
+            <div class="wa-card-info"><span class="wa-card-name">Deurmat</span><span class="wa-card-desc">40 x 60 cm | diverse kleuren</span></div>
+            <div class="wa-card-pricing"><div class="wa-price-unit">&euro; 2,49/st</div><div class="wa-card-price"><span class="wa-price-euros">2</span><span class="wa-price-cents">49</span></div></div>
+          </div>
+          <div class="wa-card">
+            <span class="wa-card-badge">Weekactie</span>
+            <svg class="wa-card-heart" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+            <img class="wa-card-img" src="images/wa-prod3.png" alt="Selfie sheet mask">
+            <div class="wa-card-info"><span class="wa-card-name">Selfie sheet mask</span><span class="wa-card-desc">Diverse varianten</span></div>
+            <div class="wa-card-pricing"><div class="wa-price-unit">&euro; 25,65/l</div><div class="wa-card-price"><span class="wa-price-euros">0</span><span class="wa-price-cents">59</span></div></div>
+          </div>
+          <div class="wa-card">
+            <span class="wa-card-badge">Weekactie</span>
+            <svg class="wa-card-heart" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+            <img class="wa-card-img" src="images/wa-prod4.png" alt="Van Bleiswijck verf Metallics">
+            <div class="wa-card-info"><span class="wa-card-name">Van Bleiswijck verf Metallics</span><span class="wa-card-desc">250 ml | goud</span></div>
+            <div class="wa-card-pricing"><div class="wa-price-unit">&euro; 6,60/l</div><div class="wa-card-price"><span class="wa-price-euros">1</span><span class="wa-price-cents">65</span></div></div>
+          </div>
+          <div class="wa-card">
+            <span class="wa-card-badge">Weekactie</span>
+            <svg class="wa-card-heart" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+            <img class="wa-card-img" src="images/wa-prod5.png" alt="Superfinn vaatwastabletten">
+            <div class="wa-card-info"><span class="wa-card-name">Superfinn vaatwastabletten Classic</span><span class="wa-card-desc">64 stuks</span></div>
+            <div class="wa-card-pricing"><div class="wa-price-unit">&euro; 0,05/st</div><div class="wa-card-price"><span class="wa-price-euros">2</span><span class="wa-price-cents">89</span></div></div>
+          </div>
+          <div class="wa-card">
+            <span class="wa-card-badge">Weekactie</span>
+            <svg class="wa-card-heart" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+            <img class="wa-card-img" src="images/wa-prod6.png" alt="Kleedje van imitatiebont">
+            <div class="wa-card-info"><span class="wa-card-name">Kleedje van imitatiebont</span><span class="wa-card-desc">68 x 100 cm | diverse varianten</span></div>
+            <div class="wa-card-pricing"><div class="wa-price-unit">&euro; 4,99/st</div><div class="wa-card-price"><span class="wa-price-euros">4</span><span class="wa-price-cents">99</span></div></div>
+          </div>
+          <div class="wa-card">
+            <span class="wa-card-badge">Weekactie</span>
+            <img class="wa-card-img" src="images/wa-prod7.png" alt="Woondeken">
+            <div class="wa-card-info"><span class="wa-card-name">Woondeken</span><span class="wa-card-desc">150 x 200 cm | diverse varianten</span></div>
+            <div class="wa-card-pricing"><div class="wa-price-unit">&euro; 4,32/m2</div><div class="wa-card-price"><span class="wa-price-euros">12</span><span class="wa-price-cents">95</span></div></div>
+          </div>
+          <div class="wa-card">
+            <span class="wa-card-badge">Weekactie</span>
+            <img class="wa-card-img" src="images/wa-prod8.png" alt="Kussenhoes van imitatiebont">
+            <div class="wa-card-info"><span class="wa-card-name">Kussenhoes van imitatiebont</span><span class="wa-card-desc">45 x 45 cm | diverse varianten</span></div>
+            <div class="wa-card-pricing"><div class="wa-price-unit">&euro; 2,99/st</div><div class="wa-card-price"><span class="wa-price-euros">2</span><span class="wa-price-cents">99</span></div></div>
+          </div>
+          <div class="wa-card">
+            <span class="wa-card-badge">Weekactie</span>
+            <img class="wa-card-img" src="images/wa-prod9.png" alt="Chenille badmat">
+            <div class="wa-card-info"><span class="wa-card-name">Chenille badmat</span><span class="wa-card-desc">50 x 80 cm | diverse varianten</span></div>
+            <div class="wa-card-pricing"><div class="wa-price-unit">&euro; 12,38/m2</div><div class="wa-card-price"><span class="wa-price-euros">4</span><span class="wa-price-cents">95</span></div></div>
+          </div>
+          <div class="wa-card">
+            <span class="wa-card-badge">Weekactie</span>
+            <img class="wa-card-img" src="images/wa-prod10.png" alt="Geurkaars">
+            <div class="wa-card-info"><span class="wa-card-name">Geurkaars</span><span class="wa-card-desc">&Oslash; 10 x 12,5 cm | diverse varianten</span></div>
+            <div class="wa-card-pricing"><div class="wa-price-unit">&euro; 8,31/kg</div><div class="wa-card-price"><span class="wa-price-euros">3</span><span class="wa-price-cents">99</span></div></div>
+          </div>
+          <div class="wa-card">
+            <span class="wa-card-badge">Weekactie</span>
+            <img class="wa-card-img" src="images/wa-prod11.png" alt="Ledkaars">
+            <div class="wa-card-info"><span class="wa-card-name">Ledkaars</span><span class="wa-card-desc">&Oslash; 7 x 9 cm | diverse varianten</span></div>
+            <div class="wa-card-pricing"><div class="wa-price-unit">&euro; 1,59/st</div><div class="wa-card-price"><span class="wa-price-euros">1</span><span class="wa-price-cents">59</span></div></div>
+          </div>
+          <div class="wa-card">
+            <span class="wa-card-badge">Weekactie</span>
+            <img class="wa-card-img" src="images/wa-prod12.png" alt="XOXO style eenhoorn">
+            <div class="wa-card-info"><span class="wa-card-name">XOXO style eenhoorn</span><span class="wa-card-desc">Met licht</span></div>
+            <div class="wa-card-pricing"><div class="wa-price-unit">&euro; 7,95/st</div><div class="wa-card-price"><span class="wa-price-euros">7</span><span class="wa-price-cents">95</span></div></div>
+          </div>
         </div>
       </div>
-      <div class="placeholder-page">
-        <div class="placeholder-icon">
-          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z"/><circle cx="7" cy="7" r="1.5"/></svg>
+      </div>
+      <!-- Online mode -->
+      <div class="weekactie-online">
+      <div class="weekactie-page">
+        <div class="weekactie-header">
+          <img class="weekactie-header-logo" src="images/weekactie-logo.png" alt="Weekactie">
+          <svg class="weekactie-header-bell" viewBox="0 0 24 24" fill="none"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M13.73 21a2 2 0 01-3.46 0" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="18" cy="4" r="3" fill="#FF8200" stroke="white" stroke-width="1.5"/></svg>
         </div>
-        <span class="placeholder-title">Weekactie</span>
-        <span class="placeholder-subtitle">Deze pagina wordt later uitgewerkt</span>
+        <div class="weekactie-date">28 september t/m 4 oktober</div>
+        <div class="weekactie-grid">
+          <div class="wa-card">
+            <span class="wa-card-badge">Online deal</span>
+            <div class="wa-card-cta"><svg viewBox="0 0 14 14" fill="none"><path d="M7 1v12M1 7h12" stroke="white" stroke-width="2" stroke-linecap="round"/></svg></div>
+            <img class="wa-card-img" src="https://shop.action.com/static/images/800/3560231186166_25aac83a-a307-431b-83bb-8533aba375ba.jpg" alt="Design Boekenkast">
+            <div class="wa-card-info"><span class="wa-card-name">Design boekenkast met schuifdeuren</span><span class="wa-card-desc">80 x 40 x 175 cm</span></div>
+            <div class="wa-card-pricing"><div class="wa-price-unit">&euro; 129,00/st</div><div class="wa-card-price"><span class="wa-price-euros">129</span><span class="wa-price-cents">00</span></div></div>
+          </div>
+          <div class="wa-card">
+            <span class="wa-card-badge">Online deal</span>
+            <div class="wa-card-cta"><svg viewBox="0 0 14 14" fill="none"><path d="M7 1v12M1 7h12" stroke="white" stroke-width="2" stroke-linecap="round"/></svg></div>
+            <img class="wa-card-img" src="https://shop.action.com/static/images/800/8718964176304_a4e2109c-d55f-4c36-b60c-18de0e63f5d9.jpg" alt="Luxe Tuinstoel">
+            <div class="wa-card-info"><span class="wa-card-name">Luxe tuinstoel - set van 2</span><span class="wa-card-desc">64 x 94,5 x 107,5 cm</span></div>
+            <div class="wa-card-pricing"><div class="wa-price-unit">&euro; 29,98/st</div><div class="wa-card-price"><span class="wa-price-euros">59</span><span class="wa-price-cents">95</span></div></div>
+          </div>
+          <div class="wa-card">
+            <span class="wa-card-badge">Online deal</span>
+            <div class="wa-card-cta"><svg viewBox="0 0 14 14" fill="none"><path d="M7 1v12M1 7h12" stroke="white" stroke-width="2" stroke-linecap="round"/></svg></div>
+            <img class="wa-card-img" src="https://shop.action.com/static/images/800/8721184890967_a37e7b19-14b9-4a55-b5d9-be378abf4d9a.jpg" alt="Zweefparasol XL">
+            <div class="wa-card-info"><span class="wa-card-name">Zweefparasol XL - antraciet</span><span class="wa-card-desc">&Oslash; 400 cm | incl. hoes</span></div>
+            <div class="wa-card-pricing"><div class="wa-price-unit">&euro; 149,00/st</div><div class="wa-card-price"><span class="wa-price-euros">149</span><span class="wa-price-cents">00</span></div></div>
+          </div>
+          <div class="wa-card">
+            <span class="wa-card-badge">Online deal</span>
+            <div class="wa-card-cta"><svg viewBox="0 0 14 14" fill="none"><path d="M7 1v12M1 7h12" stroke="white" stroke-width="2" stroke-linecap="round"/></svg></div>
+            <img class="wa-card-img" src="https://shop.action.com/static/images/800/706943001059_028c9789-f7c7-4165-a621-9764285954ee.jpg" alt="Kinderligstoel">
+            <div class="wa-card-info"><span class="wa-card-name">Kinderligstoel met parasol</span><span class="wa-card-desc">92 x 50 x 51 cm</span></div>
+            <div class="wa-card-pricing"><div class="wa-price-unit">&euro; 49,95/st</div><div class="wa-card-price"><span class="wa-price-euros">49</span><span class="wa-price-cents">95</span></div></div>
+          </div>
+          <div class="wa-card">
+            <span class="wa-card-badge">Online deal</span>
+            <div class="wa-card-cta"><svg viewBox="0 0 14 14" fill="none"><path d="M7 1v12M1 7h12" stroke="white" stroke-width="2" stroke-linecap="round"/></svg></div>
+            <img class="wa-card-img" src="https://shop.action.com/static/images/800/8718964267637_697ec6a1-e1fb-47af-969e-822c0f09ee1c.jpg" alt="LED Buitenlamp XXL">
+            <div class="wa-card-info"><span class="wa-card-name">LED buitenlamp XXL</span><span class="wa-card-desc">&Oslash; 23 x 107,5 cm | RGB + warm-wit</span></div>
+            <div class="wa-card-pricing"><div class="wa-price-unit">&euro; 39,95/st</div><div class="wa-card-price"><span class="wa-price-euros">39</span><span class="wa-price-cents">95</span></div></div>
+          </div>
+          <div class="wa-card">
+            <span class="wa-card-badge">Online deal</span>
+            <div class="wa-card-cta"><svg viewBox="0 0 14 14" fill="none"><path d="M7 1v12M1 7h12" stroke="white" stroke-width="2" stroke-linecap="round"/></svg></div>
+            <img class="wa-card-img" src="https://shop.action.com/static/images/800/8718964267668_5f6f531c-1e62-466d-b9c7-12f0692c9733.jpg" alt="Paddenstoel Solarlamp">
+            <div class="wa-card-info"><span class="wa-card-name">Paddenstoel solarlamp</span><span class="wa-card-desc">16 kleuren | IP44</span></div>
+            <div class="wa-card-pricing"><div class="wa-price-unit">&euro; 34,95/st</div><div class="wa-card-price"><span class="wa-price-euros">34</span><span class="wa-price-cents">95</span></div></div>
+          </div>
+        </div>
+      </div>
       </div>
     </div>
 
@@ -2444,7 +2720,7 @@
           </div>
         </div>
 
-        <div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
+        <div style="display:flex;flex-direction:column;align-items:center;gap:8px;margin-top:24px;">
           <button class="myaction-logout">Uitloggen</button>
           <span class="myaction-version">Versie 1.113.0 (9712)</span>
         </div>
@@ -2565,6 +2841,14 @@
     if (lijstjesWinkel && lijstjesOnline) {
       lijstjesWinkel.style.display = isOnline ? 'none' : 'block';
       lijstjesOnline.style.display = isOnline ? 'block' : 'none';
+    }
+
+    // Toggle weekactie page content
+    const weekactieWinkel = document.querySelector('.weekactie-winkel');
+    const weekactieOnline = document.querySelector('.weekactie-online');
+    if (weekactieWinkel && weekactieOnline) {
+      weekactieWinkel.style.display = isOnline ? 'none' : 'block';
+      weekactieOnline.style.display = isOnline ? 'block' : 'none';
     }
 
     // Animate header backgrounds, status bar, toggle, and loyalty btn
