@@ -877,10 +877,11 @@
     }
 
     .category-list-title {
-      font-size: 16px;
-      font-weight: 500;
+      font-size: 24px;
+      font-weight: 700;
       color: var(--brand-darkblue);
       padding: 16px 16px 8px;
+      letter-spacing: -0.5px;
     }
 
     .category-list-item {
@@ -966,7 +967,7 @@
     }
 
     .ws-category-title {
-      font-size: 18px;
+      font-size: 24px;
       font-weight: 700;
       color: var(--brand-darkblue);
       padding: 16px 16px 8px;
@@ -1094,6 +1095,82 @@
       font-size: 16px;
       font-weight: 500;
       cursor: pointer;
+    }
+
+    /* ===== Mijn lijstjes (winkel) ===== */
+    .mijn-lijstjes {
+      padding: 24px 16px;
+      background: white;
+      min-height: 100%;
+    }
+
+    .mijn-lijstjes-title {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--brand-darkblue);
+      letter-spacing: -0.5px;
+      margin-bottom: 20px;
+    }
+
+    .lijstjes-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .lijstje-card {
+      border-radius: 12px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .lijstje-card-thumb {
+      aspect-ratio: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #d9edf9;
+      position: relative;
+    }
+
+    .lijstje-card-thumb.orange {
+      background: #fff3e6;
+    }
+
+    .lijstje-card-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .lijstje-card-thumb .lijstje-icon {
+      width: 48px;
+      height: 48px;
+      object-fit: contain;
+    }
+
+    .lijstje-card-info {
+      padding: 10px 12px;
+      background: #f3f4f6;
+    }
+
+    .lijstje-card-name {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--brand-darkblue);
+      letter-spacing: -0.3px;
+      display: block;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .lijstje-card-count {
+      font-size: 13px;
+      color: #54585a;
+      display: block;
+      margin-top: 2px;
     }
 
     /* ===== Mijn Action page ===== */
@@ -2192,14 +2269,51 @@
           </div>
         </div>
       </div>
-      <!-- Winkel mode: placeholder -->
+      <!-- Winkel mode: Mijn lijstjes -->
       <div class="lijstjes-winkel">
-        <div class="placeholder-page">
-          <div class="placeholder-icon">
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+        <div class="mijn-lijstjes">
+          <h2 class="mijn-lijstjes-title">Mijn lijstjes</h2>
+          <div class="lijstjes-grid">
+            <!-- Maak een lijstje -->
+            <div class="lijstje-card">
+              <div class="lijstje-card-thumb">
+                <img class="lijstje-icon" src="images/lijstje-plus.svg" alt="+">
+              </div>
+              <div class="lijstje-card-info">
+                <span class="lijstje-card-name">Maak een lijstje</span>
+              </div>
+            </div>
+            <!-- Verlanglijstje Bobby -->
+            <div class="lijstje-card">
+              <div class="lijstje-card-thumb orange">
+                <img src="images/lijstje-puzzleblock.png" alt="Verlanglijstje Bobby">
+              </div>
+              <div class="lijstje-card-info">
+                <span class="lijstje-card-name">Verlanglijstje Bobby</span>
+                <span class="lijstje-card-count">5 producten</span>
+              </div>
+            </div>
+            <!-- BBQ'en -->
+            <div class="lijstje-card">
+              <div class="lijstje-card-thumb">
+                <img src="images/lijstje-bbq.png" alt="BBQ'en">
+              </div>
+              <div class="lijstje-card-info">
+                <span class="lijstje-card-name">BBQ'en 😎</span>
+                <span class="lijstje-card-count">5 producten</span>
+              </div>
+            </div>
+            <!-- Kerst 2025 -->
+            <div class="lijstje-card">
+              <div class="lijstje-card-thumb">
+                <img class="lijstje-icon" src="images/lijstje-heart.svg" alt="Kerst 2025">
+              </div>
+              <div class="lijstje-card-info">
+                <span class="lijstje-card-name">Kerst 2025</span>
+                <span class="lijstje-card-count">0 producten</span>
+              </div>
+            </div>
           </div>
-          <span class="placeholder-title">Mijn lijstjes</span>
-          <span class="placeholder-subtitle">Deze pagina wordt later uitgewerkt</span>
         </div>
       </div>
     </div>
