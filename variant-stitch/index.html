@@ -2498,6 +2498,12 @@
       // Show target page
       pages.forEach(p => p.classList.remove('active'));
       document.getElementById(targetPage).classList.add('active');
+
+      // Status bar bg for Mijn Action
+      const statusBar = document.querySelector('.status-bar');
+      if (statusBar) {
+        statusBar.style.background = targetPage === 'page-account' ? '#d9edf9' : '';
+      }
     });
   });
 
