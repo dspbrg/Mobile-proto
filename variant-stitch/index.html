@@ -205,7 +205,8 @@
 
     /* ===== Search Bar ===== */
     .search-bar {
-      width: calc(100% - 32px);
+      align-self: stretch;
+      margin: 0 16px;
       display: flex;
       align-items: center;
       gap: 8px;
@@ -943,58 +944,12 @@
     .myaction-avatar {
       width: 144px;
       height: 144px;
-      border-radius: 50%;
-      background: #c4e3f5;
-      position: relative;
-      overflow: hidden;
       flex-shrink: 0;
     }
 
-    .myaction-avatar .avatar-shelve {
-      position: absolute;
-      left: 0;
-      right: 0;
-      height: 14px;
-      opacity: 0.4;
-    }
-    .myaction-avatar .avatar-shelve:first-child { top: 31%; }
-    .myaction-avatar .avatar-shelve:nth-child(2) { top: 70%; }
-
-    .myaction-avatar .avatar-product {
-      position: absolute;
-      opacity: 0.4;
-    }
-
-    .myaction-avatar .avatar-phone {
-      position: absolute;
-      left: -50px;
-      top: 26%;
-      width: 119px;
-      height: 226px;
-    }
-
-    .myaction-avatar .avatar-logo-wrap {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 54px;
-      height: 54px;
-      background: white;
-      border-radius: 13px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .myaction-avatar .avatar-logo-wrap img {
-      width: 44px;
-      height: 27px;
-    }
-
-    .myaction-avatar .avatar-stroke {
-      position: absolute;
-      inset: -2px;
+    .myaction-avatar img {
+      width: 100%;
+      height: 100%;
     }
 
     .myaction-section {
@@ -1104,18 +1059,13 @@
     }
 
     /* ===== Online mode styles ===== */
-    .section-header {
-      transition: background-color 0.4s ease, padding-bottom 0.4s ease;
-    }
-
     .section-header.online-mode {
       background: var(--brand-darkblue);
       padding-bottom: 16px;
     }
 
     .section-header.online-mode .search-bar {
-      width: calc(100% - 32px);
-      border: 1px solid transparent;
+      border: none;
       border-radius: 0;
       padding: 0;
       gap: 0;
@@ -1861,31 +1811,6 @@
 
     <!-- ===== PAGE: Producten ===== -->
     <div class="page-view" id="page-producten">
-      <div class="section-header">
-        <div class="layout-navbar">
-          <div class="toggle-app" id="toggle-switch-2">
-            <div class="toggle-option active" data-toggle="winkel">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M19.6536 2C20.2788 2.00007 20.8384 2.38822 21.0579 2.97363L23.6829 9.97363C24.0504 10.9541 23.3258 11.9999 22.2786 12H20.9803V22H18.9803V12H13.9803V22H2.98031V12H1.72101C0.674079 11.9997-0.0506501 10.954 0.316717 9.97363L2.94172 2.97363C3.16121 2.38832 3.72093 2.00019 4.34601 2H19.6536ZM4.98031 20H11.9803V17H4.98031V20ZM4.98031 15H11.9803V12H4.98031V15ZM2.44367 10H21.556L19.306 4H4.69367L2.44367 10Z" transform="translate(0, 2)"/></svg>
-              <span class="toggle-label">In de winkel</span>
-            </div>
-            <div class="toggle-option" data-toggle="online">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M13.5839 1.63194C14.0634 1.35793 14.6741 1.52449 14.9481 2.00401L18.6601 8.5001H20.4394C21.4152 8.5001 22.1311 9.41764 21.8944 10.3644L19.4286 20.2276C19.0947 21.5631 17.8951 22.5001 16.5185 22.5001H5.64151C4.26492 22.5001 3.06522 21.5631 2.73135 20.2276L0.265531 10.3644C0.0288506 9.41764 0.744754 8.5001 1.72061 8.5001H2.49991L6.21182 2.00401C6.48583 1.52449 7.09656 1.35793 7.57608 1.63194C8.0556 1.90595 8.22216 2.51668 7.94815 2.99619L4.80264 8.5001H16.3573L13.2118 2.99619C12.9378 2.51668 13.1044 1.90595 13.5839 1.63194ZM4.67178 19.7423C4.78307 20.1874 5.18265 20.5001 5.64151 20.5001H16.5185C16.9773 20.5001 17.3769 20.1874 17.4882 19.7423L19.7997 10.5001H2.36026L4.67178 19.7423Z" transform="translate(1, 0)"/></svg>
-              <span class="toggle-label">Online deals</span>
-            </div>
-          </div>
-          <div class="loyalty-btn">
-            <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><g transform="rotate(90,12,12) translate(2,0)"><path fill-rule="evenodd" clip-rule="evenodd" d="M17 2H3C2.44772 2 2 2.44772 2 3V21C2 21.5523 2.44772 22 3 22H17C17.5523 22 18 21.5523 18 21V3C18 2.44771 17.5523 2 17 2ZM3 0C1.34315 0 0 1.34315 0 3V21C0 22.6569 1.34315 24 3 24H17C18.6569 24 20 22.6569 20 21V3C20 1.34315 18.6569 0 17 0H3Z" fill="#001489"/></g><svg x="5" y="8" width="7" height="7.8" viewBox="0 0 7.01567 7.80371"><path d="M2.84921 0C2.9114 0 2.94619 0.0484489 2.92636 0.107422L0.377531 7.69629C0.353123 7.76863 0.316677 7.80371 0.241789 7.80371H0.0826091C0.020672 7.80356-0.0141236 7.75503 0.00546067 7.69629L2.55527 0.107422C2.57995 0.039617 2.61401 0 2.69101 0H2.84921ZM4.70566 0C4.76762 3.85542e-05 4.80211 0.0478243 4.7828 0.106445L2.233 7.69531C2.21321 7.75417 2.14668 7.80254 2.08456 7.80273H1.56796C1.50582 7.80263 1.471 7.75422 1.49081 7.69531L4.04062 0.106445C4.06073 0.0480036 4.12726 0.000258766 4.18905 0H4.70566ZM6.9332 0C6.99507 7.03894e-05 7.02959 0.0478523 7.01034 0.106445L4.46054 7.69531C4.44075 7.75415 4.3742 7.80251 4.3121 7.80273H3.42441C3.36231 7.80263 3.32749 7.75422 3.34726 7.69531L5.89609 0.106445C5.91614 0.047829 5.98356 0.000141417 6.0455 0H6.9332Z" fill="#001489"/></svg><svg x="11" y="8" width="7.3" height="7.8" viewBox="0 0 7.30998 7.80339"><path fill-rule="evenodd" clip-rule="evenodd" d="M5.29935 1.77084L4.99625 3.65312C4.98638 3.71454 4.92736 3.7648 4.86514 3.7648H3.28812C3.22594 3.7648 3.19121 3.71654 3.21104 3.65757L3.84493 1.77084C3.89427 1.62366 4.06617 1.50439 4.22872 1.50439H5.048C5.21046 1.50439 5.32303 1.62366 5.29935 1.77084M2.31324 0.826465L0.00558473 7.69612C-0.0142469 7.75513 0.0204384 7.80339 0.0827033 7.80339H1.7052C1.76743 7.80339 1.83455 7.75513 1.85438 7.69612L2.6336 5.3765C2.65343 5.31749 2.72055 5.26923 2.78278 5.26923H4.62298C4.68525 5.26923 4.72804 5.31949 4.71817 5.38092L4.34614 7.6917C4.33627 7.75312 4.3791 7.80339 4.44133 7.80339H6.06387C6.12613 7.80339 6.18511 7.75312 6.19502 7.6917L7.30021 0.826465C7.37368 0.370097 7.02454 0 6.5204 0H3.50386C2.9996 0 2.46659 0.370097 2.31324 0.826465" fill="#001489"/></svg></svg>
-          </div>
-        </div>
-        <div class="search-bar">
-          <img class="search-trapeze left" src="images/search-trapeze-left.svg" alt="">
-          <div class="search-center">
-            <span class="search-label">Waar ben je naar op zoek?</span>
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M21 22C20.7441 22 20.4883 21.9023 20.293 21.707L14.9033 16.3174C13.5478 17.3716 11.8457 18 10 18C5.5889 18 2 14.4111 2 10C2 5.5889 5.5889 2 10 2C14.4111 2 18 5.5889 18 10C18 11.8457 17.3711 13.5479 16.3174 14.9033L21.707 20.2929C22.0976 20.6835 22.0976 21.3163 21.707 21.707C21.5117 21.9023 21.2559 22 21 22ZM10 4C6.6914 4 4 6.6914 4 10C4 13.3086 6.6914 16 10 16C13.3086 16 16 13.3086 16 10C16 6.6914 13.3086 4 10 4Z"/></svg>
-          </div>
-          <img class="search-trapeze right" src="images/search-trapeze-right.svg" alt="">
-        </div>
-      </div>
       <div class="category-list">
         <div class="category-list-title">Producten</div>
         <div class="category-list-item">
@@ -2070,46 +1995,9 @@
 
     <!-- ===== PAGE: Mijn Action ===== -->
     <div class="page-view" id="page-account">
-      <div class="section-header">
-        <div class="layout-navbar">
-          <div class="toggle-app" id="toggle-switch-5">
-            <div class="toggle-option active" data-toggle="winkel">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M19.6536 2C20.2788 2.00007 20.8384 2.38822 21.0579 2.97363L23.6829 9.97363C24.0504 10.9541 23.3258 11.9999 22.2786 12H20.9803V22H18.9803V12H13.9803V22H2.98031V12H1.72101C0.674079 11.9997-0.0506501 10.954 0.316717 9.97363L2.94172 2.97363C3.16121 2.38832 3.72093 2.00019 4.34601 2H19.6536ZM4.98031 20H11.9803V17H4.98031V20ZM4.98031 15H11.9803V12H4.98031V15ZM2.44367 10H21.556L19.306 4H4.69367L2.44367 10Z" transform="translate(0, 2)"/></svg>
-              <span class="toggle-label">In de winkel</span>
-            </div>
-            <div class="toggle-option" data-toggle="online">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M13.5839 1.63194C14.0634 1.35793 14.6741 1.52449 14.9481 2.00401L18.6601 8.5001H20.4394C21.4152 8.5001 22.1311 9.41764 21.8944 10.3644L19.4286 20.2276C19.0947 21.5631 17.8951 22.5001 16.5185 22.5001H5.64151C4.26492 22.5001 3.06522 21.5631 2.73135 20.2276L0.265531 10.3644C0.0288506 9.41764 0.744754 8.5001 1.72061 8.5001H2.49991L6.21182 2.00401C6.48583 1.52449 7.09656 1.35793 7.57608 1.63194C8.0556 1.90595 8.22216 2.51668 7.94815 2.99619L4.80264 8.5001H16.3573L13.2118 2.99619C12.9378 2.51668 13.1044 1.90595 13.5839 1.63194ZM4.67178 19.7423C4.78307 20.1874 5.18265 20.5001 5.64151 20.5001H16.5185C16.9773 20.5001 17.3769 20.1874 17.4882 19.7423L19.7997 10.5001H2.36026L4.67178 19.7423Z" transform="translate(1, 0)"/></svg>
-              <span class="toggle-label">Online deals</span>
-            </div>
-          </div>
-          <div class="loyalty-btn">
-            <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><g transform="rotate(90,12,12) translate(2,0)"><path fill-rule="evenodd" clip-rule="evenodd" d="M17 2H3C2.44772 2 2 2.44772 2 3V21C2 21.5523 2.44772 22 3 22H17C17.5523 22 18 21.5523 18 21V3C18 2.44771 17.5523 2 17 2ZM3 0C1.34315 0 0 1.34315 0 3V21C0 22.6569 1.34315 24 3 24H17C18.6569 24 20 22.6569 20 21V3C20 1.34315 18.6569 0 17 0H3Z" fill="#001489"/></g><svg x="5" y="8" width="7" height="7.8" viewBox="0 0 7.01567 7.80371"><path d="M2.84921 0C2.9114 0 2.94619 0.0484489 2.92636 0.107422L0.377531 7.69629C0.353123 7.76863 0.316677 7.80371 0.241789 7.80371H0.0826091C0.020672 7.80356-0.0141236 7.75503 0.00546067 7.69629L2.55527 0.107422C2.57995 0.039617 2.61401 0 2.69101 0H2.84921ZM4.70566 0C4.76762 3.85542e-05 4.80211 0.0478243 4.7828 0.106445L2.233 7.69531C2.21321 7.75417 2.14668 7.80254 2.08456 7.80273H1.56796C1.50582 7.80263 1.471 7.75422 1.49081 7.69531L4.04062 0.106445C4.06073 0.0480036 4.12726 0.000258766 4.18905 0H4.70566ZM6.9332 0C6.99507 7.03894e-05 7.02959 0.0478523 7.01034 0.106445L4.46054 7.69531C4.44075 7.75415 4.3742 7.80251 4.3121 7.80273H3.42441C3.36231 7.80263 3.32749 7.75422 3.34726 7.69531L5.89609 0.106445C5.91614 0.047829 5.98356 0.000141417 6.0455 0H6.9332Z" fill="#001489"/></svg><svg x="11" y="8" width="7.3" height="7.8" viewBox="0 0 7.30998 7.80339"><path fill-rule="evenodd" clip-rule="evenodd" d="M5.29935 1.77084L4.99625 3.65312C4.98638 3.71454 4.92736 3.7648 4.86514 3.7648H3.28812C3.22594 3.7648 3.19121 3.71654 3.21104 3.65757L3.84493 1.77084C3.89427 1.62366 4.06617 1.50439 4.22872 1.50439H5.048C5.21046 1.50439 5.32303 1.62366 5.29935 1.77084M2.31324 0.826465L0.00558473 7.69612C-0.0142469 7.75513 0.0204384 7.80339 0.0827033 7.80339H1.7052C1.76743 7.80339 1.83455 7.75513 1.85438 7.69612L2.6336 5.3765C2.65343 5.31749 2.72055 5.26923 2.78278 5.26923H4.62298C4.68525 5.26923 4.72804 5.31949 4.71817 5.38092L4.34614 7.6917C4.33627 7.75312 4.3791 7.80339 4.44133 7.80339H6.06387C6.12613 7.80339 6.18511 7.75312 6.19502 7.6917L7.30021 0.826465C7.37368 0.370097 7.02454 0 6.5204 0H3.50386C2.9996 0 2.46659 0.370097 2.31324 0.826465" fill="#001489"/></svg></svg>
-          </div>
-        </div>
-        <div class="search-bar">
-          <img class="search-trapeze left" src="images/search-trapeze-left.svg" alt="">
-          <div class="search-center">
-            <span class="search-label">Waar ben je naar op zoek?</span>
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M21 22C20.7441 22 20.4883 21.9023 20.293 21.707L14.9033 16.3174C13.5478 17.3716 11.8457 18 10 18C5.5889 18 2 14.4111 2 10C2 5.5889 5.5889 2 10 2C14.4111 2 18 5.5889 18 10C18 11.8457 17.3711 13.5479 16.3174 14.9033L21.707 20.2929C22.0976 20.6835 22.0976 21.3163 21.707 21.707C21.5117 21.9023 21.2559 22 21 22ZM10 4C6.6914 4 4 6.6914 4 10C4 13.3086 6.6914 16 10 16C13.3086 16 16 13.3086 16 10C16 6.6914 13.3086 4 10 4Z"/></svg>
-          </div>
-          <img class="search-trapeze right" src="images/search-trapeze-right.svg" alt="">
-        </div>
-      </div>
       <div class="myaction-page">
         <div class="myaction-avatar">
-          <img class="avatar-shelve" src="images/avatar-shelve1.svg" alt="">
-          <img class="avatar-shelve" src="images/avatar-shelve2.svg" alt="">
-          <img class="avatar-product" src="images/avatar-clock.svg" alt="" style="top:5%;left:10%;width:26px;height:37px;">
-          <img class="avatar-product" src="images/avatar-spray.svg" alt="" style="top:6%;left:58%;width:25px;height:38px;">
-          <img class="avatar-product" src="images/avatar-dumbbell.svg" alt="" style="top:21%;left:31%;width:28px;height:14px;">
-          <img class="avatar-product" src="images/avatar-ketchup.svg" alt="" style="top:10%;left:53%;width:9px;height:31px;">
-          <img class="avatar-product" src="images/avatar-lamp.svg" alt="" style="top:34%;right:-5%;width:43px;height:52px;transform:scaleY(-1);">
-          <img class="avatar-product" src="images/avatar-cactus.svg" alt="" style="top:51%;right:18%;width:14px;height:28px;">
-          <img class="avatar-phone" src="images/avatar-phone.svg" alt="">
-          <div class="avatar-logo-wrap">
-            <img src="images/action-logo.png" alt="Action">
-          </div>
-          <img class="avatar-stroke" src="images/avatar-stroke.svg" alt="">
+          <img src="images/myaction.png" alt="Mijn Action">
         </div>
 
         <div class="myaction-section">
@@ -2141,6 +2029,10 @@
             </div>
             <div class="myaction-menu-item">
               <span class="myaction-menu-label">Mijn digitale kassabonnen</span>
+              <svg class="myaction-menu-arrow" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M7.5 15l5-5-5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div class="myaction-menu-item">
+              <span class="myaction-menu-label">Action webshop deals aankopen</span>
               <svg class="myaction-menu-arrow" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M7.5 15l5-5-5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </div>
           </div>
