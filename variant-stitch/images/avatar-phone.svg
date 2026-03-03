@@ -1,0 +1,14 @@
+<svg preserveAspectRatio="none" width="100%" height="100%" overflow="visible" style="display: block;" viewBox="0 0 118.963 226.024" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Phone">
+<path id="Fill 1" fill-rule="evenodd" clip-rule="evenodd" d="M101.35 0.765485L17.6144 0.765485C8.31042 0.765485 0.770178 8.26184 0.770178 17.5098L0.770178 208.517C0.770178 217.763 8.31042 225.258 17.6144 225.258H101.35C110.653 225.258 118.193 217.763 118.193 208.517V17.5098C118.193 8.26184 110.653 0.765485 101.35 0.765485" fill="var(--fill-0, #54585A)"/>
+<path id="Fill 2" fill-rule="evenodd" clip-rule="evenodd" d="M117.423 208.517C117.423 217.325 110.212 224.492 101.35 224.492H17.6144C8.74938 224.492 1.54032 217.325 1.54032 208.517L1.54032 17.5098C1.54032 8.69976 8.74938 1.53107 17.6144 1.53107L101.35 1.53107C110.212 1.53107 117.423 8.69976 117.423 17.5098V208.517ZM101.35 0L17.6144 0C7.90224 0 0 7.85464 0 17.5099L0 208.517C0 218.169 7.90224 226.024 17.6144 226.024H101.35C111.061 226.024 118.963 218.169 118.963 208.517V17.5099C118.963 7.85464 111.061 0 101.35 0V0Z" fill="var(--fill-0, #717171)"/>
+<path id="Fill 4" fill-rule="evenodd" clip-rule="evenodd" d="M25.273 116.038H112.925V25.8819H25.273V116.038Z" fill="var(--fill-0, #ECF6FC)"/>
+<rect id="Rectangle 4" x="62.2122" y="34.6472" width="20.6609" height="20.6609" rx="5.0087" fill="var(--fill-0, #C0E1F5)"/>
+<rect id="Rectangle 4_2" x="35.9165" y="34.6472" width="20.6609" height="20.6609" rx="5.0087" fill="var(--fill-0, #C0E1F5)"/>
+<rect id="Rectangle 5" x="62.2122" y="60.9428" width="20.6609" height="20.6609" rx="5.0087" fill="var(--fill-0, #C0E1F5)"/>
+<rect id="Rectangle 6" x="88.5078" y="60.9428" width="20.6609" height="20.6609" rx="5.0087" fill="var(--fill-0, #C0E1F5)"/>
+<rect id="Rectangle 7" x="62.2122" y="87.2385" width="20.6609" height="20.6609" rx="5.0087" fill="var(--fill-0, #C0E1F5)"/>
+<rect id="Rectangle 8" x="88.5078" y="87.2385" width="20.6609" height="20.6609" rx="5.0087" fill="var(--fill-0, #C0E1F5)"/>
+<rect id="Rectangle 3" x="43.4295" y="12.108" width="32.5565" height="3.13043" rx="1.56522" fill="var(--fill-0, #D2D5D7)"/>
+</g>
+</svg>

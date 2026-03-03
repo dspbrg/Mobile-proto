@@ -205,7 +205,7 @@
 
     /* ===== Search Bar ===== */
     .search-bar {
-      width: 343px;
+      width: calc(100% - 32px);
       display: flex;
       align-items: center;
       gap: 8px;
@@ -213,7 +213,6 @@
       border: 1px solid var(--neutral-300);
       border-radius: var(--radius-round);
       background: var(--white);
-      transition: all 0.4s ease;
     }
 
     .search-bar .search-label {
@@ -426,7 +425,6 @@
       display: none;
       width: 100%;
       flex-direction: column;
-      align-items: center;
       gap: 0;
     }
 
@@ -868,6 +866,243 @@
       gap: 16px;
     }
 
+    /* ===== Category List (Producten) ===== */
+    .category-list {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      background: white;
+    }
+
+    .category-list-title {
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--brand-darkblue);
+      padding: 16px 16px 8px;
+    }
+
+    .category-list-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 16px;
+      height: 56px;
+      background: white;
+      cursor: pointer;
+    }
+
+    .category-list-item:active {
+      background: var(--neutral-50);
+    }
+
+    .category-list-item-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .category-list-item-img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: #ecf6fc;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .category-list-item-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .category-list-item-name {
+      font-size: 16px;
+      font-weight: 400;
+      color: var(--brand-darkblue);
+      line-height: 16px;
+    }
+
+    .category-list-item-arrow {
+      color: var(--neutral-300);
+      flex-shrink: 0;
+    }
+
+    /* ===== Mijn Action page ===== */
+    .myaction-page {
+      background: #d9edf9;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 24px 8px;
+      gap: 24px;
+    }
+
+    .myaction-avatar {
+      width: 144px;
+      height: 144px;
+      border-radius: 50%;
+      background: #c4e3f5;
+      position: relative;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .myaction-avatar .avatar-shelve {
+      position: absolute;
+      left: 0;
+      right: 0;
+      height: 14px;
+      opacity: 0.4;
+    }
+    .myaction-avatar .avatar-shelve:first-child { top: 31%; }
+    .myaction-avatar .avatar-shelve:nth-child(2) { top: 70%; }
+
+    .myaction-avatar .avatar-product {
+      position: absolute;
+      opacity: 0.4;
+    }
+
+    .myaction-avatar .avatar-phone {
+      position: absolute;
+      left: -50px;
+      top: 26%;
+      width: 119px;
+      height: 226px;
+    }
+
+    .myaction-avatar .avatar-logo-wrap {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 54px;
+      height: 54px;
+      background: white;
+      border-radius: 13px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .myaction-avatar .avatar-logo-wrap img {
+      width: 44px;
+      height: 27px;
+    }
+
+    .myaction-avatar .avatar-stroke {
+      position: absolute;
+      inset: -2px;
+    }
+
+    .myaction-section {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .myaction-section-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--brand-darkblue);
+      letter-spacing: -0.5px;
+      line-height: 24px;
+    }
+
+    .myaction-menu-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .myaction-menu-item {
+      background: white;
+      border-radius: 2px;
+      box-shadow: 0 2px 4px rgba(98,181,229,0.2);
+      padding: 8px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+    }
+
+    .myaction-menu-item:active {
+      opacity: 0.85;
+    }
+
+    .myaction-menu-label {
+      font-size: 16px;
+      font-weight: 400;
+      color: var(--brand-darkblue);
+      line-height: 22px;
+    }
+
+    .myaction-menu-arrow {
+      color: var(--neutral-300);
+      flex-shrink: 0;
+    }
+
+    .myaction-profile-card {
+      background: white;
+      border-radius: 2px;
+      box-shadow: 0 2px 4px rgba(98,181,229,0.2);
+      padding: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .myaction-profile-info {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .myaction-profile-name {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--brand-darkblue);
+      letter-spacing: -0.5px;
+      line-height: 26px;
+    }
+
+    .myaction-profile-sub {
+      font-size: 16px;
+      font-weight: 400;
+      color: #1a1a1a;
+      line-height: 22px;
+    }
+
+    .myaction-profile-barcode {
+      width: 56px;
+      height: 56px;
+    }
+
+    .myaction-profile-barcode img {
+      width: 100%;
+      height: 100%;
+    }
+
+    .myaction-logout {
+      border: 1px solid var(--brand-darkblue);
+      border-radius: 360px;
+      background: white;
+      padding: 6px 12px;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--brand-darkblue);
+      cursor: pointer;
+      width: 296px;
+    }
+
+    .myaction-version {
+      font-size: 12px;
+      color: var(--brand-darkblue);
+      margin-top: 8px;
+    }
+
     /* ===== Online mode styles ===== */
     .section-header {
       transition: background-color 0.4s ease, padding-bottom 0.4s ease;
@@ -879,7 +1114,7 @@
     }
 
     .section-header.online-mode .search-bar {
-      width: 343px;
+      width: calc(100% - 32px);
       border: 1px solid transparent;
       border-radius: 0;
       padding: 0;
@@ -906,10 +1141,6 @@
 
     .section-header.online-mode .search-bar .search-trapeze.right {
       transform: rotate(180deg);
-    }
-
-    .section-header.online-mode .search-bar svg:last-of-type {
-      display: none;
     }
 
     .toggle-app {
@@ -1655,12 +1886,113 @@
           <img class="search-trapeze right" src="images/search-trapeze-right.svg" alt="">
         </div>
       </div>
-      <div class="placeholder-page">
-        <div class="placeholder-icon">
-          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+      <div class="category-list">
+        <div class="category-list-title">Producten</div>
+        <div class="category-list-item">
+          <div class="category-list-item-left">
+            <div class="category-list-item-img"><img src="images/cat-wonen.png" alt=""></div>
+            <span class="category-list-item-name">Wonen</span>
+          </div>
+          <svg class="category-list-item-arrow" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M7.5 15l5-5-5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </div>
-        <span class="placeholder-title">Producten</span>
-        <span class="placeholder-subtitle">Deze pagina wordt later uitgewerkt</span>
+        <div class="category-list-item">
+          <div class="category-list-item-left">
+            <div class="category-list-item-img"><img src="images/cat-keuken.png" alt=""></div>
+            <span class="category-list-item-name">Keuken</span>
+          </div>
+          <svg class="category-list-item-arrow" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M7.5 15l5-5-5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="category-list-item">
+          <div class="category-list-item-left">
+            <div class="category-list-item-img"><img src="images/cat-slapen.png" alt=""></div>
+            <span class="category-list-item-name">Slapen</span>
+          </div>
+          <svg class="category-list-item-arrow" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M7.5 15l5-5-5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="category-list-item">
+          <div class="category-list-item-left">
+            <div class="category-list-item-img"><img src="images/cat-kantoor.png" alt=""></div>
+            <span class="category-list-item-name">Kantoor &amp; school</span>
+          </div>
+          <svg class="category-list-item-arrow" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M7.5 15l5-5-5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="category-list-item">
+          <div class="category-list-item-left">
+            <div class="category-list-item-img"><img src="images/cat-hobby.png" alt=""></div>
+            <span class="category-list-item-name">Hobby</span>
+          </div>
+          <svg class="category-list-item-arrow" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M7.5 15l5-5-5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="category-list-item">
+          <div class="category-list-item-left">
+            <div class="category-list-item-img"><img src="images/cat-dhz.png" alt=""></div>
+            <span class="category-list-item-name">Doe het zelf</span>
+          </div>
+          <svg class="category-list-item-arrow" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M7.5 15l5-5-5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="category-list-item">
+          <div class="category-list-item-left">
+            <div class="category-list-item-img"><img src="images/cat-speelgoed.png" alt=""></div>
+            <span class="category-list-item-name">Speelgoed</span>
+          </div>
+          <svg class="category-list-item-arrow" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M7.5 15l5-5-5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="category-list-item">
+          <div class="category-list-item-left">
+            <div class="category-list-item-img"><img src="images/cat-tuin.png" alt=""></div>
+            <span class="category-list-item-name">Tuin</span>
+          </div>
+          <svg class="category-list-item-arrow" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M7.5 15l5-5-5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="category-list-item">
+          <div class="category-list-item-left">
+            <div class="category-list-item-img"><img src="images/cat-reizen.png" alt=""></div>
+            <span class="category-list-item-name">Reizen</span>
+          </div>
+          <svg class="category-list-item-arrow" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M7.5 15l5-5-5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="category-list-item">
+          <div class="category-list-item-left">
+            <div class="category-list-item-img"><img src="images/cat-verzorging.png" alt=""></div>
+            <span class="category-list-item-name">Persoonlijke verzorging</span>
+          </div>
+          <svg class="category-list-item-arrow" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M7.5 15l5-5-5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="category-list-item">
+          <div class="category-list-item-left">
+            <div class="category-list-item-img"><img src="images/cat-eten.png" alt=""></div>
+            <span class="category-list-item-name">Eten &amp; drinken</span>
+          </div>
+          <svg class="category-list-item-arrow" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M7.5 15l5-5-5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="category-list-item">
+          <div class="category-list-item-left">
+            <div class="category-list-item-img"><img src="images/cat-multimedia.png" alt=""></div>
+            <span class="category-list-item-name">Multimedia</span>
+          </div>
+          <svg class="category-list-item-arrow" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M7.5 15l5-5-5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="category-list-item">
+          <div class="category-list-item-left">
+            <div class="category-list-item-img"><img src="images/cat-mode.png" alt=""></div>
+            <span class="category-list-item-name">Mode</span>
+          </div>
+          <svg class="category-list-item-arrow" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M7.5 15l5-5-5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="category-list-item">
+          <div class="category-list-item-left">
+            <div class="category-list-item-img"><img src="images/cat-sport.png" alt=""></div>
+            <span class="category-list-item-name">Sportartikelen</span>
+          </div>
+          <svg class="category-list-item-arrow" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M7.5 15l5-5-5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="category-list-item">
+          <div class="category-list-item-left">
+            <div class="category-list-item-img"><img src="images/cat-huisdieren.png" alt=""></div>
+            <span class="category-list-item-name">Huisdieren</span>
+          </div>
+          <svg class="category-list-item-arrow" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M7.5 15l5-5-5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
       </div>
     </div>
 
@@ -1763,12 +2095,113 @@
           <img class="search-trapeze right" src="images/search-trapeze-right.svg" alt="">
         </div>
       </div>
-      <div class="placeholder-page">
-        <div class="placeholder-icon">
-          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      <div class="myaction-page">
+        <div class="myaction-avatar">
+          <img class="avatar-shelve" src="images/avatar-shelve1.svg" alt="">
+          <img class="avatar-shelve" src="images/avatar-shelve2.svg" alt="">
+          <img class="avatar-product" src="images/avatar-clock.svg" alt="" style="top:5%;left:10%;width:26px;height:37px;">
+          <img class="avatar-product" src="images/avatar-spray.svg" alt="" style="top:6%;left:58%;width:25px;height:38px;">
+          <img class="avatar-product" src="images/avatar-dumbbell.svg" alt="" style="top:21%;left:31%;width:28px;height:14px;">
+          <img class="avatar-product" src="images/avatar-ketchup.svg" alt="" style="top:10%;left:53%;width:9px;height:31px;">
+          <img class="avatar-product" src="images/avatar-lamp.svg" alt="" style="top:34%;right:-5%;width:43px;height:52px;transform:scaleY(-1);">
+          <img class="avatar-product" src="images/avatar-cactus.svg" alt="" style="top:51%;right:18%;width:14px;height:28px;">
+          <img class="avatar-phone" src="images/avatar-phone.svg" alt="">
+          <div class="avatar-logo-wrap">
+            <img src="images/action-logo.png" alt="Action">
+          </div>
+          <img class="avatar-stroke" src="images/avatar-stroke.svg" alt="">
         </div>
-        <span class="placeholder-title">Mijn Action</span>
-        <span class="placeholder-subtitle">Deze pagina wordt later uitgewerkt</span>
+
+        <div class="myaction-section">
+          <div class="myaction-profile-card">
+            <div class="myaction-profile-info">
+              <span class="myaction-profile-name">Maria</span>
+              <span class="myaction-profile-sub">Mijn klantenkaart</span>
+            </div>
+            <div class="myaction-profile-barcode">
+              <img src="images/barcode.png" alt="Barcode">
+            </div>
+          </div>
+          <div class="myaction-menu-list">
+            <div class="myaction-menu-item">
+              <span class="myaction-menu-label">Mijn gegevens</span>
+              <svg class="myaction-menu-arrow" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M7.5 15l5-5-5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div class="myaction-menu-item">
+              <span class="myaction-menu-label">Mijn kraskaarten</span>
+              <svg class="myaction-menu-arrow" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M7.5 15l5-5-5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div class="myaction-menu-item">
+              <span class="myaction-menu-label">Spin & Win</span>
+              <svg class="myaction-menu-arrow" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M7.5 15l5-5-5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div class="myaction-menu-item">
+              <span class="myaction-menu-label">Win met je lijstje</span>
+              <svg class="myaction-menu-arrow" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M7.5 15l5-5-5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div class="myaction-menu-item">
+              <span class="myaction-menu-label">Mijn digitale kassabonnen</span>
+              <svg class="myaction-menu-arrow" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M7.5 15l5-5-5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+          </div>
+        </div>
+
+        <div class="myaction-section">
+          <span class="myaction-section-title">Winkels</span>
+          <div class="myaction-menu-item">
+            <span class="myaction-menu-label">Zoek je winkel</span>
+            <svg class="myaction-menu-arrow" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M7.5 15l5-5-5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+        </div>
+
+        <div class="myaction-section">
+          <span class="myaction-section-title">Voorkeuren</span>
+          <div class="myaction-menu-list">
+            <div class="myaction-menu-item">
+              <span class="myaction-menu-label">Communicatie</span>
+              <svg class="myaction-menu-arrow" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M7.5 15l5-5-5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div class="myaction-menu-item">
+              <span class="myaction-menu-label">Persoonlijk</span>
+              <svg class="myaction-menu-arrow" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M7.5 15l5-5-5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div class="myaction-menu-item">
+              <span class="myaction-menu-label">Land &amp; Taal</span>
+              <svg class="myaction-menu-arrow" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M7.5 15l5-5-5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+          </div>
+        </div>
+
+        <div class="myaction-section">
+          <span class="myaction-section-title">Overig</span>
+          <div class="myaction-menu-list">
+            <div class="myaction-menu-item">
+              <span class="myaction-menu-label">Geef feedback</span>
+              <svg class="myaction-menu-arrow" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M7.5 15l5-5-5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div class="myaction-menu-item">
+              <span class="myaction-menu-label">Klantenservice</span>
+              <svg class="myaction-menu-arrow" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M7.5 15l5-5-5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div class="myaction-menu-item">
+              <span class="myaction-menu-label">Werken bij Action</span>
+              <svg class="myaction-menu-arrow" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M7.5 15l5-5-5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div class="myaction-menu-item">
+              <span class="myaction-menu-label">Duurzaamheid</span>
+              <svg class="myaction-menu-arrow" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M7.5 15l5-5-5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div class="myaction-menu-item">
+              <span class="myaction-menu-label">Juridische informatie</span>
+              <svg class="myaction-menu-arrow" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M7.5 15l5-5-5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+          </div>
+        </div>
+
+        <div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
+          <button class="myaction-logout">Uitloggen</button>
+          <span class="myaction-version">Versie 1.113.0 (9712)</span>
+        </div>
       </div>
     </div>
 
