@@ -1119,8 +1119,6 @@
     }
 
     .lijstje-card {
-      border-radius: 12px;
-      overflow: hidden;
       display: flex;
       flex-direction: column;
     }
@@ -1131,7 +1129,8 @@
       align-items: center;
       justify-content: center;
       background: #d9edf9;
-      position: relative;
+      border-radius: 12px;
+      overflow: hidden;
     }
 
     .lijstje-card-thumb.orange {
@@ -1151,8 +1150,7 @@
     }
 
     .lijstje-card-info {
-      padding: 10px 12px;
-      background: #f3f4f6;
+      padding: 8px 0 0;
     }
 
     .lijstje-card-name {
@@ -1175,13 +1173,27 @@
 
     /* ===== Mijn Action page ===== */
     .myaction-page {
-      background: #d9edf9;
+      background: white;
       width: 100%;
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 24px 16px;
-      gap: 24px;
+    }
+
+    .myaction-page-title {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--brand-darkblue);
+      letter-spacing: -0.5px;
+      align-self: flex-start;
+      padding: 24px 16px 20px;
+    }
+
+    .myaction-avatar-wrap {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      background: linear-gradient(to bottom, white 50%, #d9edf9 50%);
     }
 
     .myaction-avatar {
@@ -1195,11 +1207,21 @@
       height: 100%;
     }
 
+    .myaction-blue-area {
+      width: 100%;
+      background: #d9edf9;
+      padding: 24px 16px;
+    }
+
     .myaction-section {
       width: 100%;
       display: flex;
       flex-direction: column;
       gap: 16px;
+    }
+
+    .myaction-section + .myaction-section {
+      margin-top: 24px;
     }
 
     .myaction-section-title {
@@ -2325,10 +2347,13 @@
     <!-- ===== PAGE: Mijn Action ===== -->
     <div class="page-view" id="page-account">
       <div class="myaction-page">
-        <div class="myaction-avatar">
-          <img src="images/myaction.png" alt="Mijn Action">
+        <h2 class="myaction-page-title">Mijn Action</h2>
+        <div class="myaction-avatar-wrap">
+          <div class="myaction-avatar">
+            <img src="images/myaction.png" alt="Mijn Action">
+          </div>
         </div>
-
+        <div class="myaction-blue-area">
         <div class="myaction-section">
           <div class="myaction-profile-card">
             <div class="myaction-profile-info">
@@ -2423,6 +2448,7 @@
           <button class="myaction-logout">Uitloggen</button>
           <span class="myaction-version">Versie 1.113.0 (9712)</span>
         </div>
+        </div>
       </div>
     </div>
 
@@ -2505,7 +2531,7 @@
       // Status bar bg for Mijn Action
       const statusBar = document.querySelector('.status-bar');
       if (statusBar) {
-        statusBar.style.background = targetPage === 'page-account' ? '#d9edf9' : '';
+        statusBar.style.background = '';
       }
     });
   });
