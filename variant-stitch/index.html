@@ -1110,7 +1110,9 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      position: relative;
+      position: sticky;
+      top: 0;
+      z-index: 10;
     }
 
     .weekactie-header-logo {
@@ -1118,15 +1120,6 @@
       object-fit: contain;
     }
 
-    .weekactie-header-bell {
-      position: absolute;
-      right: 16px;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 24px;
-      height: 24px;
-      color: white;
-    }
 
     .weekactie-date {
       height: 64px;
@@ -2413,7 +2406,6 @@
       <div class="weekactie-page">
         <div class="weekactie-header">
           <img class="weekactie-header-logo" src="images/weekactie-logo.png" alt="Weekactie">
-          <svg class="weekactie-header-bell" viewBox="0 0 24 24" fill="none"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M13.73 21a2 2 0 01-3.46 0" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="18" cy="4" r="3" fill="#FF8200" stroke="white" stroke-width="1.5"/></svg>
         </div>
         <div class="weekactie-date">28 september t/m 4 oktober</div>
         <div class="weekactie-grid">
@@ -2503,7 +2495,6 @@
       <div class="weekactie-page">
         <div class="weekactie-header">
           <img class="weekactie-header-logo" src="images/weekactie-logo.png" alt="Weekactie">
-          <svg class="weekactie-header-bell" viewBox="0 0 24 24" fill="none"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M13.73 21a2 2 0 01-3.46 0" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="18" cy="4" r="3" fill="#FF8200" stroke="white" stroke-width="1.5"/></svg>
         </div>
         <div class="weekactie-date">28 september t/m 4 oktober</div>
         <div class="weekactie-grid">
