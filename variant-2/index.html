@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="theme-color" content="#ffffff" id="theme-color-meta">
   <title>Action App Prototype</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -30,6 +31,7 @@
         background: var(--white);
         height: 100dvh;
         overflow: hidden;
+        transition: background-color 0.4s ease;
       }
       body.online-mode {
         background: var(--brand-darkblue);
@@ -2867,6 +2869,7 @@
     if (statusBar) statusBar.classList.toggle('online-mode', isOnline);
 
     document.body.classList.toggle('online-mode', isOnline);
+    document.getElementById('theme-color-meta').setAttribute('content', isOnline ? '#001489' : '#ffffff');
 
     const tabbar = document.querySelector('.tabbar');
     if (tabbar) tabbar.classList.toggle('online-mode', isOnline);
