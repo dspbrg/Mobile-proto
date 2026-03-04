@@ -2876,7 +2876,6 @@
 
     document.body.classList.toggle('online-mode', isOnline);
     document.querySelector('.page-content').classList.toggle('online-mode', isOnline);
-    document.getElementById('theme-color-meta').setAttribute('content', isOnline ? '#001489' : '#ffffff');
 
     const tabbar = document.querySelector('.tabbar');
     if (tabbar) tabbar.classList.toggle('online-mode', isOnline);
@@ -2908,8 +2907,7 @@
   const winkelSplash = document.getElementById('winkel-splash');
   let isCurrentlyOnline = false;
 
-  function showSplash(splashEl, themeColor, callback) {
-    document.getElementById('theme-color-meta').setAttribute('content', themeColor);
+  function showSplash(splashEl, callback) {
     splashEl.classList.add('visible');
     setTimeout(() => {
       callback();
@@ -2921,12 +2919,12 @@
 
   document.getElementById('toggle-switch').addEventListener('click', () => {
     if (isCurrentlyOnline) {
-      showSplash(winkelSplash, '#ffffff', () => {
+      showSplash(winkelSplash, () => {
         isCurrentlyOnline = false;
         setOnlineMode(false);
       });
     } else {
-      showSplash(webshopSplash, '#001489', () => {
+      showSplash(webshopSplash, () => {
         isCurrentlyOnline = true;
         setOnlineMode(true);
       });
