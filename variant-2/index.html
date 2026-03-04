@@ -2920,11 +2920,13 @@
 
   document.getElementById('toggle-switch').addEventListener('click', () => {
     if (isCurrentlyOnline) {
+      document.getElementById('theme-color-meta').setAttribute('content', '#ffffff');
       showSplash(winkelSplash, () => {
         isCurrentlyOnline = false;
         setOnlineMode(false);
       });
     } else {
+      document.getElementById('theme-color-meta').setAttribute('content', '#001489');
       showSplash(webshopSplash, () => {
         isCurrentlyOnline = true;
         setOnlineMode(true);
