@@ -2908,8 +2908,12 @@
   const winkelSplash = document.getElementById('winkel-splash');
   let isCurrentlyOnline = false;
 
-  function showSplash(splashEl, callback) {
+  function showSplash(splashEl, themeColor, callback) {
     splashEl.classList.add('visible');
+    // Wacht tot splash volledig zichtbaar is (0.3s CSS transition)
+    setTimeout(() => {
+      document.getElementById('theme-color-meta').setAttribute('content', themeColor);
+    }, 300);
     setTimeout(() => {
       callback();
       setTimeout(() => {
@@ -2920,14 +2924,12 @@
 
   document.getElementById('toggle-switch').addEventListener('click', () => {
     if (isCurrentlyOnline) {
-      document.getElementById('theme-color-meta').setAttribute('content', '#ffffff');
-      showSplash(winkelSplash, () => {
+      showSplash(winkelSplash, '#ffffff', () => {
         isCurrentlyOnline = false;
         setOnlineMode(false);
       });
     } else {
-      document.getElementById('theme-color-meta').setAttribute('content', '#001489');
-      showSplash(webshopSplash, () => {
+      showSplash(webshopSplash, '#001489', () => {
         isCurrentlyOnline = true;
         setOnlineMode(true);
       });
