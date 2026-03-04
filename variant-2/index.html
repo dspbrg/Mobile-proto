@@ -120,73 +120,36 @@
 
     /* ===== Toggle Switch ===== */
     .toggle-app {
-      background: var(--neutral-50);
       display: flex;
-      gap: 4px;
-      height: 48px;
       align-items: center;
-      padding: 4px;
-      border-radius: var(--radius-sm);
-      width: 239px;
+      gap: 8px;
+      height: 48px;
+      padding: 0 20px;
+      border-radius: var(--radius-round);
       cursor: pointer;
       user-select: none;
+      background: var(--neutral-50);
+      border: 1.5px solid var(--neutral-150);
+      transition: background 0.3s ease, border-color 0.3s ease;
     }
 
-    .toggle-option {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      height: 100%;
-      padding: 16px 12px;
-      border-radius: var(--radius-xs);
-      white-space: nowrap;
-      overflow: hidden;
-      transition: width 0.35s cubic-bezier(0.4, 0, 0.2, 1),
-                  background 0.25s ease,
-                  box-shadow 0.25s ease;
+    .toggle-app:active {
+      transform: scale(0.97);
     }
 
-    .toggle-option.active {
-      background: var(--white);
-      box-shadow: 0 0 8px rgba(0,0,0,0.1);
-      width: 179px;
-    }
-
-    .toggle-option:not(.active) {
-      width: 48px;
+    .toggle-app svg {
       flex-shrink: 0;
+      width: 20px;
+      height: 20px;
+      color: var(--brand-darkblue);
     }
 
-    .toggle-option .toggle-label {
-      font-size: 16px;
+    .toggle-app .toggle-label {
+      font-size: 15px;
       font-weight: 500;
       line-height: 16px;
       color: var(--brand-darkblue);
-      opacity: 0;
-      max-width: 0;
-      overflow: hidden;
-      transition: opacity 0.2s ease, max-width 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-
-    .toggle-option.active .toggle-label {
-      opacity: 1;
-      max-width: 150px;
-      transition: opacity 0.25s ease 0.1s, max-width 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-
-    .toggle-option svg {
-      flex-shrink: 0;
-      width: 24px;
-      height: 24px;
-    }
-
-    .toggle-option:not(.active) svg {
-      color: var(--neutral-700);
-    }
-
-    .toggle-option.active svg {
-      color: var(--brand-darkblue);
+      white-space: nowrap;
     }
 
     /* ===== Loyalty Card Button ===== */
@@ -221,6 +184,17 @@
       font-size: 16px;
       font-weight: 400;
       line-height: 22px;
+      color: var(--neutral-700);
+      border: none;
+      outline: none;
+      background: transparent;
+      font-family: inherit;
+      padding: 0;
+      width: 0;
+      min-width: 0;
+    }
+
+    .search-bar .search-label::placeholder {
       color: var(--neutral-700);
     }
 
@@ -1515,15 +1489,16 @@
       transform: rotate(180deg);
     }
 
-    .toggle-app {
-      transition: background-color 0.35s ease;
-    }
-
     .toggle-app.online-mode {
-      background: #6672b8;
+      background: rgba(255,255,255,0.15);
+      border-color: rgba(255,255,255,0.25);
     }
 
-    .toggle-app.online-mode .toggle-option:not(.active) svg {
+    .toggle-app.online-mode svg {
+      color: white;
+    }
+
+    .toggle-app.online-mode .toggle-label {
       color: white;
     }
 
@@ -1611,6 +1586,37 @@
 
     .tabbar.online-mode .tab-badge {
       background: var(--brand-darkblue);
+    }
+
+    /* ===== Webshop Splash Screen ===== */
+    .splash-overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .splash-overlay.visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .splash-overlay img {
+      width: 247px;
+      height: auto;
+    }
+
+    .splash-webshop {
+      background: var(--brand-darkblue);
+    }
+
+    .splash-winkel {
+      background: var(--white);
     }
 
     /* ===== Online deals promo bar ===== */
@@ -1850,6 +1856,14 @@
 <body>
 
 <div class="phone-frame">
+  <!-- Splash Screens -->
+  <div class="splash-overlay splash-webshop" id="webshop-splash">
+    <img src="../images/webshop-logo.png" alt="Action Webshop">
+  </div>
+  <div class="splash-overlay splash-winkel" id="winkel-splash">
+    <img src="../images/winkel-logo.png" alt="Action">
+  </div>
+
   <!-- Status Bar -->
   <div class="status-bar">
     <span class="status-bar-time">9:41</span>
@@ -1869,18 +1883,10 @@
         <div class="layout-navbar">
           <!-- Toggle -->
           <div class="toggle-app" id="toggle-switch">
-            <div class="toggle-option active" data-toggle="winkel">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M19.6536 2C20.2788 2.00007 20.8384 2.38822 21.0579 2.97363L23.6829 9.97363C24.0504 10.9541 23.3258 11.9999 22.2786 12H20.9803V22H18.9803V12H13.9803V22H2.98031V12H1.72101C0.674079 11.9997 -0.0506501 10.954 0.316717 9.97363L2.94172 2.97363C3.16121 2.38832 3.72093 2.00019 4.34601 2H19.6536ZM4.98031 20H11.9803V17H4.98031V20ZM4.98031 15H11.9803V12H4.98031V15ZM2.44367 10H21.556L19.306 4H4.69367L2.44367 10Z" transform="translate(0, 2)"/>
-              </svg>
-              <span class="toggle-label">In de winkel</span>
-            </div>
-            <div class="toggle-option" data-toggle="online">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M13.5839 1.63194C14.0634 1.35793 14.6741 1.52449 14.9481 2.00401L18.6601 8.5001H20.4394C21.4152 8.5001 22.1311 9.41764 21.8944 10.3644L19.4286 20.2276C19.0947 21.5631 17.8951 22.5001 16.5185 22.5001H5.64151C4.26492 22.5001 3.06522 21.5631 2.73135 20.2276L0.265531 10.3644C0.0288506 9.41764 0.744754 8.5001 1.72061 8.5001H2.49991L6.21182 2.00401C6.48583 1.52449 7.09656 1.35793 7.57608 1.63194C8.0556 1.90595 8.22216 2.51668 7.94815 2.99619L4.80264 8.5001H16.3573L13.2118 2.99619C12.9378 2.51668 13.1044 1.90595 13.5839 1.63194ZM4.67178 19.7423C4.78307 20.1874 5.18265 20.5001 5.64151 20.5001H16.5185C16.9773 20.5001 17.3769 20.1874 17.4882 19.7423L19.7997 10.5001H2.36026L4.67178 19.7423Z" transform="translate(1, 0)"/>
-              </svg>
-              <span class="toggle-label">Online deals</span>
-            </div>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" id="toggle-icon">
+              <path d="M13.5839 1.63194C14.0634 1.35793 14.6741 1.52449 14.9481 2.00401L18.6601 8.5001H20.4394C21.4152 8.5001 22.1311 9.41764 21.8944 10.3644L19.4286 20.2276C19.0947 21.5631 17.8951 22.5001 16.5185 22.5001H5.64151C4.26492 22.5001 3.06522 21.5631 2.73135 20.2276L0.265531 10.3644C0.0288506 9.41764 0.744754 8.5001 1.72061 8.5001H2.49991L6.21182 2.00401C6.48583 1.52449 7.09656 1.35793 7.57608 1.63194C8.0556 1.90595 8.22216 2.51668 7.94815 2.99619L4.80264 8.5001H16.3573L13.2118 2.99619C12.9378 2.51668 13.1044 1.90595 13.5839 1.63194ZM4.67178 19.7423C4.78307 20.1874 5.18265 20.5001 5.64151 20.5001H16.5185C16.9773 20.5001 17.3769 20.1874 17.4882 19.7423L19.7997 10.5001H2.36026L4.67178 19.7423Z" transform="translate(1, 0)"/>
+            </svg>
+            <span class="toggle-label" id="toggle-label">Online deals</span>
           </div>
 
           <!-- Loyalty Card Button -->
@@ -1893,7 +1899,7 @@
         <div class="search-bar">
           <img class="search-trapeze left" src="images/search-trapeze-left.svg" alt="">
           <div class="search-center">
-            <span class="search-label">Waar ben je naar op zoek?</span>
+            <input type="search" class="search-label" placeholder="Waar ben je naar op zoek?" enterkeyhint="search">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M21 22C20.7441 22 20.4883 21.9023 20.293 21.707L14.9033 16.3174C13.5478 17.3716 11.8457 18 10 18C5.5889 18 2 14.4111 2 10C2 5.5889 5.5889 2 10 2C14.4111 2 18 5.5889 18 10C18 11.8457 17.3711 13.5479 16.3174 14.9033L21.707 20.2929C22.0976 20.6835 22.0976 21.3163 21.707 21.707C21.5117 21.9023 21.2559 22 21 22ZM10 4C6.6914 4 4 6.6914 4 10C4 13.3086 6.6914 16 10 16C13.3086 16 16 13.3086 16 10C16 6.6914 13.3086 4 10 4Z"/></svg>
           </div>
           <img class="search-trapeze right" src="images/search-trapeze-right.svg" alt="">
@@ -2873,23 +2879,50 @@
       }
     }
 
-    // Sync all toggle switches across pages
-    document.querySelectorAll('.toggle-app').forEach(toggle => {
-      toggle.querySelectorAll('.toggle-option').forEach(o => {
-        o.classList.toggle('active', o.dataset.toggle === (isOnline ? 'online' : 'winkel'));
-      });
-    });
+    // Update toggle button text & icon
+    const toggleLabel = document.getElementById('toggle-label');
+    const toggleIcon = document.getElementById('toggle-icon');
+    const storeIconPath = 'M19.6536 2C20.2788 2.00007 20.8384 2.38822 21.0579 2.97363L23.6829 9.97363C24.0504 10.9541 23.3258 11.9999 22.2786 12H20.9803V22H18.9803V12H13.9803V22H2.98031V12H1.72101C0.674079 11.9997 -0.0506501 10.954 0.316717 9.97363L2.94172 2.97363C3.16121 2.38832 3.72093 2.00019 4.34601 2H19.6536ZM4.98031 20H11.9803V17H4.98031V20ZM4.98031 15H11.9803V12H4.98031V15ZM2.44367 10H21.556L19.306 4H4.69367L2.44367 10Z';
+    const cartIconPath = 'M13.5839 1.63194C14.0634 1.35793 14.6741 1.52449 14.9481 2.00401L18.6601 8.5001H20.4394C21.4152 8.5001 22.1311 9.41764 21.8944 10.3644L19.4286 20.2276C19.0947 21.5631 17.8951 22.5001 16.5185 22.5001H5.64151C4.26492 22.5001 3.06522 21.5631 2.73135 20.2276L0.265531 10.3644C0.0288506 9.41764 0.744754 8.5001 1.72061 8.5001H2.49991L6.21182 2.00401C6.48583 1.52449 7.09656 1.35793 7.57608 1.63194C8.0556 1.90595 8.22216 2.51668 7.94815 2.99619L4.80264 8.5001H16.3573L13.2118 2.99619C12.9378 2.51668 13.1044 1.90595 13.5839 1.63194ZM4.67178 19.7423C4.78307 20.1874 5.18265 20.5001 5.64151 20.5001H16.5185C16.9773 20.5001 17.3769 20.1874 17.4882 19.7423L19.7997 10.5001H2.36026L4.67178 19.7423Z';
+
+    if (toggleLabel) {
+      if (isOnline) {
+        toggleLabel.textContent = 'Winkel assortiment';
+        toggleIcon.innerHTML = '<path d="' + storeIconPath + '" transform="translate(0, 2)"/>';
+      } else {
+        toggleLabel.textContent = 'Online deals';
+        toggleIcon.innerHTML = '<path d="' + cartIconPath + '" transform="translate(1, 0)"/>';
+      }
+    }
   }
 
-  document.querySelectorAll('.toggle-app').forEach(toggle => {
-    const options = toggle.querySelectorAll('.toggle-option');
+  // Splash screen logic
+  const webshopSplash = document.getElementById('webshop-splash');
+  const winkelSplash = document.getElementById('winkel-splash');
+  let isCurrentlyOnline = false;
 
-    options.forEach(option => {
-      option.addEventListener('click', () => {
-        if (option.classList.contains('active')) return;
-        setOnlineMode(option.dataset.toggle === 'online');
+  function showSplash(splashEl, callback) {
+    splashEl.classList.add('visible');
+    setTimeout(() => {
+      callback();
+      setTimeout(() => {
+        splashEl.classList.remove('visible');
+      }, 800);
+    }, 700);
+  }
+
+  document.getElementById('toggle-switch').addEventListener('click', () => {
+    if (isCurrentlyOnline) {
+      showSplash(winkelSplash, () => {
+        isCurrentlyOnline = false;
+        setOnlineMode(false);
       });
-    });
+    } else {
+      showSplash(webshopSplash, () => {
+        isCurrentlyOnline = true;
+        setOnlineMode(true);
+      });
+    }
   });
 </script>
 
