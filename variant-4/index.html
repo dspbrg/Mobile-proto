@@ -46,6 +46,9 @@
       --radius-xs: 4px;
       --radius-sm: 8px;
       --radius-round: 360px;
+      --dark-bg: #121212;
+      --dark-bg-raised: #1e1e1e;
+      --dark-border: #2a2a2a;
     }
 
     /* ===== Phone Frame ===== */
@@ -915,7 +918,7 @@
       width: 100%;
       display: flex;
       flex-direction: column;
-      background: var(--brand-darkblue);
+      background: var(--dark-bg);
     }
 
     .ws-deals-link {
@@ -924,13 +927,13 @@
       gap: 12px;
       padding: 16px;
       height: 56px;
-      border-bottom: 1px solid #1a32a6;
+      border-bottom: 1px solid var(--dark-border);
       cursor: pointer;
-      background: #0a2296;
+      background: var(--dark-bg-raised);
     }
 
     .ws-deals-link:active {
-      background: #1a32a6;
+      background: var(--dark-border);
     }
 
     .ws-deals-link svg {
@@ -959,13 +962,13 @@
       gap: 12px;
       padding: 8px 16px;
       height: 64px;
-      border-bottom: 1px solid #1a32a6;
+      border-bottom: 1px solid var(--dark-border);
       cursor: pointer;
-      background: #0a2296;
+      background: var(--dark-bg-raised);
     }
 
     .ws-category-item:active {
-      background: #1a32a6;
+      background: var(--dark-border);
     }
 
     .ws-category-item-img {
@@ -1479,8 +1482,12 @@
 
     /* ===== Online mode styles ===== */
     .section-header.online-mode {
-      background: var(--brand-darkblue);
+      background: var(--dark-bg);
       padding-bottom: 16px;
+    }
+
+    .section-header.online-mode .webshop-promo-bar {
+      display: flex;
     }
 
     .section-header.online-mode .search-bar {
@@ -1539,7 +1546,7 @@
     }
 
     .status-bar.online-mode {
-      background: var(--brand-darkblue);
+      background: var(--dark-bg);
     }
 
     .status-bar.online-mode .status-bar-time {
@@ -1579,7 +1586,7 @@
     }
 
     .tabbar.online-mode {
-      background: var(--brand-darkblue);
+      background: var(--dark-bg);
       border-top-color: rgba(255,255,255,0.1);
     }
 
@@ -1613,7 +1620,7 @@
 
     /* ===== Dark mode for online content ===== */
     .page-content.online-mode {
-      background: var(--brand-darkblue);
+      background: var(--dark-bg);
     }
 
     .page-content.online-mode .webshop-card {
@@ -1626,7 +1633,7 @@
     }
 
     .page-content.online-mode .ws-category-list {
-      background: var(--brand-darkblue);
+      background: var(--dark-bg);
     }
 
     .page-content.online-mode .ws-category-title {
@@ -1634,8 +1641,8 @@
     }
 
     .page-content.online-mode .ws-category-item {
-      background: #0a2296;
-      border-color: #1a32a6;
+      background: var(--dark-bg-raised);
+      border-color: var(--dark-border);
     }
 
     .page-content.online-mode .ws-category-item-name {
@@ -1647,7 +1654,7 @@
     }
 
     .page-content.online-mode .basket-empty {
-      background: var(--brand-darkblue);
+      background: var(--dark-bg);
     }
 
     .page-content.online-mode .basket-empty-title,
@@ -1663,9 +1670,9 @@
     /* ===== Online only promo bar ===== */
     .webshop-promo-bar {
       width: 100%;
-      background: var(--brand-darkblue);
-      height: 72px;
-      display: flex;
+      background: var(--dark-bg);
+      padding: 4px 16px 4px;
+      display: none;
       align-items: center;
       justify-content: center;
       flex-shrink: 0;
@@ -1676,11 +1683,10 @@
       color: white;
     }
 
-    .webshop-promo-bar-text {
-      font-size: 22px;
-      font-weight: 700;
-      color: #00b6e7;
-      line-height: 1;
+    .webshop-promo-logo {
+      height: 26px;
+      width: auto;
+      object-fit: contain;
     }
 
     /* ===== Online only product grid (2 kolommen) ===== */
@@ -1689,7 +1695,7 @@
       display: flex;
       flex-direction: column;
       gap: 0;
-      background: var(--brand-darkblue);
+      background: var(--dark-bg);
       padding-bottom: 16px;
     }
 
@@ -1919,6 +1925,11 @@
         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M13.5839 1.63194C14.0634 1.35793 14.6741 1.52449 14.9481 2.00401L18.6601 8.5001H20.4394C21.4152 8.5001 22.1311 9.41764 21.8944 10.3644L19.4286 20.2276C19.0947 21.5631 17.8951 22.5001 16.5185 22.5001H5.64151C4.26492 22.5001 3.06522 21.5631 2.73135 20.2276L0.265531 10.3644C0.0288506 9.41764 0.744754 8.5001 1.72061 8.5001H2.49991L6.21182 2.00401C6.48583 1.52449 7.09656 1.35793 7.57608 1.63194C8.0556 1.90595 8.22216 2.51668 7.94815 2.99619L4.80264 8.5001H16.3573L13.2118 2.99619C12.9378 2.51668 13.1044 1.90595 13.5839 1.63194ZM4.67178 19.7423C4.78307 20.1874 5.18265 20.5001 5.64151 20.5001H16.5185C16.9773 20.5001 17.3769 20.1874 17.4882 19.7423L19.7997 10.5001H2.36026L4.67178 19.7423Z"/></svg>
         Online only
       </div>
+    </div>
+
+    <!-- Webshop Logo (online mode) -->
+    <div class="webshop-promo-bar">
+      <img src="../images/webshop-logo.png" alt="Action Webshop" class="webshop-promo-logo">
     </div>
 
     <!-- Search Bar -->
@@ -2179,9 +2190,6 @@
 
       <!-- Toggle Content: Online only -->
       <div class="toggle-page" id="content-online">
-        <div class="webshop-promo-bar">
-          <span class="webshop-promo-bar-text">Tijdelijke deals</span>
-        </div>
         <div class="webshop-lane">
 <div class="webshop-cards-grid">
 
