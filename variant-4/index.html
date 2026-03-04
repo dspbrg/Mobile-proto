@@ -741,13 +741,14 @@
     .product-cards-grid {
       display: grid;
       grid-template-columns: 1fr 1fr 1fr;
-      gap: 8px;
+      gap: 16px;
+      padding: 0 16px;
     }
 
     .product-card {
-      background: white;
+      background: none;
+      border: none;
       border-radius: 0;
-      overflow: hidden;
       display: flex;
       flex-direction: column;
       cursor: pointer;
@@ -765,6 +766,8 @@
       justify-content: center;
       position: relative;
       overflow: hidden;
+      background: white;
+      border-radius: 12px;
     }
 
     .product-card-img img {
@@ -789,7 +792,7 @@
     }
 
     .product-card-body {
-      padding: 10px 10px 12px;
+      padding: 8px 0 12px;
       display: flex;
       flex-direction: column;
       gap: 4px;
@@ -912,7 +915,7 @@
       width: 100%;
       display: flex;
       flex-direction: column;
-      background: white;
+      background: var(--brand-darkblue);
     }
 
     .ws-deals-link {
@@ -921,31 +924,31 @@
       gap: 12px;
       padding: 16px;
       height: 56px;
-      border-bottom: 1px solid #dadfe3;
+      border-bottom: 1px solid #1a32a6;
       cursor: pointer;
-      background: white;
+      background: #0a2296;
     }
 
     .ws-deals-link:active {
-      background: var(--neutral-50);
+      background: #1a32a6;
     }
 
     .ws-deals-link svg {
       width: 24px;
       height: 24px;
-      color: var(--brand-darkblue);
+      color: white;
       flex-shrink: 0;
     }
 
     .ws-deals-link span {
       font-size: 16px;
-      color: var(--brand-darkblue);
+      color: white;
     }
 
     .ws-category-title {
       font-size: 24px;
       font-weight: 700;
-      color: var(--brand-darkblue);
+      color: white;
       padding: 24px 16px 20px;
       letter-spacing: -0.5px;
     }
@@ -956,13 +959,13 @@
       gap: 12px;
       padding: 8px 16px;
       height: 64px;
-      border-bottom: 1px solid #dadfe3;
+      border-bottom: 1px solid #1a32a6;
       cursor: pointer;
-      background: white;
+      background: #0a2296;
     }
 
     .ws-category-item:active {
-      background: var(--neutral-50);
+      background: #1a32a6;
     }
 
     .ws-category-item-img {
@@ -986,7 +989,7 @@
     .ws-category-item-name {
       font-size: 16px;
       font-weight: 400;
-      color: var(--brand-darkblue);
+      color: rgba(255,255,255,0.85);
       line-height: 22px;
     }
 
@@ -1576,36 +1579,36 @@
     }
 
     .tabbar.online-mode {
-      background: var(--white);
-      border-top-color: var(--neutral-150);
+      background: var(--brand-darkblue);
+      border-top-color: rgba(255,255,255,0.1);
     }
 
     .tabbar.online-mode .tabbar-tab {
-      background: var(--white);
+      background: transparent;
     }
 
     .tabbar.online-mode .tabbar-tab-label {
-      color: var(--neutral-700);
+      color: rgba(255,255,255,0.5);
     }
 
     .tabbar.online-mode .tabbar-tab.active .tabbar-tab-label {
-      color: var(--brand-darkblue);
+      color: white;
     }
 
     .tabbar.online-mode .tabbar-tab-icon svg {
-      color: var(--neutral-700);
+      color: rgba(255,255,255,0.5);
     }
 
     .tabbar.online-mode .tabbar-tab.active .tabbar-tab-icon svg {
-      color: var(--brand-darkblue);
+      color: white;
     }
 
     .tabbar.online-mode .home-indicator-bar {
-      background: rgba(89,89,89,0.8);
+      background: rgba(255,255,255,0.8);
     }
 
     .tabbar.online-mode .tab-badge {
-      background: var(--brand-darkblue);
+      background: #00b6e7;
     }
 
     /* ===== Dark mode for online content ===== */
@@ -1614,36 +1617,12 @@
     }
 
     .page-content.online-mode .webshop-card {
-      background: #0a2296;
-      border-color: #1a32a6;
-    }
-
-    .page-content.online-mode .webshop-card-img {
-      background: white;
+      background: none;
+      border: none;
     }
 
     .page-content.online-mode .webshop-card-img img {
       mix-blend-mode: multiply;
-    }
-
-    .page-content.online-mode .webshop-card-name {
-      color: rgba(255,255,255,0.85);
-    }
-
-    .page-content.online-mode .webshop-card-desc {
-      color: rgba(255,255,255,0.5);
-    }
-
-    .page-content.online-mode .webshop-card-price {
-      color: white;
-    }
-
-    .page-content.online-mode .webshop-cards-grid {
-      border-color: #1a32a6;
-    }
-
-    .page-content.online-mode .webshop-lane-title {
-      color: white;
     }
 
     .page-content.online-mode .ws-category-list {
@@ -1684,7 +1663,7 @@
     /* ===== Online only promo bar ===== */
     .webshop-promo-bar {
       width: 100%;
-      background: #00b6e7;
+      background: var(--brand-darkblue);
       height: 72px;
       display: flex;
       align-items: center;
@@ -1700,7 +1679,7 @@
     .webshop-promo-bar-text {
       font-size: 22px;
       font-weight: 700;
-      color: white;
+      color: #00b6e7;
       line-height: 1;
     }
 
@@ -1710,6 +1689,8 @@
       display: flex;
       flex-direction: column;
       gap: 0;
+      background: var(--brand-darkblue);
+      padding-bottom: 16px;
     }
 
     .webshop-lane-title {
@@ -1723,17 +1704,14 @@
     .webshop-cards-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 0;
-      border-top: 1px solid #e2e5e9;
-      border-left: 1px solid #e2e5e9;
+      gap: 16px;
+      padding: 0 16px;
     }
 
     .webshop-card {
-      background: white;
+      background: none;
+      border: none;
       border-radius: 0;
-      border-right: 1px solid #e2e5e9;
-      border-bottom: 1px solid #e2e5e9;
-      overflow: hidden;
       display: flex;
       flex-direction: column;
       cursor: pointer;
@@ -1751,11 +1729,13 @@
       justify-content: center;
       position: relative;
       overflow: hidden;
+      background: white;
+      border-radius: 12px;
     }
 
     .webshop-card-img img {
-      width: 80%;
-      height: 80%;
+      width: 100%;
+      height: 100%;
       object-fit: contain;
     }
 
@@ -1775,7 +1755,7 @@
     }
 
     .webshop-card-body {
-      padding: 10px 10px 12px;
+      padding: 8px 0 12px;
       display: flex;
       flex-direction: column;
       gap: 4px;
@@ -1785,7 +1765,7 @@
     .webshop-card-name {
       font-size: 13px;
       font-weight: 400;
-      color: var(--neutral-700);
+      color: rgba(255,255,255,0.85);
       line-height: 1.35;
       display: -webkit-box;
       -webkit-line-clamp: 2;
@@ -1796,14 +1776,14 @@
 
     .webshop-card-desc {
       font-size: 12px;
-      color: var(--neutral-500);
+      color: rgba(255,255,255,0.5);
       min-height: calc(12px * 1.35);
     }
 
     .webshop-card-price {
       font-size: 18px;
       font-weight: 700;
-      color: var(--brand-darkblue);
+      color: white;
       line-height: 1;
     }
 
