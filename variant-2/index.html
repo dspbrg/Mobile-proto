@@ -99,6 +99,11 @@
       flex: 1;
       overflow-y: auto;
       overflow-x: hidden;
+      transition: background-color 0.4s ease;
+    }
+
+    .page-content.online-mode {
+      background: var(--brand-darkblue);
     }
 
     /* ===== Header Section ===== */
@@ -114,6 +119,7 @@
       padding-top: 16px;
       z-index: 50;
       padding-bottom: 16px;
+      transition: background-color 0.4s ease;
     }
 
     /* ===== Navbar with Toggle & Card Button ===== */
@@ -2869,6 +2875,7 @@
     if (statusBar) statusBar.classList.toggle('online-mode', isOnline);
 
     document.body.classList.toggle('online-mode', isOnline);
+    document.querySelector('.page-content').classList.toggle('online-mode', isOnline);
     document.getElementById('theme-color-meta').setAttribute('content', isOnline ? '#001489' : '#ffffff');
 
     const tabbar = document.querySelector('.tabbar');
