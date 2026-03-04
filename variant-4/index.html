@@ -2,7 +2,7 @@
 <html lang="nl">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
   <title>Action App Prototype</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -30,6 +30,9 @@
         background: var(--white);
         height: 100dvh;
         overflow: hidden;
+      }
+      body.online-mode {
+        background: var(--dark-bg);
       }
     }
 
@@ -62,6 +65,8 @@
       box-shadow: 0 0 40px rgba(0,0,0,0.15);
       display: flex;
       flex-direction: column;
+      padding-top: env(safe-area-inset-top);
+      padding-bottom: env(safe-area-inset-bottom);
     }
 
     @media (max-width: 500px) {
@@ -2899,6 +2904,8 @@
     });
     const statusBar = document.querySelector('.status-bar');
     if (statusBar) statusBar.classList.toggle('online-mode', isOnline);
+
+    document.body.classList.toggle('online-mode', isOnline);
 
     const tabbar = document.querySelector('.tabbar');
     if (tabbar) tabbar.classList.toggle('online-mode', isOnline);
