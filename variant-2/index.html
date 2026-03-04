@@ -1883,8 +1883,8 @@
         <div class="layout-navbar">
           <!-- Toggle -->
           <div class="toggle-app" id="toggle-switch">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" id="toggle-icon">
-              <path d="M13.5839 1.63194C14.0634 1.35793 14.6741 1.52449 14.9481 2.00401L18.6601 8.5001H20.4394C21.4152 8.5001 22.1311 9.41764 21.8944 10.3644L19.4286 20.2276C19.0947 21.5631 17.8951 22.5001 16.5185 22.5001H5.64151C4.26492 22.5001 3.06522 21.5631 2.73135 20.2276L0.265531 10.3644C0.0288506 9.41764 0.744754 8.5001 1.72061 8.5001H2.49991L6.21182 2.00401C6.48583 1.52449 7.09656 1.35793 7.57608 1.63194C8.0556 1.90595 8.22216 2.51668 7.94815 2.99619L4.80264 8.5001H16.3573L13.2118 2.99619C12.9378 2.51668 13.1044 1.90595 13.5839 1.63194ZM4.67178 19.7423C4.78307 20.1874 5.18265 20.5001 5.64151 20.5001H16.5185C16.9773 20.5001 17.3769 20.1874 17.4882 19.7423L19.7997 10.5001H2.36026L4.67178 19.7423Z" transform="translate(1, 0)"/>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/>
             </svg>
             <span class="toggle-label" id="toggle-label">Online deals</span>
           </div>
@@ -2879,20 +2879,10 @@
       }
     }
 
-    // Update toggle button text & icon
+    // Update toggle button text
     const toggleLabel = document.getElementById('toggle-label');
-    const toggleIcon = document.getElementById('toggle-icon');
-    const storeIconPath = 'M19.6536 2C20.2788 2.00007 20.8384 2.38822 21.0579 2.97363L23.6829 9.97363C24.0504 10.9541 23.3258 11.9999 22.2786 12H20.9803V22H18.9803V12H13.9803V22H2.98031V12H1.72101C0.674079 11.9997 -0.0506501 10.954 0.316717 9.97363L2.94172 2.97363C3.16121 2.38832 3.72093 2.00019 4.34601 2H19.6536ZM4.98031 20H11.9803V17H4.98031V20ZM4.98031 15H11.9803V12H4.98031V15ZM2.44367 10H21.556L19.306 4H4.69367L2.44367 10Z';
-    const cartIconPath = 'M13.5839 1.63194C14.0634 1.35793 14.6741 1.52449 14.9481 2.00401L18.6601 8.5001H20.4394C21.4152 8.5001 22.1311 9.41764 21.8944 10.3644L19.4286 20.2276C19.0947 21.5631 17.8951 22.5001 16.5185 22.5001H5.64151C4.26492 22.5001 3.06522 21.5631 2.73135 20.2276L0.265531 10.3644C0.0288506 9.41764 0.744754 8.5001 1.72061 8.5001H2.49991L6.21182 2.00401C6.48583 1.52449 7.09656 1.35793 7.57608 1.63194C8.0556 1.90595 8.22216 2.51668 7.94815 2.99619L4.80264 8.5001H16.3573L13.2118 2.99619C12.9378 2.51668 13.1044 1.90595 13.5839 1.63194ZM4.67178 19.7423C4.78307 20.1874 5.18265 20.5001 5.64151 20.5001H16.5185C16.9773 20.5001 17.3769 20.1874 17.4882 19.7423L19.7997 10.5001H2.36026L4.67178 19.7423Z';
-
     if (toggleLabel) {
-      if (isOnline) {
-        toggleLabel.textContent = 'Winkel assortiment';
-        toggleIcon.innerHTML = '<path d="' + storeIconPath + '" transform="translate(0, 2)"/>';
-      } else {
-        toggleLabel.textContent = 'Online deals';
-        toggleIcon.innerHTML = '<path d="' + cartIconPath + '" transform="translate(1, 0)"/>';
-      }
+      toggleLabel.textContent = isOnline ? 'Winkel assortiment' : 'Online deals';
     }
   }
 
