@@ -1,0 +1,2874 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Action App Prototype</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    /* ===== Reset & Base ===== */
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html, body {
+      height: 100%;
+      font-family: 'Ubuntu', sans-serif;
+      background: #e8e8e8;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+    }
+
+    @media (max-width: 500px) {
+      html, body {
+        background: var(--white);
+        height: 100dvh;
+        overflow: hidden;
+      }
+    }
+
+    /* ===== Design Tokens ===== */
+    :root {
+      --brand-darkblue: #001489;
+      --brand-orange: #ff8200;
+      --neutral-50: #f3f4f6;
+      --neutral-150: #dadfe3;
+      --neutral-300: #b6bec8;
+      --neutral-500: #8593a3;
+      --neutral-700: #505862;
+      --white: #ffffff;
+      --radius-xs: 4px;
+      --radius-sm: 8px;
+      --radius-round: 360px;
+    }
+
+    /* ===== Phone Frame ===== */
+    .phone-frame {
+      width: 100%;
+      max-width: 375px;
+      height: 100dvh;
+      background: var(--white);
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 0 40px rgba(0,0,0,0.15);
+      display: flex;
+      flex-direction: column;
+    }
+
+    @media (max-width: 500px) {
+      .phone-frame {
+        max-width: 100%;
+        box-shadow: none;
+      }
+    }
+
+    /* ===== Status Bar (iOS style) ===== */
+    .status-bar {
+      display: none;
+    }
+
+    .status-bar-time {
+      display: none;
+    }
+
+    .status-bar-icons {
+      display: none;
+    }
+
+    /* ===== Page Content ===== */
+    .page-content {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      align-items: center;
+      padding-top: 0px;
+      padding-bottom: 24px;
+      flex: 1;
+      overflow-y: auto;
+      overflow-x: hidden;
+    }
+
+    /* ===== Header Section ===== */
+    .section-header {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      align-items: center;
+      background: var(--white);
+      padding-top: 16px;
+      padding-bottom: 16px;
+      z-index: 50;
+      flex-shrink: 0;
+      transition: background-color 0.4s ease;
+    }
+
+    /* ===== Navbar with Toggle & Card Button ===== */
+    .layout-navbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 16px;
+      width: 100%;
+    }
+
+    /* ===== Top Tabs ===== */
+    .top-tabs {
+      display: flex;
+      width: 100%;
+      border-bottom: 2px solid var(--neutral-150);
+    }
+
+    .top-tab {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 12px 0;
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--neutral-500);
+      cursor: pointer;
+      user-select: none;
+      border-bottom: 3px solid transparent;
+      margin-bottom: -2px;
+      transition: color 0.3s ease, border-color 0.3s ease;
+    }
+
+    .top-tab.active {
+      color: var(--brand-darkblue);
+      border-bottom-color: var(--brand-darkblue);
+      font-weight: 700;
+    }
+
+    .top-tab svg {
+      width: 20px;
+      height: 20px;
+      flex-shrink: 0;
+    }
+
+    /* ===== Loyalty Card Button ===== */
+    .loyalty-btn {
+      width: 48px;
+      height: 48px;
+      border-radius: var(--radius-round);
+      border: 1px solid var(--neutral-500);
+      background: var(--neutral-150);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+
+    /* ===== Search Bar ===== */
+    .search-bar {
+      align-self: stretch;
+      margin: 0 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 16px;
+      border: 1px solid var(--neutral-300);
+      border-radius: var(--radius-round);
+      background: var(--white);
+    }
+
+    .search-bar .search-label {
+      flex: 1;
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 22px;
+      color: var(--neutral-700);
+      border: none;
+      outline: none;
+      background: transparent;
+      font-family: inherit;
+      padding: 0;
+      width: 0;
+      min-width: 0;
+    }
+
+    .search-bar .search-label::placeholder {
+      color: var(--neutral-700);
+    }
+
+    .search-bar svg {
+      flex-shrink: 0;
+      color: var(--neutral-700);
+      width: 24px;
+      height: 24px;
+    }
+
+    .search-bar .search-trapeze {
+      display: none;
+    }
+
+    .search-bar .search-center {
+      display: contents;
+    }
+
+    /* ===== Quick Actions ===== */
+    .section-quick-actions {
+      display: flex;
+      gap: 8px;
+      padding: 0 16px;
+      width: 100%;
+    }
+
+    .quick-actions-column {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      flex: 1;
+    }
+
+    .menu-item {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+      padding: 8px 0;
+      cursor: pointer;
+    }
+
+    .menu-item:active {
+      opacity: 0.7;
+    }
+
+    .menu-item-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: var(--radius-xs);
+      background: var(--brand-orange);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .menu-item-icon svg {
+      color: var(--white);
+    }
+
+    .menu-item-text {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      min-width: 0;
+      overflow: hidden;
+    }
+
+    .menu-item-title {
+      font-size: 16px;
+      font-weight: 500;
+      line-height: 22px;
+      color: var(--brand-darkblue);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .menu-item-subtitle {
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 18px;
+      color: var(--neutral-700);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    /* ===== Tab Bar ===== */
+    .tabbar {
+      width: 100%;
+      background: var(--white);
+      border-top: 1px solid var(--neutral-150);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex-shrink: 0;
+      z-index: 100;
+    }
+
+    .tabbar-tabs {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+    }
+
+    .tabbar-tab {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      align-items: center;
+      justify-content: center;
+      padding: 6px 0;
+      width: 72px;
+      background: var(--white);
+      cursor: pointer;
+      position: relative;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    .tabbar-tab:active {
+      background: var(--neutral-50);
+    }
+
+    .tabbar-tab-icon {
+      width: 28px;
+      height: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .tabbar-tab-icon svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    .tabbar-tab-label {
+      font-size: 11px;
+      font-weight: 400;
+      line-height: 12px;
+      letter-spacing: -0.3px;
+      text-align: center;
+      white-space: nowrap;
+      color: var(--neutral-700);
+      transition: color 0.4s ease;
+    }
+
+    .tabbar-tab.active .tabbar-tab-label {
+      color: var(--brand-darkblue);
+    }
+
+    .tabbar-tab.active .tabbar-tab-icon svg {
+      color: var(--brand-darkblue);
+    }
+
+    .tabbar-tab:not(.active) .tabbar-tab-icon svg {
+      color: var(--neutral-700);
+    }
+
+    /* Badge */
+    .tab-badge {
+      position: absolute;
+      top: 4px;
+      left: 40px;
+      min-width: 16px;
+      height: 16px;
+      padding: 0 4px;
+      border-radius: 360px;
+      background: var(--brand-orange);
+      transition: background-color 0.4s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 400;
+      line-height: 12px;
+      color: var(--white);
+    }
+
+    /* Home Indicator */
+    .home-indicator {
+      height: 24px;
+      width: 100%;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      padding-bottom: 8px;
+    }
+
+    .home-indicator-bar {
+      width: 139px;
+      height: 5px;
+      border-radius: 100px;
+      background: rgba(89,89,89,0.8);
+      opacity: 0.5;
+    }
+
+    /* ===== Page Views ===== */
+    .page-view {
+      display: none;
+      width: 100%;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .page-view.active {
+      display: flex;
+    }
+
+    /* Placeholder pages */
+    .placeholder-page {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 60px 32px;
+      gap: 16px;
+      text-align: center;
+    }
+
+    .placeholder-icon {
+      width: 64px;
+      height: 64px;
+      border-radius: 16px;
+      background: var(--neutral-50);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .placeholder-icon svg {
+      width: 32px;
+      height: 32px;
+      color: var(--neutral-500);
+    }
+
+    .placeholder-title {
+      font-size: 20px;
+      font-weight: 500;
+      color: var(--brand-darkblue);
+      line-height: 28px;
+    }
+
+    .placeholder-subtitle {
+      font-size: 14px;
+      font-weight: 400;
+      color: var(--neutral-700);
+      line-height: 20px;
+    }
+
+    /* ===== Category Bubble Lane ===== */
+    .category-bubble-lane {
+      width: 100%;
+      overflow-x: auto;
+      overflow-y: visible;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      padding: 0 0 0 16px;
+    }
+
+    .category-bubble-lane::-webkit-scrollbar {
+      display: none;
+    }
+
+    .category-bubble-track {
+      display: flex;
+      gap: 12px;
+      width: max-content;
+      padding-bottom: 4px;
+      padding-right: 16px;
+    }
+
+    .category-bubble-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+
+    .category-bubble-item:active .category-bubble-circle {
+      opacity: 0.8;
+    }
+
+    .category-bubble-circle {
+      width: 68px;
+      height: 68px;
+      border-radius: 50%;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .category-bubble-circle img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .category-bubble-label {
+      font-size: 12px;
+      font-weight: 400;
+      color: var(--neutral-700);
+      text-align: center;
+      line-height: 1.2;
+      max-width: 68px;
+    }
+
+    /* ===== Hero Banner ===== */
+    .hero-banner {
+      width: 100%;
+      position: relative;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .hero-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: var(--brand-orange);
+      overflow: hidden;
+    }
+
+    .hero-bg-trapeze {
+      position: absolute;
+      top: 0;
+      bottom: -50%;
+      left: 0;
+      width: 60%;
+      background: #e6f8fd;
+      clip-path: polygon(0 0, 100% 0, calc(100% - 66px) 100%, 0 100%);
+    }
+
+    .hero-content {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-top: 24px;
+      gap: 24px;
+    }
+
+    .hero-text {
+      width: 100%;
+      padding: 0 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      color: var(--brand-darkblue);
+    }
+
+    .hero-title {
+      font-size: 32px;
+      font-weight: 700;
+      line-height: 36px;
+      letter-spacing: -0.5px;
+    }
+
+    .hero-subtitle {
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 22px;
+    }
+
+    .hero-image-container {
+      width: 289px;
+      height: 248px;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .hero-image-container img {
+      width: 288px;
+      height: 288px;
+      object-fit: contain;
+    }
+
+    .hero-bottom {
+      position: absolute;
+      bottom: 16px;
+      left: 16px;
+      right: 16px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+    }
+
+    .hero-price-tag {
+      display: flex;
+      align-items: flex-start;
+    }
+
+    .hero-price-tag-side {
+      position: relative;
+      height: 80px;
+      flex-shrink: 0;
+    }
+
+    .hero-price-tag-side.left {
+      width: 28px;
+      margin-right: -1px;
+    }
+
+    .hero-price-tag-side.right {
+      width: 32px;
+      margin-left: -1px;
+    }
+
+    .hero-price-tag-side .tag-shadow {
+      position: absolute;
+      bottom: 0;
+      height: 80px;
+    }
+
+    .hero-price-tag-side.left .tag-shadow {
+      right: 0;
+      width: 26.75px;
+    }
+
+    .hero-price-tag-side.right .tag-shadow {
+      right: 0;
+      width: 31.5px;
+      transform: rotate(180deg);
+    }
+
+    .hero-price-tag-side .tag-shape {
+      position: absolute;
+    }
+
+    .hero-price-tag-side.left .tag-shape {
+      top: 1px;
+      right: 0;
+      bottom: 7px;
+      left: 2px;
+    }
+
+    .hero-price-tag-side.right .tag-shape {
+      top: 1px;
+      right: 6px;
+      bottom: 7px;
+      left: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hero-price-tag-side.right .tag-shape img {
+      transform: rotate(180deg);
+    }
+
+    .hero-price-tag-side img {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
+    .hero-price-tag-body {
+      background: var(--brand-orange);
+      border-top: 1px solid var(--brand-darkblue);
+      box-shadow: 0 7px 0 0 var(--brand-darkblue);
+      height: 73px;
+      padding: 8px 4px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      align-items: center;
+      justify-content: center;
+      min-width: 68px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .hero-price-main {
+      display: flex;
+      align-items: baseline;
+      gap: 2px;
+    }
+
+    .hero-price-whole {
+      font-weight: 700;
+      font-size: 48px;
+      line-height: 40px;
+      color: white;
+      -webkit-text-stroke: 2px var(--brand-darkblue);
+      text-shadow: 2px 2px 0 var(--brand-darkblue);
+      letter-spacing: -1px;
+    }
+
+    .hero-price-decimal {
+      font-weight: 700;
+      font-size: 28px;
+      line-height: 28px;
+      color: white;
+      -webkit-text-stroke: 1.5px var(--brand-darkblue);
+      text-shadow: 1px 1px 0 var(--brand-darkblue);
+      letter-spacing: 2px;
+    }
+
+    .hero-price-unit {
+      font-size: 10px;
+      line-height: 10px;
+      color: var(--brand-darkblue);
+    }
+
+    .hero-cta {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--brand-darkblue);
+      border: 2px solid white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+
+    /* ===== Product Cards Lane ===== */
+    .product-lane {
+      width: 100%;
+      padding: 0 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .product-lane-title {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--brand-orange);
+      line-height: 1;
+    }
+
+    .product-cards-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 8px;
+    }
+
+    .product-card {
+      background: white;
+      border-radius: 0;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      cursor: pointer;
+    }
+
+    .product-card:active {
+      opacity: 0.85;
+    }
+
+    .product-card-img {
+      width: 100%;
+      aspect-ratio: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .product-card-img img {
+      width: 80%;
+      height: 80%;
+      object-fit: contain;
+    }
+
+    .product-card-badge {
+      position: absolute;
+      top: 0;
+      left: 0;
+      background: var(--brand-orange);
+      color: white;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.4px;
+      text-transform: none;
+      padding: 3px 14px 3px 6px;
+      border-radius: 0;
+      clip-path: polygon(0 0, 100% 0, calc(100% - 8px) 100%, 0 100%);
+    }
+
+    .product-card-body {
+      padding: 10px 10px 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .product-card-name {
+      font-size: 12px;
+      font-weight: 400;
+      color: var(--neutral-700);
+      line-height: 1.35;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .product-card-price {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--brand-darkblue);
+      line-height: 1;
+      margin-top: 4px;
+    }
+
+    .product-card-price sup {
+      font-size: 11px;
+      vertical-align: super;
+      line-height: 0;
+    }
+
+    .product-card-price-old {
+      font-size: 11px;
+      color: var(--neutral-500);
+      text-decoration: line-through;
+    }
+
+    /* ===== Toggle page content ===== */
+    .toggle-page {
+      display: none;
+      width: 100%;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+    }
+
+    .toggle-page.active {
+      display: flex;
+    }
+
+    #content-winkel {
+      gap: 16px;
+    }
+
+    /* ===== Category List (Producten) ===== */
+    .category-list {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      background: white;
+    }
+
+    .category-list-title {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--brand-darkblue);
+      padding: 24px 16px 20px;
+      letter-spacing: -0.5px;
+    }
+
+    .category-list-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 16px;
+      height: 56px;
+      background: white;
+      cursor: pointer;
+    }
+
+    .category-list-item:active {
+      background: var(--neutral-50);
+    }
+
+    .category-list-item-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .category-list-item-img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: #ecf6fc;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .category-list-item-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .category-list-item-name {
+      font-size: 16px;
+      font-weight: 400;
+      color: var(--brand-darkblue);
+      line-height: 16px;
+    }
+
+    .category-list-item-arrow {
+      color: var(--neutral-300);
+      flex-shrink: 0;
+    }
+
+    /* Webshop category list overrides */
+    .ws-category-list {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      background: white;
+    }
+
+    .ws-deals-link {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 16px;
+      height: 56px;
+      border-bottom: 1px solid #dadfe3;
+      cursor: pointer;
+      background: white;
+    }
+
+    .ws-deals-link:active {
+      background: var(--neutral-50);
+    }
+
+    .ws-deals-link svg {
+      width: 24px;
+      height: 24px;
+      color: var(--brand-darkblue);
+      flex-shrink: 0;
+    }
+
+    .ws-deals-link span {
+      font-size: 16px;
+      color: var(--brand-darkblue);
+    }
+
+    .ws-category-title {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--brand-darkblue);
+      padding: 24px 16px 20px;
+      letter-spacing: -0.5px;
+    }
+
+    .ws-category-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 8px 16px;
+      height: 64px;
+      border-bottom: 1px solid #dadfe3;
+      cursor: pointer;
+      background: white;
+    }
+
+    .ws-category-item:active {
+      background: var(--neutral-50);
+    }
+
+    .ws-category-item-img {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: #b2e9f8;
+      overflow: hidden;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .ws-category-item-img img {
+      width: 65%;
+      height: 65%;
+      object-fit: contain;
+    }
+
+    .ws-category-item-name {
+      font-size: 16px;
+      font-weight: 400;
+      color: var(--brand-darkblue);
+      line-height: 22px;
+    }
+
+    .producten-winkel, .producten-online {
+      width: 100%;
+    }
+
+    .producten-online {
+      display: none;
+    }
+
+    .lijstjes-winkel, .lijstjes-online {
+      width: 100%;
+    }
+
+    .lijstjes-online {
+      display: none;
+    }
+
+    /* Empty basket */
+    .basket-empty {
+      width: 100%;
+      background: white;
+    }
+
+    .basket-empty-visual {
+      position: relative;
+      width: 100%;
+      height: 336px;
+      overflow: hidden;
+    }
+
+    .basket-empty-trapeze {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      transform: translateY(-50%);
+      width: 343px;
+      height: 272px;
+    }
+
+    .basket-empty-img {
+      position: absolute;
+      left: 50%;
+      top: 0;
+      transform: translateX(-50%);
+      width: 332px;
+      height: 332px;
+      object-fit: contain;
+    }
+
+    .basket-empty-content {
+      padding: 16px 16px 48px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .basket-empty-title {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--brand-darkblue);
+      letter-spacing: -0.5px;
+      line-height: 30px;
+    }
+
+    .basket-empty-sub {
+      font-size: 16px;
+      color: #505862;
+      line-height: 22px;
+    }
+
+    .basket-empty-btn {
+      margin-top: 16px;
+      width: 100%;
+      height: 44px;
+      border: none;
+      border-radius: 360px;
+      background: #00b6e7;
+      color: white;
+      font-family: 'Ubuntu', sans-serif;
+      font-size: 16px;
+      font-weight: 500;
+      cursor: pointer;
+    }
+
+    /* ===== Weekactie page ===== */
+    .weekactie-page {
+      width: 100%;
+      background: white;
+    }
+
+    .weekactie-header {
+      width: 100%;
+      height: 48px;
+      background: var(--brand-orange);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .weekactie-header-logo {
+      height: 28px;
+      object-fit: contain;
+    }
+
+
+    .weekactie-date {
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--brand-orange);
+      background: white;
+    }
+
+    .weekactie-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      background: #d4d5d6;
+      gap: 1px;
+      border-top: 1px solid #d4d5d6;
+    }
+
+    .wa-card {
+      background: white;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .wa-card-img {
+      width: 124px;
+      height: 124px;
+      object-fit: contain;
+      align-self: center;
+      margin-top: 12px;
+    }
+
+    .wa-card-badge {
+      position: absolute;
+      top: 0;
+      left: 0;
+      background: var(--brand-orange);
+      color: white;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 14px 3px 6px;
+      clip-path: polygon(0 0, 100% 0, calc(100% - 8px) 100%, 0 100%);
+    }
+
+    .wa-card-heart {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      width: 24px;
+      height: 24px;
+    }
+
+    .wa-card-info {
+      padding: 4px 10px 0;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .wa-card-name {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--brand-darkblue);
+      line-height: 1.2;
+    }
+
+    .wa-card-desc {
+      font-size: 12px;
+      color: #54585a;
+      line-height: 1;
+    }
+
+    .wa-card-pricing {
+      padding: 0 10px 12px;
+      margin-top: auto;
+    }
+
+    .wa-price-unit {
+      font-size: 11px;
+      color: #54585a;
+      margin-top: 16px;
+      margin-bottom: 2px;
+    }
+
+    .wa-card-price {
+      display: flex;
+      align-items: flex-start;
+    }
+
+    .wa-price-euros {
+      font-size: 48px;
+      font-weight: 700;
+      color: var(--brand-orange);
+      line-height: 0.77;
+      letter-spacing: -2px;
+    }
+
+    .wa-price-cents {
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--brand-orange);
+      line-height: 0.85;
+    }
+
+    .wa-card-cta {
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: var(--brand-orange);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .wa-card-cta svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    .weekactie-winkel, .weekactie-online {
+      width: 100%;
+    }
+
+    .weekactie-online {
+      display: none;
+    }
+
+    /* ===== Mijn lijstjes (winkel) ===== */
+    .mijn-lijstjes {
+      padding: 24px 16px;
+      background: white;
+      min-height: 100%;
+    }
+
+    .mijn-lijstjes-title {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--brand-darkblue);
+      letter-spacing: -0.5px;
+      margin-bottom: 20px;
+    }
+
+    .lijstjes-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .lijstje-card {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .lijstje-card-thumb {
+      aspect-ratio: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #d9edf9;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .lijstje-card-thumb.orange {
+      background: #fff3e6;
+    }
+
+    .lijstje-card-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .lijstje-card-thumb .lijstje-icon {
+      width: 48px;
+      height: 48px;
+      object-fit: contain;
+    }
+
+    .lijstje-card-info {
+      padding: 8px 0 0;
+    }
+
+    .lijstje-card-name {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--brand-darkblue);
+      letter-spacing: -0.3px;
+      display: block;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .lijstje-card-count {
+      font-size: 13px;
+      color: #54585a;
+      display: block;
+      margin-top: 2px;
+    }
+
+    .new-lijstje-btn {
+      width: calc(100% - 32px);
+      margin: 16px 16px 24px;
+      padding: 14px;
+      border-radius: var(--radius-sm);
+      border: 2px dashed var(--neutral-300);
+      background: transparent;
+      font-family: inherit;
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--brand-darkblue);
+      cursor: pointer;
+    }
+
+    .new-lijstje-btn:active {
+      background: var(--neutral-50);
+    }
+
+    /* ===== Mijn Action page ===== */
+    .myaction-page {
+      background: white;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .myaction-page-title {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--brand-darkblue);
+      letter-spacing: -0.5px;
+      align-self: flex-start;
+      padding: 24px 16px 20px;
+    }
+
+    .myaction-avatar-wrap {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      background: linear-gradient(to bottom, white 50%, #d9edf9 50%);
+    }
+
+    .myaction-avatar {
+      width: 144px;
+      height: 144px;
+      flex-shrink: 0;
+    }
+
+    .myaction-avatar img {
+      width: 100%;
+      height: 100%;
+    }
+
+    .myaction-blue-area {
+      width: 100%;
+      background: #d9edf9;
+      padding: 24px 16px;
+    }
+
+    .myaction-section {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .myaction-section + .myaction-section {
+      margin-top: 24px;
+    }
+
+    .myaction-section-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--brand-darkblue);
+      letter-spacing: -0.5px;
+      line-height: 24px;
+    }
+
+    .myaction-menu-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .myaction-menu-item {
+      background: white;
+      border-radius: 2px;
+      box-shadow: 0 2px 4px rgba(98,181,229,0.2);
+      padding: 8px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+    }
+
+    .myaction-menu-item:active {
+      opacity: 0.85;
+    }
+
+    .myaction-menu-label {
+      font-size: 16px;
+      font-weight: 400;
+      color: var(--brand-darkblue);
+      line-height: 22px;
+    }
+
+    .myaction-menu-arrow {
+      color: var(--neutral-300);
+      flex-shrink: 0;
+    }
+
+    .myaction-profile-card {
+      background: white;
+      border-radius: 2px;
+      box-shadow: 0 2px 4px rgba(98,181,229,0.2);
+      padding: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .myaction-profile-info {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .myaction-profile-name {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--brand-darkblue);
+      letter-spacing: -0.5px;
+      line-height: 26px;
+    }
+
+    .myaction-profile-sub {
+      font-size: 16px;
+      font-weight: 400;
+      color: #1a1a1a;
+      line-height: 22px;
+    }
+
+    .myaction-profile-barcode {
+      width: 56px;
+      height: 56px;
+    }
+
+    .myaction-profile-barcode img {
+      width: 100%;
+      height: 100%;
+    }
+
+    .myaction-logout {
+      border: 1px solid var(--brand-darkblue);
+      border-radius: 360px;
+      background: white;
+      padding: 6px 12px;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--brand-darkblue);
+      cursor: pointer;
+      width: 296px;
+    }
+
+    .myaction-version {
+      font-size: 12px;
+      color: var(--brand-darkblue);
+      margin-top: 8px;
+    }
+
+    /* ===== Online mode styles ===== */
+    .section-header.online-mode {
+      background: var(--brand-darkblue);
+      padding-bottom: 16px;
+    }
+
+    .section-header.online-mode .search-bar {
+      border: none;
+      border-radius: 0;
+      padding: 0;
+      gap: 0;
+      background: transparent;
+    }
+
+    .section-header.online-mode .search-bar .search-center {
+      background: var(--white);
+      flex: 1;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding-right: 12px;
+    }
+
+    .section-header.online-mode .search-bar .search-trapeze {
+      display: block;
+      width: 25px;
+      height: 44px;
+      flex-shrink: 0;
+    }
+
+    .section-header.online-mode .search-bar .search-trapeze.right {
+      transform: rotate(180deg);
+    }
+
+    .section-header.online-mode .top-tabs {
+      border-bottom-color: rgba(255,255,255,0.2);
+    }
+
+    .section-header.online-mode .top-tab {
+      color: rgba(255,255,255,0.5);
+    }
+
+    .section-header.online-mode .top-tab.active {
+      color: white;
+      border-bottom-color: white;
+    }
+
+    .loyalty-btn {
+      transition: opacity 0.4s ease;
+    }
+
+    .loyalty-btn.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .status-bar {
+      transition: background-color 0.4s ease;
+    }
+
+    .status-bar.online-mode {
+      background: var(--brand-darkblue);
+    }
+
+    .status-bar.online-mode .status-bar-time {
+      color: white;
+    }
+
+    .status-bar.online-mode svg path,
+    .status-bar.online-mode svg rect,
+    .status-bar.online-mode svg circle {
+      fill: white;
+      stroke: white;
+    }
+
+    .status-bar.online-mode svg rect[stroke-opacity] {
+      stroke: rgba(255,255,255,0.35);
+    }
+
+    .status-bar.online-mode svg path[fill-opacity] {
+      fill: rgba(255,255,255,0.4);
+    }
+
+    /* Tabbar online mode — blauw, alle children transitioneren mee */
+    .tabbar {
+      transition: background-color 0.4s ease, border-color 0.4s ease;
+    }
+
+    .tabbar-tab {
+      transition: background-color 0.4s ease, color 0.4s ease;
+    }
+
+    .tabbar-tab-icon svg {
+      transition: color 0.4s ease;
+    }
+
+    .home-indicator-bar {
+      transition: background-color 0.4s ease;
+    }
+
+    .tabbar.online-mode {
+      background: var(--white);
+      border-top-color: var(--neutral-150);
+    }
+
+    .tabbar.online-mode .tabbar-tab {
+      background: var(--white);
+    }
+
+    .tabbar.online-mode .tabbar-tab-label {
+      color: var(--neutral-700);
+    }
+
+    .tabbar.online-mode .tabbar-tab.active .tabbar-tab-label {
+      color: var(--brand-darkblue);
+    }
+
+    .tabbar.online-mode .tabbar-tab-icon svg {
+      color: var(--neutral-700);
+    }
+
+    .tabbar.online-mode .tabbar-tab.active .tabbar-tab-icon svg {
+      color: var(--brand-darkblue);
+    }
+
+    .tabbar.online-mode .home-indicator-bar {
+      background: rgba(89,89,89,0.8);
+    }
+
+    .tabbar.online-mode .tab-badge {
+      background: var(--brand-darkblue);
+    }
+
+    /* ===== Webshop Splash Screen ===== */
+/* ===== Online only promo bar ===== */
+    .webshop-promo-bar {
+      width: 100%;
+      background: #00b6e7;
+      height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .webshop-promo-bar svg {
+      flex-shrink: 0;
+      color: white;
+    }
+
+    .webshop-promo-bar-text {
+      font-size: 22px;
+      font-weight: 700;
+      color: white;
+      line-height: 1;
+    }
+
+    /* ===== Online only product grid (2 kolommen) ===== */
+    .webshop-lane {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .webshop-lane-title {
+      font-size: 20px;
+      font-weight: 700;
+      color: white;
+      line-height: 1;
+      padding: 12px 16px 0;
+    }
+
+    .webshop-cards-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      border-top: 1px solid #e2e5e9;
+      border-left: 1px solid #e2e5e9;
+    }
+
+    .webshop-card {
+      background: white;
+      border-radius: 0;
+      border-right: 1px solid #e2e5e9;
+      border-bottom: 1px solid #e2e5e9;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      cursor: pointer;
+    }
+
+    .webshop-card:active {
+      opacity: 0.85;
+    }
+
+    .webshop-card-img {
+      width: 100%;
+      aspect-ratio: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .webshop-card-img img {
+      width: 80%;
+      height: 80%;
+      object-fit: contain;
+    }
+
+    .webshop-card-badge {
+      position: absolute;
+      top: 0;
+      left: 0;
+      background: #00b6e7;
+      color: white;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.4px;
+      text-transform: none;
+      padding: 3px 14px 3px 6px;
+      border-radius: 0;
+      clip-path: polygon(0 0, 100% 0, calc(100% - 8px) 100%, 0 100%);
+    }
+
+    .webshop-card-body {
+      padding: 10px 10px 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      flex: 1;
+    }
+
+    .webshop-card-name {
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--neutral-700);
+      line-height: 1.35;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      min-height: calc(2 * 13px * 1.35);
+    }
+
+    .webshop-card-desc {
+      font-size: 12px;
+      color: var(--neutral-500);
+      min-height: calc(12px * 1.35);
+    }
+
+    .webshop-card-price {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--brand-darkblue);
+      line-height: 1;
+    }
+
+    .webshop-card-price sup {
+      font-size: 11px;
+      vertical-align: super;
+      line-height: 0;
+    }
+
+    .webshop-card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: auto;
+      padding-top: 6px;
+    }
+
+    .webshop-card-cta {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: #00b6e7;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      cursor: pointer;
+    }
+
+    .webshop-card-cta svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    /* Online banner */
+    .online-banner {
+      width: 100%;
+      height: 72px;
+      overflow: hidden;
+    }
+
+    .online-banner img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top left;
+    }
+
+    /* Category list */
+    .category-section-title {
+      padding: 16px 16px 8px 16px;
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--brand-darkblue);
+      line-height: 16px;
+      width: 100%;
+    }
+
+    .category-list {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      width: 100%;
+    }
+
+    .category-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 16px;
+      height: 56px;
+      background: white;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .category-item:active {
+      background: var(--neutral-50);
+    }
+
+    .category-item-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .category-item-img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      object-fit: cover;
+      flex-shrink: 0;
+      background: #ecf6fc;
+    }
+
+    .category-item-name {
+      font-size: 16px;
+      font-weight: 400;
+      color: var(--brand-darkblue);
+      line-height: 16px;
+    }
+
+    .category-item-caret {
+      width: 16px;
+      height: 16px;
+      flex-shrink: 0;
+      color: var(--neutral-500);
+    }
+  </style>
+</head>
+<body>
+
+<div class="phone-frame">
+<!-- Status Bar -->
+  <div class="status-bar">
+    <span class="status-bar-time">9:41</span>
+    <div class="status-bar-icons">
+      <svg width="17" height="12" viewBox="0 0 17 12" fill="none"><path d="M1.5 3.5C4.5 0.5 9.5 0.5 12.5 3.5" stroke="black" stroke-width="1.2" stroke-linecap="round"/><path d="M3.5 6C5.5 4 8.5 4 10.5 6" stroke="black" stroke-width="1.2" stroke-linecap="round"/><path d="M5.5 8.5C6.5 7.5 7.5 7.5 8.5 8.5" stroke="black" stroke-width="1.2" stroke-linecap="round"/><circle cx="7" cy="11" r="1" fill="black"/></svg>
+      <svg width="16" height="12" viewBox="0 0 16 12" fill="none"><rect x="0.5" y="0.5" width="3" height="11" rx="0.5" fill="black" stroke="black"/><rect x="4.5" y="3.5" width="3" height="8" rx="0.5" fill="black" stroke="black"/><rect x="8.5" y="5.5" width="3" height="6" rx="0.5" fill="black" stroke="black"/><rect x="12.5" y="7.5" width="3" height="4" rx="0.5" fill="black" stroke="black"/></svg>
+      <svg width="27" height="12" viewBox="0 0 27 12" fill="none"><rect x="0.5" y="0.5" width="22" height="11" rx="2" stroke="black" stroke-opacity="0.35"/><path d="M24 4.5v3a1.5 1.5 0 000-3z" fill="black" fill-opacity="0.4"/><rect x="2" y="2" width="18" height="8" rx="1" fill="black"/></svg>
+    </div>
+  </div>
+
+  <!-- Global Header with Tabs -->
+  <div class="section-header" id="global-header">
+    <div class="top-tabs" id="top-tabs">
+      <div class="top-tab active" data-tab="winkel">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.6536 4C20.2788 4.00007 20.8384 4.38822 21.0579 4.97363L23.6829 11.9736C24.0504 12.9541 23.3258 13.9999 22.2786 14H20.9803V24H18.9803V14H13.9803V24H2.98031V14H1.72101C0.674079 13.9997-0.0506501 12.954 0.316717 11.9736L2.94172 4.97363C3.16121 4.38832 3.72093 4.00019 4.34601 4H19.6536ZM4.98031 22H11.9803V19H4.98031V22ZM4.98031 17H11.9803V14H4.98031V17ZM2.44367 12H21.556L19.306 6H4.69367L2.44367 12Z"/></svg>
+        In de winkel
+      </div>
+      <div class="top-tab" data-tab="online">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M13.5839 1.63194C14.0634 1.35793 14.6741 1.52449 14.9481 2.00401L18.6601 8.5001H20.4394C21.4152 8.5001 22.1311 9.41764 21.8944 10.3644L19.4286 20.2276C19.0947 21.5631 17.8951 22.5001 16.5185 22.5001H5.64151C4.26492 22.5001 3.06522 21.5631 2.73135 20.2276L0.265531 10.3644C0.0288506 9.41764 0.744754 8.5001 1.72061 8.5001H2.49991L6.21182 2.00401C6.48583 1.52449 7.09656 1.35793 7.57608 1.63194C8.0556 1.90595 8.22216 2.51668 7.94815 2.99619L4.80264 8.5001H16.3573L13.2118 2.99619C12.9378 2.51668 13.1044 1.90595 13.5839 1.63194ZM4.67178 19.7423C4.78307 20.1874 5.18265 20.5001 5.64151 20.5001H16.5185C16.9773 20.5001 17.3769 20.1874 17.4882 19.7423L19.7997 10.5001H2.36026L4.67178 19.7423Z"/></svg>
+        Online only
+      </div>
+    </div>
+
+    <!-- Search Bar -->
+    <div class="search-bar">
+      <img class="search-trapeze left" src="images/search-trapeze-left.svg" alt="">
+      <div class="search-center">
+        <input type="search" class="search-label" placeholder="Waar ben je naar op zoek?" enterkeyhint="search">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M21 22C20.7441 22 20.4883 21.9023 20.293 21.707L14.9033 16.3174C13.5478 17.3716 11.8457 18 10 18C5.5889 18 2 14.4111 2 10C2 5.5889 5.5889 2 10 2C14.4111 2 18 5.5889 18 10C18 11.8457 17.3711 13.5479 16.3174 14.9033L21.707 20.2929C22.0976 20.6835 22.0976 21.3163 21.707 21.707C21.5117 21.9023 21.2559 22 21 22ZM10 4C6.6914 4 4 6.6914 4 10C4 13.3086 6.6914 16 10 16C13.3086 16 16 13.3086 16 10C16 6.6914 13.3086 4 10 4Z"/></svg>
+      </div>
+      <img class="search-trapeze right" src="images/search-trapeze-right.svg" alt="">
+    </div>
+  </div>
+
+  <!-- Page Content -->
+  <div class="page-content">
+
+    <!-- ===== PAGE: Start (Home) ===== -->
+    <div class="page-view active" id="page-start">
+
+      <!-- Toggle Content: In de winkel -->
+      <div class="toggle-page active" id="content-winkel">
+
+        <div class="section-quick-actions">
+          <div class="quick-actions-column">
+            <div class="menu-item menu-item-klantenkaart">
+              <div class="menu-item-icon menu-item-icon-orange">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><rect x="2" y="4" width="20" height="16" rx="2" stroke="white" stroke-width="1.8"/><line x1="7" y1="9" x2="7" y2="15" stroke="white" stroke-width="1.5"/><line x1="9.5" y1="9" x2="9.5" y2="15" stroke="white" stroke-width="1"/><line x1="11.5" y1="9" x2="11.5" y2="15" stroke="white" stroke-width="1.5"/><line x1="14" y1="9" x2="14" y2="15" stroke="white" stroke-width="1"/><line x1="16" y1="9" x2="16" y2="15" stroke="white" stroke-width="1.5"/></svg>
+              </div>
+              <div class="menu-item-text">
+                <span class="menu-item-title">Klantenkaart</span>
+                <span class="menu-item-subtitle">Toon je QR-code</span>
+              </div>
+            </div>
+            <div class="menu-item">
+              <div class="menu-item-icon">
+                <svg width="24" height="24" viewBox="0 0 18.07 18.07" fill="white">
+                  <path d="M9.40104 18.0633C9.09054 18.0633 8.77991 18.0145 8.47721 17.9163C7.81221 17.7 7.33758 17.2298 6.54948 16.4515L6.44303 16.3465L1.26823 11.1613C0.885427 10.7878 0.61204 10.5105 0.40104 10.1629C0.21354 9.82548 0.0992881 9.50179 0.0406881 9.1663C-0.0296119 8.8011 0.0026303 8.45672 0.0514303 7.93522L0.392251 4.19449C0.475251 3.19499 0.533887 2.5793 0.836587 2.0192C1.11099 1.5168 1.51898 1.10871 2.01798 0.836705C2.59508 0.524705 3.23008 0.470463 4.19108 0.388463L7.8151 0.0588733C8.4489 0.00177335 8.8005-0.0314517 9.1862 0.0432483C9.526 0.102348 9.85996 0.226383 10.1628 0.408483C10.488 0.591583 10.7467 0.841581 11.1725 1.26688L16.3346 6.43827C17.236 7.34017 17.697 7.8001 17.9167 8.4744C18.113 9.076 18.113 9.71602 17.9196 10.3268C17.6891 11.0167 17.2077 11.4982 16.3337 12.3722L12.3737 16.3322C11.4977 17.2087 11.0141 17.6916 10.3256 17.9157C10.023 18.0144 9.71264 18.0633 9.40104 18.0633ZM8.68717 2.00028C8.55047 2.00028 8.35418 2.01838 8.09538 2.04178L4.36686 2.38114C3.62666 2.44414 3.16663 2.48952 2.97233 2.59452C2.81413 2.68092 2.6823 2.81282 2.5944 2.97342C2.4909 3.16432 2.44598 3.62137 2.38248 4.35087V4.37528L2.04289 8.1204C2.00969 8.4715 1.98821 8.70331 2.00871 8.80631C2.03121 8.93911 2.07201 9.0529 2.13151 9.1608C2.18421 9.2458 2.31508 9.38883 2.67448 9.73893L7.95573 15.029C8.51333 15.5803 8.88155 15.9444 9.09635 16.0138C9.29555 16.0792 9.5113 16.0783 9.7067 16.0138C9.9391 15.9381 10.3454 15.5324 10.9596 14.9181L14.9196 10.9582C15.5134 10.3644 15.9421 9.93568 16.0182 9.70768C16.0797 9.51238 16.0807 9.29449 16.0153 9.09379C15.944 8.87599 15.5632 8.4953 14.987 7.9191L9.75871 2.68119C9.42571 2.34919 9.26849 2.1994 9.15519 2.1359C9.04089 2.0671 8.93841 2.02979 8.82511 2.01029C8.78881 2.00319 8.74277 2.00028 8.68717 2.00028Z"/>
+                  <path d="M5.64132 7.63744C5.10812 7.63744 4.60614 7.42941 4.22824 7.05151C3.45094 6.27321 3.45094 5.00656 4.22824 4.22826C5.00754 3.44896 6.27413 3.44948 7.05343 4.22778C7.83173 5.00658 7.83171 6.27321 7.05441 7.05151C6.67641 7.42941 6.17452 7.63744 5.64132 7.63744Z"/>
+                </svg>
+              </div>
+              <div class="menu-item-text">
+                <span class="menu-item-title">Weekactie</span>
+                <span class="menu-item-subtitle">Bekijk de acties</span>
+              </div>
+            </div>
+          </div>
+          <div class="quick-actions-column">
+            <div class="menu-item">
+              <div class="menu-item-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <path d="M4 4h2l3 12h10M9 18a1.5 1.5 0 100 3 1.5 1.5 0 000-3zm8 0a1.5 1.5 0 100 3 1.5 1.5 0 000-3z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M6.5 8h14l-1.5 6H8L6.5 8z" stroke="white" stroke-width="1.5" fill="none"/>
+                </svg>
+              </div>
+              <div class="menu-item-text">
+                <span class="menu-item-title">Kassabonnen</span>
+                <span class="menu-item-subtitle">Altijd bij de hand</span>
+              </div>
+            </div>
+            <div class="menu-item">
+              <div class="menu-item-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                </svg>
+              </div>
+              <div class="menu-item-text">
+                <span class="menu-item-title">Mijn lijstjes</span>
+                <span class="menu-item-subtitle">Bekijk mijn lijstjes</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Hero Banner -->
+        <div class="hero-banner">
+          <div class="hero-bg">
+            <div class="hero-bg-trapeze"></div>
+          </div>
+          <div class="hero-content">
+            <div class="hero-text">
+              <div class="hero-title">Disney Stitch knuffel</div>
+              <div class="hero-subtitle">25 cm | diverse kleuren</div>
+            </div>
+            <div class="hero-image-container">
+              <img src="images/hero-stitch.avif" alt="Disney Stitch knuffel">
+            </div>
+          </div>
+          <div class="hero-bottom">
+            <div class="hero-price-tag">
+              <div class="hero-price-tag-side left">
+                <div class="tag-shadow"><img src="images/price-tag-left-shadow.svg" alt=""></div>
+                <div class="tag-shape"><img src="images/price-tag-left-shape.svg" alt=""></div>
+              </div>
+              <div class="hero-price-tag-body">
+                <div class="hero-price-main">
+                  <span class="hero-price-whole">9</span>
+                  <span class="hero-price-decimal">99</span>
+                </div>
+                <div class="hero-price-unit">9,99/st</div>
+              </div>
+              <div class="hero-price-tag-side right">
+                <div class="tag-shadow"><img src="images/price-tag-right-shadow.svg" alt=""></div>
+                <div class="tag-shape"><img src="images/price-tag-right-shape.svg" alt=""></div>
+              </div>
+            </div>
+            <div class="hero-cta">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M9 18l6-6-6-6" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+
+        <!-- Category Bubble Lane -->
+        <div class="category-bubble-lane">
+          <div class="category-bubble-track">
+
+            <div class="category-bubble-item">
+              <div class="category-bubble-circle">
+                <img src="https://asset.action.com/image/upload/t_digital_square/w_200/Categoryslider_Decoration_Home__2024_qatudm.webp" alt="Wonen">
+              </div>
+              <span class="category-bubble-label">Wonen</span>
+            </div>
+
+            <div class="category-bubble-item">
+              <div class="category-bubble-circle">
+                <img src="https://asset.action.com/image/upload/t_digital_square/w_200/Categoryslider_Kitchen_2024_fi7jou.webp" alt="Keuken">
+              </div>
+              <span class="category-bubble-label">Keuken</span>
+            </div>
+
+            <div class="category-bubble-item">
+              <div class="category-bubble-circle">
+                <img src="https://asset.action.com/image/upload/t_digital_square/w_200/Categoryslider_HouseholdGoods_2024_eejxld.webp" alt="Huishouden">
+              </div>
+              <span class="category-bubble-label">Huishouden</span>
+            </div>
+
+            <div class="category-bubble-item">
+              <div class="category-bubble-circle">
+                <img src="https://asset.action.com/image/upload/t_digital_square/w_200/Categoryslider_Toys_Entertainment_Toys__2024_ujx4hs.webp" alt="Speelgoed">
+              </div>
+              <span class="category-bubble-label">Speelgoed</span>
+            </div>
+
+            <div class="category-bubble-item">
+              <div class="category-bubble-circle">
+                <img src="https://asset.action.com/image/upload/t_digital_square/w_200/Categoryslider_GardenAndOutdoor_2024_dqquea.webp" alt="Tuin">
+              </div>
+              <span class="category-bubble-label">Tuin</span>
+            </div>
+
+            <div class="category-bubble-item">
+              <div class="category-bubble-circle">
+                <img src="https://asset.action.com/image/upload/t_digital_square/w_200/Categoryslider_PersonalCare_2024_ci5mv5.webp" alt="Persoonlijke verzorging">
+              </div>
+              <span class="category-bubble-label">Verzorging</span>
+            </div>
+
+            <div class="category-bubble-item">
+              <div class="category-bubble-circle">
+                <img src="https://asset.action.com/image/upload/t_digital_square/w_200/Categoryslider_FoodAndDrink_2024_z353fk.webp" alt="Eten & drinken">
+              </div>
+              <span class="category-bubble-label">Eten & drinken</span>
+            </div>
+
+            <div class="category-bubble-item">
+              <div class="category-bubble-circle">
+                <img src="https://asset.action.com/image/upload/t_digital_square/w_200/Categoryslider_Fashion_2024_yauwgr.webp" alt="Mode">
+              </div>
+              <span class="category-bubble-label">Mode</span>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Product Cards Lane -->
+        <div class="product-lane">
+          <div class="product-lane-title">Weekactie</div>
+          <div class="product-cards-grid">
+
+            <!-- Kaart 1: Haribo Fun Mix -->
+            <div class="product-card">
+              <div class="product-card-img">
+                <span class="product-card-badge">Actie</span>
+                <img src="https://asset.action.com/image/upload/t_digital_product_image/w_400/36717700.webp" alt="Haribo Fun Mix">
+              </div>
+              <div class="product-card-body">
+                <div class="product-card-name">Haribo Fun Mix</div>
+                <div class="product-card-price"><sup>€</sup>2,49</div>
+              </div>
+            </div>
+
+            <!-- Kaart 2: Curver Prullenbak -->
+            <div class="product-card">
+              <div class="product-card-img">
+                <span class="product-card-badge">Actie</span>
+                <img src="https://asset.action.com/image/upload/t_digital_product_image/w_400/37642579.webp" alt="Curver Prullenbak">
+              </div>
+              <div class="product-card-body">
+                <div class="product-card-name">Curver Prullenbak 10L</div>
+                <div class="product-card-price"><sup>€</sup>2,99</div>
+              </div>
+            </div>
+
+            <!-- Kaart 3: Kappa Sneakersokken -->
+            <div class="product-card">
+              <div class="product-card-img">
+                <span class="product-card-badge">Actie</span>
+                <img src="https://asset.action.com/image/upload/t_digital_product_image/w_400/20607409.webp" alt="Kappa Sneakersokken">
+              </div>
+              <div class="product-card-body">
+                <div class="product-card-name">Kappa Sneakersokken 3 paar</div>
+                <div class="product-card-price"><sup>€</sup>1,98</div>
+              </div>
+            </div>
+
+            <!-- Kaart 4: Curver Vershouddoos -->
+            <div class="product-card">
+              <div class="product-card-img">
+                <span class="product-card-badge">Actie</span>
+                <img src="https://asset.action.com/image/upload/t_digital_product_image/w_400/35501029.webp" alt="Curver Vershouddoos">
+              </div>
+              <div class="product-card-body">
+                <div class="product-card-name">Curver Vershouddoos 1,3L</div>
+                <div class="product-card-price"><sup>€</sup>2,62</div>
+              </div>
+            </div>
+
+            <!-- Kaart 5: Palazzo Koffiecups -->
+            <div class="product-card">
+              <div class="product-card-img">
+                <span class="product-card-badge">Actie</span>
+                <img src="https://asset.action.com/image/upload/t_digital_product_image/w_400/31670299.webp" alt="Palazzo Koffiecups">
+              </div>
+              <div class="product-card-body">
+                <div class="product-card-name">Palazzo Koffiecups Espresso 20 stuks</div>
+                <div class="product-card-price"><sup>€</sup>2,49</div>
+              </div>
+            </div>
+
+            <!-- Kaart 6: Hotel Royal Handdoek -->
+            <div class="product-card">
+              <div class="product-card-img">
+                <span class="product-card-badge">Actie</span>
+                <img src="https://asset.action.com/image/upload/t_digital_product_image/w_400/37787563.webp" alt="Hotel Royal Handdoek">
+              </div>
+              <div class="product-card-body">
+                <div class="product-card-name">Hotel Royal Handdoek 50×100 cm</div>
+                <div class="product-card-price"><sup>€</sup>2,48</div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Toggle Content: Online only -->
+      <div class="toggle-page" id="content-online">
+        <div class="webshop-promo-bar">
+          <span class="webshop-promo-bar-text">Tijdelijke deals</span>
+        </div>
+        <div class="webshop-lane">
+<div class="webshop-cards-grid">
+
+            <!-- 1: Wandplantenbakken -->
+            <div class="webshop-card">
+              <div class="webshop-card-img">
+                <span class="webshop-card-badge">Nieuw</span>
+                <img src="https://shop.action.com/static/images/800/5707256753784_d0bdb440-e606-4578-b9f1-5f97951d07cc.jpg" alt="Wandplantenbakken">
+              </div>
+              <div class="webshop-card-body">
+                <div class="webshop-card-name">Wandplantenbakken set met solarverlichting</div>
+                <div class="webshop-card-desc">3 stuks | S-M-L</div>
+                <div class="webshop-card-footer"><div class="webshop-card-price"><sup>€</sup>39,95</div><div class="webshop-card-cta"><svg viewBox="0 0 14 14" fill="none"><path d="M7 1v12M1 7h12" stroke="white" stroke-width="2" stroke-linecap="round"/></svg></div></div>
+              </div>
+            </div>
+
+            <!--2: Luxe kunsthagen -->
+            <div class="webshop-card">
+              <div class="webshop-card-img">
+                <span class="webshop-card-badge">Nieuw</span>
+                <img src="https://shop.action.com/static/images/800/8718964273676_5d4665f1-fa06-48da-9792-e92bd1aa9397.jpg" alt="Luxe kunsthagen">
+              </div>
+              <div class="webshop-card-body">
+                <div class="webshop-card-name">Luxe kunsthagen met bloemen</div>
+                <div class="webshop-card-desc">4 stuks | 1 m²</div>
+                <div class="webshop-card-footer"><div class="webshop-card-price"><sup>€</sup>39,95</div><div class="webshop-card-cta"><svg viewBox="0 0 14 14" fill="none"><path d="M7 1v12M1 7h12" stroke="white" stroke-width="2" stroke-linecap="round"/></svg></div></div>
+              </div>
+            </div>
+
+            <!--3: Vileda Spraymop -->
+            <div class="webshop-card">
+              <div class="webshop-card-img">
+                <span class="webshop-card-badge">Nieuw</span>
+                <img src="https://shop.action.com/static/images/800/4023103232075_5cbd47ea-a7fd-42ab-a753-ea9b98518f41.jpg" alt="Vileda Spraymop">
+              </div>
+              <div class="webshop-card-body">
+                <div class="webshop-card-name">Vileda Looper elektrische spraymop</div>
+                <div class="webshop-card-desc">Incl. 2 microvezelpads</div>
+                <div class="webshop-card-footer"><div class="webshop-card-price"><sup>€</sup>49,95</div><div class="webshop-card-cta"><svg viewBox="0 0 14 14" fill="none"><path d="M7 1v12M1 7h12" stroke="white" stroke-width="2" stroke-linecap="round"/></svg></div></div>
+              </div>
+            </div>
+
+            <!-- 4: Bistroset -->
+            <div class="webshop-card">
+              <div class="webshop-card-img">
+                <span class="webshop-card-badge">Nieuw</span>
+                <img src="https://shop.action.com/static/images/800/5707256626569_e83f72fe-64f0-4998-9577-e2817d9884fe.jpg" alt="Bistroset">
+              </div>
+              <div class="webshop-card-body">
+                <div class="webshop-card-name">Luxe bistroset met tafel & 2 stoelen</div>
+                <div class="webshop-card-desc">3-delig</div>
+                <div class="webshop-card-footer"><div class="webshop-card-price"><sup>€</sup>79,95</div><div class="webshop-card-cta"><svg viewBox="0 0 14 14" fill="none"><path d="M7 1v12M1 7h12" stroke="white" stroke-width="2" stroke-linecap="round"/></svg></div></div>
+              </div>
+            </div>
+
+            <!-- 5: Kunstgras -->
+            <div class="webshop-card">
+              <div class="webshop-card-img">
+                <span class="webshop-card-badge">Nieuw</span>
+                <img src="https://shop.action.com/static/images/800/8718964273713_705d2b89-6dcf-40d9-b86e-9a0cb5781124.jpg" alt="Kunstgras">
+              </div>
+              <div class="webshop-card-body">
+                <div class="webshop-card-name">Kunstgras</div>
+                <div class="webshop-card-desc">20 mm | 1 x 8 meter</div>
+                <div class="webshop-card-footer"><div class="webshop-card-price"><sup>€</sup>39,95</div><div class="webshop-card-cta"><svg viewBox="0 0 14 14" fill="none"><path d="M7 1v12M1 7h12" stroke="white" stroke-width="2" stroke-linecap="round"/></svg></div></div>
+              </div>
+            </div>
+
+            <!--6: Serviesset Feather -->
+            <div class="webshop-card">
+              <div class="webshop-card-img">
+                <span class="webshop-card-badge">Nieuw</span>
+                <img src="https://shop.action.com/static/images/800/8721098342491_3041cdc4-223d-4947-ba7e-1ba0436c8bd0.jpg" alt="Serviesset Feather">
+              </div>
+              <div class="webshop-card-body">
+                <div class="webshop-card-name">Serviesset Feather lichtblauw</div>
+                <div class="webshop-card-desc">16-delig</div>
+                <div class="webshop-card-footer"><div class="webshop-card-price"><sup>€</sup>29,95</div><div class="webshop-card-cta"><svg viewBox="0 0 14 14" fill="none"><path d="M7 1v12M1 7h12" stroke="white" stroke-width="2" stroke-linecap="round"/></svg></div></div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== PAGE: Producten ===== -->
+    <div class="page-view" id="page-producten">
+      <!-- Online mode -->
+      <div class="producten-online">
+        <div class="ws-category-list">
+          <div class="ws-category-title">Producten</div>
+          <div class="ws-deals-link">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M21.41 11.58l-9-9C12.05 2.22 11.55 2 11 2H4c-1.1 0-2 .9-2 2v7c0 .55.22 1.05.59 1.42l9 9c.36.36.86.58 1.41.58.55 0 1.05-.22 1.41-.59l7-7c.37-.36.59-.86.59-1.41 0-.55-.23-1.06-.59-1.42zM5.5 7C4.67 7 4 6.33 4 5.5S4.67 4 5.5 4 7 4.67 7 5.5 6.33 7 5.5 7z"/></svg>
+            <span>Alle tijdelijke deals</span>
+          </div>
+          <div class="ws-category-item">
+            <div class="ws-category-item-img"><img src="images/ws-cat-tuin.png" alt=""></div>
+            <span class="ws-category-item-name">Tuin</span>
+          </div>
+          <div class="ws-category-item">
+            <div class="ws-category-item-img"><img src="images/ws-cat-wonen.png" alt=""></div>
+            <span class="ws-category-item-name">Wonen</span>
+          </div>
+          <div class="ws-category-item">
+            <div class="ws-category-item-img"><img src="images/ws-cat-keuken.png" alt=""></div>
+            <span class="ws-category-item-name">Keuken</span>
+          </div>
+          <div class="ws-category-item">
+            <div class="ws-category-item-img"><img src="images/ws-cat-slapen.png" alt=""></div>
+            <span class="ws-category-item-name">Slapen</span>
+          </div>
+          <div class="ws-category-item">
+            <div class="ws-category-item-img"><img src="images/ws-cat-dhz.png" alt=""></div>
+            <span class="ws-category-item-name">Doe het zelf</span>
+          </div>
+          <div class="ws-category-item">
+            <div class="ws-category-item-img"><img src="images/ws-cat-smarthome.png" alt=""></div>
+            <span class="ws-category-item-name">Smart home</span>
+          </div>
+          <div class="ws-category-item">
+            <div class="ws-category-item-img"><img src="images/ws-cat-multimedia.png" alt=""></div>
+            <span class="ws-category-item-name">Multimedia</span>
+          </div>
+          <div class="ws-category-item">
+            <div class="ws-category-item-img"><img src="images/ws-cat-vrijetijd.png" alt=""></div>
+            <span class="ws-category-item-name">Vrije tijd</span>
+          </div>
+          <div class="ws-category-item">
+            <div class="ws-category-item-img"><img src="images/ws-cat-sport.png" alt=""></div>
+            <span class="ws-category-item-name">Sport &amp; verzorging</span>
+          </div>
+          <div class="ws-category-item">
+            <div class="ws-category-item-img"><img src="images/ws-cat-lsc.png" alt=""></div>
+            <span class="ws-category-item-name">LSC smart connect</span>
+          </div>
+        </div>
+      </div>
+      <!-- Winkel mode -->
+      <div class="producten-winkel">
+      <div class="category-list">
+        <div class="category-list-title">Producten</div>
+        <div class="category-list-item">
+          <div class="category-list-item-left">
+            <div class="category-list-item-img"><img src="images/cat-wonen.png" alt=""></div>
+            <span class="category-list-item-name">Wonen</span>
+          </div>
+          <svg class="category-list-item-arrow" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M7.5 15l5-5-5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="category-list-item">
+          <div class="category-list-item-left">
+            <div class="category-list-item-img"><img src="images/cat-keuken.png" alt=""></div>
+            <span class="category-list-item-name">Keuken</span>
+          </div>
+          <svg class="category-list-item-arrow" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M7.5 15l5-5-5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="category-list-item">
+          <div class="category-list-item-left">
+            <div class="category-list-item-img"><img src="images/cat-slapen.png" alt=""></div>
+            <span class="category-list-item-name">Slapen</span>
+          </div>
+          <svg class="category-list-item-arrow" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M7.5 15l5-5-5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="category-list-item">
+          <div class="category-list-item-left">
+            <div class="category-list-item-img"><img src="images/cat-kantoor.png" alt=""></div>
+            <span class="category-list-item-name">Kantoor &amp; school</span>
+          </div>
+          <svg class="category-list-item-arrow" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M7.5 15l5-5-5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="category-list-item">
+          <div class="category-list-item-left">
+            <div class="category-list-item-img"><img src="images/cat-hobby.png" alt=""></div>
+            <span class="category-list-item-name">Hobby</span>
+          </div>
+          <svg class="category-list-item-arrow" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M7.5 15l5-5-5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="category-list-item">
+          <div class="category-list-item-left">
+            <div class="category-list-item-img"><img src="images/cat-dhz.png" alt=""></div>
+            <span class="category-list-item-name">Doe het zelf</span>
+          </div>
+          <svg class="category-list-item-arrow" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M7.5 15l5-5-5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="category-list-item">
+          <div class="category-list-item-left">
+            <div class="category-list-item-img"><img src="images/cat-speelgoed.png" alt=""></div>
+            <span class="category-list-item-name">Speelgoed</span>
+          </div>
+          <svg class="category-list-item-arrow" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M7.5 15l5-5-5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="category-list-item">
+          <div class="category-list-item-left">
+            <div class="category-list-item-img"><img src="images/cat-tuin.png" alt=""></div>
+            <span class="category-list-item-name">Tuin</span>
+          </div>
+          <svg class="category-list-item-arrow" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M7.5 15l5-5-5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="category-list-item">
+          <div class="category-list-item-left">
+            <div class="category-list-item-img"><img src="images/cat-reizen.png" alt=""></div>
+            <span class="category-list-item-name">Reizen</span>
+          </div>
+          <svg class="category-list-item-arrow" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M7.5 15l5-5-5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="category-list-item">
+          <div class="category-list-item-left">
+            <div class="category-list-item-img"><img src="images/cat-verzorging.png" alt=""></div>
+            <span class="category-list-item-name">Persoonlijke verzorging</span>
+          </div>
+          <svg class="category-list-item-arrow" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M7.5 15l5-5-5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="category-list-item">
+          <div class="category-list-item-left">
+            <div class="category-list-item-img"><img src="images/cat-eten.png" alt=""></div>
+            <span class="category-list-item-name">Eten &amp; drinken</span>
+          </div>
+          <svg class="category-list-item-arrow" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M7.5 15l5-5-5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="category-list-item">
+          <div class="category-list-item-left">
+            <div class="category-list-item-img"><img src="images/cat-multimedia.png" alt=""></div>
+            <span class="category-list-item-name">Multimedia</span>
+          </div>
+          <svg class="category-list-item-arrow" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M7.5 15l5-5-5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="category-list-item">
+          <div class="category-list-item-left">
+            <div class="category-list-item-img"><img src="images/cat-mode.png" alt=""></div>
+            <span class="category-list-item-name">Mode</span>
+          </div>
+          <svg class="category-list-item-arrow" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M7.5 15l5-5-5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="category-list-item">
+          <div class="category-list-item-left">
+            <div class="category-list-item-img"><img src="images/cat-sport.png" alt=""></div>
+            <span class="category-list-item-name">Sportartikelen</span>
+          </div>
+          <svg class="category-list-item-arrow" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M7.5 15l5-5-5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="category-list-item">
+          <div class="category-list-item-left">
+            <div class="category-list-item-img"><img src="images/cat-huisdieren.png" alt=""></div>
+            <span class="category-list-item-name">Huisdieren</span>
+          </div>
+          <svg class="category-list-item-arrow" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M7.5 15l5-5-5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+      </div>
+      </div>
+    </div>
+
+    <!-- ===== PAGE: Weekactie ===== -->
+    <div class="page-view" id="page-weekactie">
+      <!-- Winkel mode -->
+      <div class="weekactie-winkel">
+      <div class="weekactie-page">
+        <div class="weekactie-header">
+          <img class="weekactie-header-logo" src="images/weekactie-logo.png" alt="Weekactie">
+        </div>
+        <div class="weekactie-date">28 september t/m 4 oktober</div>
+        <div class="weekactie-grid">
+          <div class="wa-card">
+            <span class="wa-card-badge">Weekactie</span>
+            <svg class="wa-card-heart" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+            <img class="wa-card-img" src="images/wa-prod1.png" alt="Tulpenbollen">
+            <div class="wa-card-info"><span class="wa-card-name">Tulpenbollen</span><span class="wa-card-desc">15 stuks | diverse varianten</span></div>
+            <div class="wa-card-pricing"><div class="wa-price-unit">&euro; 0,11/st</div><div class="wa-card-price"><span class="wa-price-euros">1</span><span class="wa-price-cents">69</span></div></div>
+          </div>
+          <div class="wa-card">
+            <span class="wa-card-badge">Weekactie</span>
+            <svg class="wa-card-heart" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+            <img class="wa-card-img" src="images/wa-prod2.png" alt="Deurmat">
+            <div class="wa-card-info"><span class="wa-card-name">Deurmat</span><span class="wa-card-desc">40 x 60 cm | diverse kleuren</span></div>
+            <div class="wa-card-pricing"><div class="wa-price-unit">&euro; 2,49/st</div><div class="wa-card-price"><span class="wa-price-euros">2</span><span class="wa-price-cents">49</span></div></div>
+          </div>
+          <div class="wa-card">
+            <span class="wa-card-badge">Weekactie</span>
+            <svg class="wa-card-heart" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+            <img class="wa-card-img" src="images/wa-prod3.png" alt="Selfie sheet mask">
+            <div class="wa-card-info"><span class="wa-card-name">Selfie sheet mask</span><span class="wa-card-desc">Diverse varianten</span></div>
+            <div class="wa-card-pricing"><div class="wa-price-unit">&euro; 25,65/l</div><div class="wa-card-price"><span class="wa-price-euros">0</span><span class="wa-price-cents">59</span></div></div>
+          </div>
+          <div class="wa-card">
+            <span class="wa-card-badge">Weekactie</span>
+            <svg class="wa-card-heart" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+            <img class="wa-card-img" src="images/wa-prod4.png" alt="Van Bleiswijck verf Metallics">
+            <div class="wa-card-info"><span class="wa-card-name">Van Bleiswijck verf Metallics</span><span class="wa-card-desc">250 ml | goud</span></div>
+            <div class="wa-card-pricing"><div class="wa-price-unit">&euro; 6,60/l</div><div class="wa-card-price"><span class="wa-price-euros">1</span><span class="wa-price-cents">65</span></div></div>
+          </div>
+          <div class="wa-card">
+            <span class="wa-card-badge">Weekactie</span>
+            <svg class="wa-card-heart" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+            <img class="wa-card-img" src="images/wa-prod5.png" alt="Superfinn vaatwastabletten">
+            <div class="wa-card-info"><span class="wa-card-name">Superfinn vaatwastabletten Classic</span><span class="wa-card-desc">64 stuks</span></div>
+            <div class="wa-card-pricing"><div class="wa-price-unit">&euro; 0,05/st</div><div class="wa-card-price"><span class="wa-price-euros">2</span><span class="wa-price-cents">89</span></div></div>
+          </div>
+          <div class="wa-card">
+            <span class="wa-card-badge">Weekactie</span>
+            <svg class="wa-card-heart" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+            <img class="wa-card-img" src="images/wa-prod6.png" alt="Kleedje van imitatiebont">
+            <div class="wa-card-info"><span class="wa-card-name">Kleedje van imitatiebont</span><span class="wa-card-desc">68 x 100 cm | diverse varianten</span></div>
+            <div class="wa-card-pricing"><div class="wa-price-unit">&euro; 4,99/st</div><div class="wa-card-price"><span class="wa-price-euros">4</span><span class="wa-price-cents">99</span></div></div>
+          </div>
+          <div class="wa-card">
+            <span class="wa-card-badge">Weekactie</span>
+            <img class="wa-card-img" src="images/wa-prod7.png" alt="Woondeken">
+            <div class="wa-card-info"><span class="wa-card-name">Woondeken</span><span class="wa-card-desc">150 x 200 cm | diverse varianten</span></div>
+            <div class="wa-card-pricing"><div class="wa-price-unit">&euro; 4,32/m2</div><div class="wa-card-price"><span class="wa-price-euros">12</span><span class="wa-price-cents">95</span></div></div>
+          </div>
+          <div class="wa-card">
+            <span class="wa-card-badge">Weekactie</span>
+            <img class="wa-card-img" src="images/wa-prod8.png" alt="Kussenhoes van imitatiebont">
+            <div class="wa-card-info"><span class="wa-card-name">Kussenhoes van imitatiebont</span><span class="wa-card-desc">45 x 45 cm | diverse varianten</span></div>
+            <div class="wa-card-pricing"><div class="wa-price-unit">&euro; 2,99/st</div><div class="wa-card-price"><span class="wa-price-euros">2</span><span class="wa-price-cents">99</span></div></div>
+          </div>
+          <div class="wa-card">
+            <span class="wa-card-badge">Weekactie</span>
+            <img class="wa-card-img" src="images/wa-prod9.png" alt="Chenille badmat">
+            <div class="wa-card-info"><span class="wa-card-name">Chenille badmat</span><span class="wa-card-desc">50 x 80 cm | diverse varianten</span></div>
+            <div class="wa-card-pricing"><div class="wa-price-unit">&euro; 12,38/m2</div><div class="wa-card-price"><span class="wa-price-euros">4</span><span class="wa-price-cents">95</span></div></div>
+          </div>
+          <div class="wa-card">
+            <span class="wa-card-badge">Weekactie</span>
+            <img class="wa-card-img" src="images/wa-prod10.png" alt="Geurkaars">
+            <div class="wa-card-info"><span class="wa-card-name">Geurkaars</span><span class="wa-card-desc">&Oslash; 10 x 12,5 cm | diverse varianten</span></div>
+            <div class="wa-card-pricing"><div class="wa-price-unit">&euro; 8,31/kg</div><div class="wa-card-price"><span class="wa-price-euros">3</span><span class="wa-price-cents">99</span></div></div>
+          </div>
+          <div class="wa-card">
+            <span class="wa-card-badge">Weekactie</span>
+            <img class="wa-card-img" src="images/wa-prod11.png" alt="Ledkaars">
+            <div class="wa-card-info"><span class="wa-card-name">Ledkaars</span><span class="wa-card-desc">&Oslash; 7 x 9 cm | diverse varianten</span></div>
+            <div class="wa-card-pricing"><div class="wa-price-unit">&euro; 1,59/st</div><div class="wa-card-price"><span class="wa-price-euros">1</span><span class="wa-price-cents">59</span></div></div>
+          </div>
+          <div class="wa-card">
+            <span class="wa-card-badge">Weekactie</span>
+            <img class="wa-card-img" src="images/wa-prod12.png" alt="XOXO style eenhoorn">
+            <div class="wa-card-info"><span class="wa-card-name">XOXO style eenhoorn</span><span class="wa-card-desc">Met licht</span></div>
+            <div class="wa-card-pricing"><div class="wa-price-unit">&euro; 7,95/st</div><div class="wa-card-price"><span class="wa-price-euros">7</span><span class="wa-price-cents">95</span></div></div>
+          </div>
+        </div>
+      </div>
+      </div>
+      <!-- Online mode -->
+      <div class="weekactie-online">
+      <div class="weekactie-page">
+        <div class="weekactie-header">
+          <img class="weekactie-header-logo" src="images/weekactie-logo.png" alt="Weekactie">
+        </div>
+        <div class="weekactie-date">28 september t/m 4 oktober</div>
+        <div class="weekactie-grid">
+          <div class="wa-card">
+            <span class="wa-card-badge">Online deal</span>
+            <div class="wa-card-cta"><svg viewBox="0 0 14 14" fill="none"><path d="M7 1v12M1 7h12" stroke="white" stroke-width="2" stroke-linecap="round"/></svg></div>
+            <img class="wa-card-img" src="https://shop.action.com/static/images/800/3560231186166_25aac83a-a307-431b-83bb-8533aba375ba.jpg" alt="Design Boekenkast">
+            <div class="wa-card-info"><span class="wa-card-name">Design boekenkast met schuifdeuren</span><span class="wa-card-desc">80 x 40 x 175 cm</span></div>
+            <div class="wa-card-pricing"><div class="wa-price-unit">&euro; 129,00/st</div><div class="wa-card-price"><span class="wa-price-euros">129</span><span class="wa-price-cents">00</span></div></div>
+          </div>
+          <div class="wa-card">
+            <span class="wa-card-badge">Online deal</span>
+            <div class="wa-card-cta"><svg viewBox="0 0 14 14" fill="none"><path d="M7 1v12M1 7h12" stroke="white" stroke-width="2" stroke-linecap="round"/></svg></div>
+            <img class="wa-card-img" src="https://shop.action.com/static/images/800/8718964176304_a4e2109c-d55f-4c36-b60c-18de0e63f5d9.jpg" alt="Luxe Tuinstoel">
+            <div class="wa-card-info"><span class="wa-card-name">Luxe tuinstoel - set van 2</span><span class="wa-card-desc">64 x 94,5 x 107,5 cm</span></div>
+            <div class="wa-card-pricing"><div class="wa-price-unit">&euro; 29,98/st</div><div class="wa-card-price"><span class="wa-price-euros">59</span><span class="wa-price-cents">95</span></div></div>
+          </div>
+          <div class="wa-card">
+            <span class="wa-card-badge">Online deal</span>
+            <div class="wa-card-cta"><svg viewBox="0 0 14 14" fill="none"><path d="M7 1v12M1 7h12" stroke="white" stroke-width="2" stroke-linecap="round"/></svg></div>
+            <img class="wa-card-img" src="https://shop.action.com/static/images/800/8721184890967_a37e7b19-14b9-4a55-b5d9-be378abf4d9a.jpg" alt="Zweefparasol XL">
+            <div class="wa-card-info"><span class="wa-card-name">Zweefparasol XL - antraciet</span><span class="wa-card-desc">&Oslash; 400 cm | incl. hoes</span></div>
+            <div class="wa-card-pricing"><div class="wa-price-unit">&euro; 149,00/st</div><div class="wa-card-price"><span class="wa-price-euros">149</span><span class="wa-price-cents">00</span></div></div>
+          </div>
+          <div class="wa-card">
+            <span class="wa-card-badge">Online deal</span>
+            <div class="wa-card-cta"><svg viewBox="0 0 14 14" fill="none"><path d="M7 1v12M1 7h12" stroke="white" stroke-width="2" stroke-linecap="round"/></svg></div>
+            <img class="wa-card-img" src="https://shop.action.com/static/images/800/706943001059_028c9789-f7c7-4165-a621-9764285954ee.jpg" alt="Kinderligstoel">
+            <div class="wa-card-info"><span class="wa-card-name">Kinderligstoel met parasol</span><span class="wa-card-desc">92 x 50 x 51 cm</span></div>
+            <div class="wa-card-pricing"><div class="wa-price-unit">&euro; 49,95/st</div><div class="wa-card-price"><span class="wa-price-euros">49</span><span class="wa-price-cents">95</span></div></div>
+          </div>
+          <div class="wa-card">
+            <span class="wa-card-badge">Online deal</span>
+            <div class="wa-card-cta"><svg viewBox="0 0 14 14" fill="none"><path d="M7 1v12M1 7h12" stroke="white" stroke-width="2" stroke-linecap="round"/></svg></div>
+            <img class="wa-card-img" src="https://shop.action.com/static/images/800/8718964267637_697ec6a1-e1fb-47af-969e-822c0f09ee1c.jpg" alt="LED Buitenlamp XXL">
+            <div class="wa-card-info"><span class="wa-card-name">LED buitenlamp XXL</span><span class="wa-card-desc">&Oslash; 23 x 107,5 cm | RGB + warm-wit</span></div>
+            <div class="wa-card-pricing"><div class="wa-price-unit">&euro; 39,95/st</div><div class="wa-card-price"><span class="wa-price-euros">39</span><span class="wa-price-cents">95</span></div></div>
+          </div>
+          <div class="wa-card">
+            <span class="wa-card-badge">Online deal</span>
+            <div class="wa-card-cta"><svg viewBox="0 0 14 14" fill="none"><path d="M7 1v12M1 7h12" stroke="white" stroke-width="2" stroke-linecap="round"/></svg></div>
+            <img class="wa-card-img" src="https://shop.action.com/static/images/800/8718964267668_5f6f531c-1e62-466d-b9c7-12f0692c9733.jpg" alt="Paddenstoel Solarlamp">
+            <div class="wa-card-info"><span class="wa-card-name">Paddenstoel solarlamp</span><span class="wa-card-desc">16 kleuren | IP44</span></div>
+            <div class="wa-card-pricing"><div class="wa-price-unit">&euro; 34,95/st</div><div class="wa-card-price"><span class="wa-price-euros">34</span><span class="wa-price-cents">95</span></div></div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </div>
+
+    <!-- ===== PAGE: Mijn lijstjes ===== -->
+    <div class="page-view" id="page-lijstjes">
+      <!-- Online mode: leeg mandje -->
+      <div class="lijstjes-online">
+        <div class="basket-empty">
+          <h2 class="mijn-lijstjes-title" style="padding: 24px 16px 0;">Mandje</h2>
+          <div class="basket-empty-visual">
+            <img class="basket-empty-trapeze" src="images/basket-trapeze.svg" alt="">
+            <img class="basket-empty-img" src="images/basket-empty.png" alt="Leeg mandje">
+          </div>
+          <div class="basket-empty-content">
+            <h2 class="basket-empty-title">Je mandje is nog leeg...</h2>
+            <p class="basket-empty-sub">Tijd om wat leuks toe te voegen!</p>
+            <button class="basket-empty-btn">Bekijk alle tijdelijke deals</button>
+          </div>
+        </div>
+      </div>
+      <!-- Winkel mode: Mijn lijstjes -->
+      <div class="lijstjes-winkel">
+        <div class="mijn-lijstjes">
+          <h2 class="mijn-lijstjes-title">Mijn lijstjes</h2>
+          <div class="lijstjes-grid">
+            <!-- Maak een lijstje -->
+            <div class="lijstje-card">
+              <div class="lijstje-card-thumb">
+                <img class="lijstje-icon" src="images/lijstje-plus.svg" alt="+">
+              </div>
+              <div class="lijstje-card-info">
+                <span class="lijstje-card-name">Maak een lijstje</span>
+              </div>
+            </div>
+            <!-- Verlanglijstje Bobby -->
+            <div class="lijstje-card">
+              <div class="lijstje-card-thumb orange">
+                <img src="images/lijstje-puzzleblock.png" alt="Verlanglijstje Bobby">
+              </div>
+              <div class="lijstje-card-info">
+                <span class="lijstje-card-name">Verlanglijstje Bobby</span>
+                <span class="lijstje-card-count">5 producten</span>
+              </div>
+            </div>
+            <!-- BBQ'en -->
+            <div class="lijstje-card">
+              <div class="lijstje-card-thumb">
+                <img src="images/lijstje-bbq.png" alt="BBQ'en">
+              </div>
+              <div class="lijstje-card-info">
+                <span class="lijstje-card-name">BBQ'en 😎</span>
+                <span class="lijstje-card-count">5 producten</span>
+              </div>
+            </div>
+            <!-- Kerst 2025 -->
+            <div class="lijstje-card">
+              <div class="lijstje-card-thumb">
+                <img class="lijstje-icon" src="images/lijstje-heart.svg" alt="Kerst 2025">
+              </div>
+              <div class="lijstje-card-info">
+                <span class="lijstje-card-name">Kerst 2025</span>
+                <span class="lijstje-card-count">0 producten</span>
+              </div>
+            </div>
+          </div>
+          <button class="new-lijstje-btn">+ Maak nieuw lijstje</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== PAGE: Mijn Action ===== -->
+    <div class="page-view" id="page-account">
+      <div class="myaction-page">
+        <h2 class="myaction-page-title">Mijn Action</h2>
+        <div class="myaction-avatar-wrap">
+          <div class="myaction-avatar">
+            <img src="images/myaction.png" alt="Mijn Action">
+          </div>
+        </div>
+        <div class="myaction-blue-area">
+        <div class="myaction-section">
+          <div class="myaction-profile-card">
+            <div class="myaction-profile-info">
+              <span class="myaction-profile-name">Maria</span>
+              <span class="myaction-profile-sub">Mijn klantenkaart</span>
+            </div>
+            <div class="myaction-profile-barcode">
+              <img src="images/barcode.png" alt="Barcode">
+            </div>
+          </div>
+          <div class="myaction-menu-list">
+            <div class="myaction-menu-item">
+              <span class="myaction-menu-label">Mijn gegevens</span>
+              <svg class="myaction-menu-arrow" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M7.5 15l5-5-5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div class="myaction-menu-item">
+              <span class="myaction-menu-label">Mijn kraskaarten</span>
+              <svg class="myaction-menu-arrow" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M7.5 15l5-5-5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div class="myaction-menu-item">
+              <span class="myaction-menu-label">Spin & Win</span>
+              <svg class="myaction-menu-arrow" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M7.5 15l5-5-5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div class="myaction-menu-item">
+              <span class="myaction-menu-label">Win met je lijstje</span>
+              <svg class="myaction-menu-arrow" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M7.5 15l5-5-5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div class="myaction-menu-item">
+              <span class="myaction-menu-label">Mijn digitale kassabonnen</span>
+              <svg class="myaction-menu-arrow" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M7.5 15l5-5-5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div class="myaction-menu-item">
+              <span class="myaction-menu-label">Action webshop aankopen</span>
+              <svg class="myaction-menu-arrow" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M7.5 15l5-5-5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+          </div>
+        </div>
+
+        <div class="myaction-section">
+          <span class="myaction-section-title">Winkels</span>
+          <div class="myaction-menu-item">
+            <span class="myaction-menu-label">Zoek je winkel</span>
+            <svg class="myaction-menu-arrow" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M7.5 15l5-5-5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+        </div>
+
+        <div class="myaction-section">
+          <span class="myaction-section-title">Voorkeuren</span>
+          <div class="myaction-menu-list">
+            <div class="myaction-menu-item">
+              <span class="myaction-menu-label">Communicatie</span>
+              <svg class="myaction-menu-arrow" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M7.5 15l5-5-5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div class="myaction-menu-item">
+              <span class="myaction-menu-label">Persoonlijk</span>
+              <svg class="myaction-menu-arrow" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M7.5 15l5-5-5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div class="myaction-menu-item">
+              <span class="myaction-menu-label">Land &amp; Taal</span>
+              <svg class="myaction-menu-arrow" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M7.5 15l5-5-5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+          </div>
+        </div>
+
+        <div class="myaction-section">
+          <span class="myaction-section-title">Overig</span>
+          <div class="myaction-menu-list">
+            <div class="myaction-menu-item">
+              <span class="myaction-menu-label">Geef feedback</span>
+              <svg class="myaction-menu-arrow" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M7.5 15l5-5-5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div class="myaction-menu-item">
+              <span class="myaction-menu-label">Klantenservice</span>
+              <svg class="myaction-menu-arrow" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M7.5 15l5-5-5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div class="myaction-menu-item">
+              <span class="myaction-menu-label">Werken bij Action</span>
+              <svg class="myaction-menu-arrow" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M7.5 15l5-5-5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div class="myaction-menu-item">
+              <span class="myaction-menu-label">Duurzaamheid</span>
+              <svg class="myaction-menu-arrow" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M7.5 15l5-5-5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div class="myaction-menu-item">
+              <span class="myaction-menu-label">Juridische informatie</span>
+              <svg class="myaction-menu-arrow" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M7.5 15l5-5-5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+          </div>
+        </div>
+
+        <div style="display:flex;flex-direction:column;align-items:center;gap:8px;margin-top:24px;">
+          <button class="myaction-logout" onclick="window.location.href='../index.html'">Uitloggen</button>
+          <span class="myaction-version">Versie 1.113.0 (9712)</span>
+        </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ===== Tab Bar ===== -->
+  <div class="tabbar">
+    <div class="tabbar-tabs">
+      <!-- Start -->
+      <div class="tabbar-tab active" data-page="page-start">
+        <div class="tabbar-tab-icon">
+          <svg viewBox="0 0 21 21.4" fill="currentColor">
+            <path d="M16.3333 21.4005C15.1325 21.4005 14.4717 21.4004 13.8302 21.1401C12.9792 20.7926 12.308 20.125 11.9367 19.2585C11.6666 18.5948 11.6667 17.9341 11.6667 16.7338V15.5671C11.6667 14.924 11.1438 14.4005 10.5 14.4005C9.85623 14.4005 9.33333 14.924 9.33333 15.5671V16.7338C9.33333 17.9341 9.33329 18.5949 9.07243 19.238C8.69186 20.1251 8.02079 20.7926 7.17204 21.139C6.52827 21.4005 5.86752 21.4005 4.66667 21.4005C3.46582 21.4005 2.80501 21.4004 2.16357 21.1401C1.31249 20.7926 0.64137 20.125 0.27002 19.2585C-6.38068e-05 18.5948 0 17.9341 0 16.7338V10.259C0 9.58972-3.82811e-05 9.18635 0.103678 8.75912C0.214162 8.34787 0.382916 7.98549 0.611816 7.65113C0.835116 7.31793 1.11315 7.06847 1.53467 6.69082L1.65771 6.57974L7.36686 1.58494C8.25668 0.813078 8.79337 0.347676 9.51449 0.141993C10.1559-0.0482907 10.844-0.0476864 11.4992 0.14598C12.2067 0.347697 12.7433 0.813078 13.6331 1.58494L13.7266 1.66527L19.4653 6.69082C19.8868 7.06847 20.1648 7.31803 20.395 7.66266C20.632 8.00788 20.8007 8.38611 20.8895 8.77578C21 9.16428 21 9.57668 21 10.2592V16.7338C21 17.9341 21 18.5949 20.7391 19.238C20.3585 20.1251 19.6875 20.7926 18.8387 21.139C18.1949 21.4005 17.5342 21.4005 16.3333 21.4005Z"/>
+          </svg>
+        </div>
+        <span class="tabbar-tab-label">Start</span>
+      </div>
+      <!-- Producten -->
+      <div class="tabbar-tab" data-page="page-producten">
+        <div class="tabbar-tab-icon">
+          <svg viewBox="0 0 23.33 23.33" fill="currentColor">
+            <path d="M22.1667 23.3333C21.8681 23.3333 21.5696 23.2193 21.3418 22.9915L15.0539 16.7036C13.4725 17.9335 11.4866 18.6667 9.33333 18.6667C4.18705 18.6667 0 14.4796 0 9.33333C0 4.18705 4.18705 0 9.33333 0C14.4796 0 18.6667 4.18705 18.6667 9.33333C18.6667 11.4867 17.9329 13.4726 16.7036 15.0539L22.9915 21.3417C23.4472 21.7974 23.4472 22.5357 22.9915 22.9915C22.7637 23.2193 22.4652 23.3333 22.1667 23.3333ZM9.33333 2.33333C5.4733 2.33333 2.33333 5.4733 2.33333 9.33333C2.33333 13.1934 5.4733 16.3333 9.33333 16.3333C13.1934 16.3333 16.3333 13.1934 16.3333 9.33333C16.3333 5.4733 13.1934 2.33333 9.33333 2.33333Z"/>
+          </svg>
+        </div>
+        <span class="tabbar-tab-label">Producten</span>
+      </div>
+      <!-- Weekactie -->
+      <div class="tabbar-tab" data-page="page-weekactie">
+        <div class="tabbar-tab-icon">
+          <svg viewBox="0 0 21.08 21.07" fill="currentColor">
+            <path d="M10.9679 21.0738C10.6056 21.0738 10.2432 21.0169 9.89008 20.9023C9.11425 20.65 8.56051 20.1014 7.64106 19.1934L7.51687 19.0709L1.4796 13.0215C1.033 12.5858 0.714046 12.2622 0.46788 11.8567C0.24913 11.4631 0.115836 11.0854 0.0474695 10.694C-0.0345472 10.2679 0.00306868 9.86617 0.060002 9.25775L0.457626 4.89358C0.554459 3.72749 0.622868 3.00918 0.976018 2.35573C1.29615 1.7696 1.77215 1.29349 2.35431 0.976156C3.0276 0.612156 3.76843 0.548874 4.88959 0.453207L9.11762 0.0686856C9.85705 0.0020689 10.2672-0.0366936 10.7172 0.0504564C11.1137 0.119406 11.5033 0.264113 11.8566 0.476563C12.236 0.69018 12.5378 0.981845 13.0346 1.47803L19.0571 7.51131C20.1087 8.56353 20.6465 9.10012 20.9028 9.8868C21.1318 10.5887 21.1318 11.3354 20.9062 12.048C20.6373 12.8528 20.0756 13.4146 19.0559 14.4343L14.436 19.0542C13.414 20.0768 12.8498 20.6402 12.0465 20.9016C11.6935 21.0168 11.3314 21.0738 10.9679 21.0738ZM10.135 2.33366C9.97555 2.33366 9.74654 2.35478 9.44461 2.38208L5.09467 2.778C4.2311 2.8515 3.6944 2.90444 3.46772 3.02694C3.28315 3.12774 3.12935 3.28163 3.0268 3.46899C2.90605 3.69171 2.85365 4.22493 2.77957 5.07601V5.10449L2.38337 9.4738C2.34463 9.88341 2.31957 10.1539 2.34349 10.274C2.36974 10.429 2.41734 10.5617 2.48676 10.6876C2.54824 10.7868 2.70092 10.9536 3.12022 11.3621L9.28168 17.5338C9.93221 18.177 10.3618 18.6018 10.6124 18.6828C10.8448 18.7591 11.0965 18.7581 11.3245 18.6828C11.5956 18.5945 12.0697 18.1212 12.7862 17.4045L17.4062 12.7845C18.099 12.0918 18.5991 11.5916 18.6879 11.3256C18.7597 11.0978 18.7608 10.8436 18.6845 10.6094C18.6013 10.3553 18.157 9.91119 17.4848 9.23895L11.3852 3.12805C10.9967 2.74072 10.8132 2.56597 10.6811 2.49188C10.5477 2.41162 10.4281 2.36809 10.296 2.34534C10.2536 2.33705 10.1999 2.33366 10.135 2.33366Z"/>
+            <path d="M6.58155 8.91035C5.95948 8.91035 5.37383 8.66764 4.93294 8.22676C4.02609 7.31874 4.02609 5.84099 4.93294 4.93298C5.84213 4.02379 7.31982 4.02439 8.22901 4.93241C9.13702 5.84101 9.137 7.31874 8.23015 8.22676C7.78915 8.66764 7.20361 8.91035 6.58155 8.91035Z"/>
+          </svg>
+        </div>
+        <span class="tabbar-tab-label">Weekactie</span>
+      </div>
+      <!-- Mijn lijstjes / Mandje -->
+      <div class="tabbar-tab" data-page="page-lijstjes" id="tab-lijstjes">
+        <div class="tabbar-tab-icon">
+          <svg id="tab-lijstjes-icon" viewBox="0 0 23.33 20.96" fill="currentColor">
+            <path d="M11.6667 20.9582C11.4713 20.9582 11.2764 20.9092 11.0999 20.8112C10.647 20.5595 0 14.5575 0 6.9582C0 2.68178 2.58738 0.629299 5.00903 0.134866C7.54175-0.378934 10.058 0.603684 11.6667 2.59915C13.2766 0.602517 15.7933-0.377884 18.3249 0.134866C20.7459 0.629299 23.3333 2.68178 23.3333 6.9582C23.3333 14.5575 12.6863 20.5595 12.2329 20.8112C12.0574 20.9092 11.8615 20.9582 11.6667 20.9582ZM6.29989 2.33938C6.0151 2.33938 5.7382 2.36728 5.47559 2.42142C3.50789 2.8231 2.33333 4.51893 2.33333 6.9582C2.33333 12.3068 9.56293 17.1415 11.6667 18.4346C13.771 17.1415 21 12.3068 21 6.9582C21 4.51893 19.8254 2.8231 17.8577 2.42142C16.1294 2.07048 13.7995 2.82409 12.7399 5.30839C12.5565 5.73854 12.1338 6.01762 11.6667 6.01762C11.199 6.01762 10.7768 5.73842 10.5934 5.30839C9.69556 3.20186 7.8813 2.33938 6.29989 2.33938Z"/>
+          </svg>
+        </div>
+        <span class="tabbar-tab-label" id="tab-lijstjes-label">Mijn lijstjes</span>
+        <div class="tab-badge">2</div>
+      </div>
+      <!-- Mijn Action -->
+      <div class="tabbar-tab" data-page="page-account">
+        <div class="tabbar-tab-icon">
+          <svg viewBox="0 0 18.67 23.33" fill="currentColor">
+            <path d="M17.5 23.3333C16.8558 23.3333 16.3333 22.8115 16.3333 22.1667C16.3333 18.3066 13.1934 15.1667 9.33333 15.1667C5.4733 15.1667 2.33333 18.3066 2.33333 22.1667C2.33333 22.8115 1.8109 23.3333 1.16667 23.3333C0.522433 23.3333 0 22.8115 0 22.1667C0 17.0204 4.18705 12.8333 9.33333 12.8333C14.4796 12.8333 18.6667 17.0204 18.6667 22.1667C18.6667 22.8115 18.1442 23.3333 17.5 23.3333ZM9.33333 11.6667C6.11707 11.6667 3.5 9.0496 3.5 5.83333C3.5 2.61707 6.11707 0 9.33333 0C12.5496 0 15.1667 2.61707 15.1667 5.83333C15.1667 9.0496 12.5496 11.6667 9.33333 11.6667ZM9.33333 2.33333C7.40332 2.33333 5.83333 3.90332 5.83333 5.83333C5.83333 7.76335 7.40332 9.33333 9.33333 9.33333C11.2633 9.33333 12.8333 7.76335 12.8333 5.83333C12.8333 3.90332 11.2633 2.33333 9.33333 2.33333Z"/>
+          </svg>
+        </div>
+        <span class="tabbar-tab-label">Mijn Action</span>
+      </div>
+    </div>
+    <div class="home-indicator">
+      <div class="home-indicator-bar"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // ===== Tab Bar Navigation =====
+  const tabs = document.querySelectorAll('.tabbar-tab');
+  const pages = document.querySelectorAll('.page-view');
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      const targetPage = tab.dataset.page;
+
+      // Update active tab
+      tabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+
+      // Show target page
+      pages.forEach(p => p.classList.remove('active'));
+      document.getElementById(targetPage).classList.add('active');
+
+      // Status bar bg for Mijn Action
+      const statusBar = document.querySelector('.status-bar');
+      if (statusBar) {
+        statusBar.style.background = '';
+      }
+    });
+  });
+
+  // ===== Toggle Switch =====
+  function setOnlineMode(isOnline) {
+    // Toggle content on Start page
+    const winkelContent = document.getElementById('content-winkel');
+    const onlineContent = document.getElementById('content-online');
+    if (winkelContent && onlineContent) {
+      if (isOnline) {
+        winkelContent.classList.remove('active');
+        onlineContent.classList.add('active');
+      } else {
+        winkelContent.classList.add('active');
+        onlineContent.classList.remove('active');
+      }
+    }
+
+    // Toggle producten page content
+    const productenWinkel = document.querySelector('.producten-winkel');
+    const productenOnline = document.querySelector('.producten-online');
+    if (productenWinkel && productenOnline) {
+      productenWinkel.style.display = isOnline ? 'none' : 'block';
+      productenOnline.style.display = isOnline ? 'block' : 'none';
+    }
+
+    // Toggle lijstjes/mandje page content
+    const lijstjesWinkel = document.querySelector('.lijstjes-winkel');
+    const lijstjesOnline = document.querySelector('.lijstjes-online');
+    if (lijstjesWinkel && lijstjesOnline) {
+      lijstjesWinkel.style.display = isOnline ? 'none' : 'block';
+      lijstjesOnline.style.display = isOnline ? 'block' : 'none';
+    }
+
+    // Toggle weekactie page content
+    const weekactieWinkel = document.querySelector('.weekactie-winkel');
+    const weekactieOnline = document.querySelector('.weekactie-online');
+    if (weekactieWinkel && weekactieOnline) {
+      weekactieWinkel.style.display = isOnline ? 'none' : 'block';
+      weekactieOnline.style.display = isOnline ? 'block' : 'none';
+    }
+
+    // Animate header backgrounds, status bar, toggle, and loyalty btn
+    document.querySelectorAll('.section-header').forEach(h => {
+      h.classList.toggle('online-mode', isOnline);
+    });
+    document.querySelectorAll('.toggle-app').forEach(t => {
+      t.classList.toggle('online-mode', isOnline);
+    });
+    document.querySelectorAll('.loyalty-btn').forEach(b => {
+      b.style.display = isOnline ? 'none' : '';
+    });
+    const statusBar = document.querySelector('.status-bar');
+    if (statusBar) statusBar.classList.toggle('online-mode', isOnline);
+
+    const tabbar = document.querySelector('.tabbar');
+    if (tabbar) tabbar.classList.toggle('online-mode', isOnline);
+
+    // Wissel icoon + label voor lijstjes-tab
+    const lijstjesIcon = document.getElementById('tab-lijstjes-icon');
+    const lijstjesLabel = document.getElementById('tab-lijstjes-label');
+    if (lijstjesIcon && lijstjesLabel) {
+      if (isOnline) {
+        lijstjesIcon.setAttribute('viewBox', '0 0 24 24');
+        lijstjesIcon.innerHTML = '<path d="M13.5839 1.63194C14.0634 1.35793 14.6741 1.52449 14.9481 2.00401L18.6601 8.5001H20.4394C21.4152 8.5001 22.1311 9.41764 21.8944 10.3644L19.4286 20.2276C19.0947 21.5631 17.8951 22.5001 16.5185 22.5001H5.64151C4.26492 22.5001 3.06522 21.5631 2.73135 20.2276L0.265531 10.3644C0.0288506 9.41764 0.744754 8.5001 1.72061 8.5001H2.49991L6.21182 2.00401C6.48583 1.52449 7.09656 1.35793 7.57608 1.63194C8.0556 1.90595 8.22216 2.51668 7.94815 2.99619L4.80264 8.5001H16.3573L13.2118 2.99619C12.9378 2.51668 13.1044 1.90595 13.5839 1.63194ZM4.67178 19.7423C4.78307 20.1874 5.18265 20.5001 5.64151 20.5001H16.5185C16.9773 20.5001 17.3769 20.1874 17.4882 19.7423L19.7997 10.5001H2.36026L4.67178 19.7423Z"/>';
+        lijstjesLabel.textContent = 'Mandje';
+      } else {
+        lijstjesIcon.setAttribute('viewBox', '0 0 23.33 20.96');
+        lijstjesIcon.innerHTML = '<path d="M11.6667 20.9582C11.4713 20.9582 11.2764 20.9092 11.0999 20.8112C10.647 20.5595 0 14.5575 0 6.9582C0 2.68178 2.58738 0.629299 5.00903 0.134866C7.54175-0.378934 10.058 0.603684 11.6667 2.59915C13.2766 0.602517 15.7933-0.377884 18.3249 0.134866C20.7459 0.629299 23.3333 2.68178 23.3333 6.9582C23.3333 14.5575 12.6863 20.5595 12.2329 20.8112C12.0574 20.9092 11.8615 20.9582 11.6667 20.9582ZM6.29989 2.33938C6.0151 2.33938 5.7382 2.36728 5.47559 2.42142C3.50789 2.8231 2.33333 4.51893 2.33333 6.9582C2.33333 12.3068 9.56293 17.1415 11.6667 18.4346C13.771 17.1415 21 12.3068 21 6.9582C21 4.51893 19.8254 2.8231 17.8577 2.42142C16.1294 2.07048 13.7995 2.82409 12.7399 5.30839C12.5565 5.73854 12.1338 6.01762 11.6667 6.01762C11.199 6.01762 10.7768 5.73842 10.5934 5.30839C9.69556 3.20186 7.8813 2.33938 6.29989 2.33938Z"/>';
+        lijstjesLabel.textContent = 'Mijn lijstjes';
+      }
+    }
+
+    // Update top tabs active state
+    document.querySelectorAll('.top-tab').forEach(tab => {
+      tab.classList.toggle('active', tab.dataset.tab === (isOnline ? 'online' : 'winkel'));
+    });
+  }
+
+  document.querySelectorAll('.top-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      if (tab.classList.contains('active')) return;
+      setOnlineMode(tab.dataset.tab === 'online');
+    });
+  });
+</script>
+
+</body>
+</html>
