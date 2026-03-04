@@ -2909,11 +2909,8 @@
   let isCurrentlyOnline = false;
 
   function showSplash(splashEl, themeColor, callback) {
+    document.getElementById('theme-color-meta').setAttribute('content', themeColor);
     splashEl.classList.add('visible');
-    // Wacht tot splash volledig zichtbaar is (0.3s CSS transition)
-    setTimeout(() => {
-      document.getElementById('theme-color-meta').setAttribute('content', themeColor);
-    }, 300);
     setTimeout(() => {
       callback();
       setTimeout(() => {
