@@ -2001,8 +2001,9 @@
     }
 
     .slide-menu-logo {
-      height: 28px;
-      object-fit: contain;
+      display: flex;
+      align-items: center;
+      gap: 0;
     }
 
     .slide-menu-close {
@@ -2406,12 +2407,7 @@
     .footer-logo {
       display: flex;
       align-items: center;
-      gap: 10px;
-    }
-
-    .footer-logo img {
-      height: 26px;
-      object-fit: contain;
+      gap: 0;
     }
 
     .footer-logo span {
@@ -2699,7 +2695,10 @@
     </div>
     <!-- Menu header with logo and close -->
     <div class="slide-menu-topbar">
-      <img src="../images/webshop-logo.png" alt="Action webshop" class="slide-menu-logo">
+      <div class="slide-menu-logo">
+        <img src="../images/action-logo.svg" alt="Action" style="height:24px;width:auto;">
+        <span style="font-size:14px;font-weight:700;font-style:italic;color:#66D3F1;margin-left:6px;">webshop</span>
+      </div>
       <button class="slide-menu-close" id="menuClose">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6L6 18" stroke="white" stroke-width="2" stroke-linecap="round"/></svg>
       </button>
@@ -2842,7 +2841,8 @@
           </svg>
           <!-- Logo -->
           <div class="webshop-logo">
-            <img src="../images/webshop-logo.png" alt="Action Webshop">
+            <img src="../images/action-logo.svg" alt="Action" style="height:24px;width:auto;">
+            <span style="font-size:14px;font-weight:700;font-style:italic;color:#66D3F1;margin-left:6px;">webshop</span>
           </div>
           <!-- Account & Basket -->
           <div class="webshop-actions">
@@ -3217,7 +3217,7 @@
     <!-- USP Brand -->
     <div class="footer-usp-brand">
       <div class="footer-logo">
-        <img src="../images/webshop-logo.png" alt="Action">
+        <img src="../images/action-logo.svg" alt="Action" style="height:26px;width:auto;">
       </div>
       <div class="footer-usps">
         <div class="footer-usp-item">
