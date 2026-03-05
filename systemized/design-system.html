@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Design System — Action App</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* Design System page overrides */
+    html, body {
+      height: auto;
+      min-height: 100%;
+      background: #f3f4f6;
+      display: block;
+      padding: 0;
+      overflow: auto;
+    }
+
+    .ds-page {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 32px 20px 80px;
+    }
+
+    .ds-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 32px;
+    }
+
+    .ds-title {
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--brand-darkblue);
+    }
+
+    .ds-back {
+      font-size: 14px;
+      color: var(--brand-darkblue);
+      text-decoration: none;
+      border: 1px solid var(--neutral-300);
+      padding: 6px 12px;
+      border-radius: 360px;
+    }
+
+    .ds-section {
+      margin-bottom: 48px;
+    }
+
+    .ds-section-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--neutral-500);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 16px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--neutral-150);
+    }
+
+    .ds-subsection {
+      margin-bottom: 24px;
+    }
+
+    .ds-label {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--neutral-500);
+      margin-bottom: 8px;
+      display: block;
+    }
+
+    /* Color swatches */
+    .ds-colors {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 12px;
+    }
+
+    .ds-swatch {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .ds-swatch-color {
+      width: 100%;
+      height: 56px;
+      border-radius: 8px;
+      border: 1px solid rgba(0,0,0,0.08);
+    }
+
+    .ds-swatch-name {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--neutral-700);
+    }
+
+    .ds-swatch-value {
+      font-size: 11px;
+      color: var(--neutral-500);
+      font-family: monospace;
+    }
+
+    /* Typography samples */
+    .ds-type-row {
+      display: flex;
+      align-items: baseline;
+      gap: 16px;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--neutral-50);
+    }
+
+    .ds-type-meta {
+      flex-shrink: 0;
+      width: 120px;
+      font-size: 11px;
+      color: var(--neutral-500);
+      font-family: monospace;
+      line-height: 1.4;
+    }
+
+    /* Component showcase */
+    .ds-showcase {
+      background: white;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+    }
+
+    .ds-showcase-dark {
+      background: var(--brand-darkblue);
+    }
+
+    .ds-showcase-gray {
+      background: var(--neutral-50);
+    }
+
+    /* Reset phone-frame context for component previews */
+    .ds-showcase .product-cards-grid,
+    .ds-showcase .webshop-cards-grid,
+    .ds-showcase .weekactie-grid {
+      max-width: 375px;
+    }
+
+    .ds-showcase .category-bubble-lane {
+      max-width: 375px;
+    }
+
+    .ds-showcase .tabbar {
+      max-width: 375px;
+      border-top: 1px solid var(--neutral-150);
+    }
+
+    .ds-inline-row {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      align-items: flex-start;
+    }
+  </style>
+</head>
+<body>
+  <div class="ds-page">
+
+    <!-- Header -->
+    <div class="ds-header">
+      <h1 class="ds-title">Design System</h1>
+      <a href="./" class="ds-back">Prototype</a>
+    </div>
+
+    <!-- ==================== COLORS ==================== -->
+    <div class="ds-section">
+      <h2 class="ds-section-title">Kleuren</h2>
+
+      <span class="ds-label">Brand</span>
+      <div class="ds-colors" style="margin-bottom: 16px;">
+        <div class="ds-swatch">
+          <div class="ds-swatch-color" style="background: var(--brand-darkblue);"></div>
+          <span class="ds-swatch-name">Dark Blue</span>
+          <span class="ds-swatch-value">#001489</span>
+        </div>
+        <div class="ds-swatch">
+          <div class="ds-swatch-color" style="background: var(--brand-orange);"></div>
+          <span class="ds-swatch-name">Orange</span>
+          <span class="ds-swatch-value">#ff8200</span>
+        </div>
+        <div class="ds-swatch">
+          <div class="ds-swatch-color" style="background: #00b6e7;"></div>
+          <span class="ds-swatch-name">Cyan</span>
+          <span class="ds-swatch-value">#00b6e7</span>
+        </div>
+      </div>
+
+      <span class="ds-label">Accessibility (WCAG AA)</span>
+      <div class="ds-colors" style="margin-bottom: 16px;">
+        <div class="ds-swatch">
+          <div class="ds-swatch-color" style="background: var(--a11y-cyan);"></div>
+          <span class="ds-swatch-name">A11y Cyan</span>
+          <span class="ds-swatch-value">#007a99</span>
+        </div>
+        <div class="ds-swatch">
+          <div class="ds-swatch-color" style="background: var(--a11y-orange);"></div>
+          <span class="ds-swatch-name">A11y Orange</span>
+          <span class="ds-swatch-value">#b34d00</span>
+        </div>
+      </div>
+
+      <span class="ds-label">Neutrals</span>
+      <div class="ds-colors" style="margin-bottom: 16px;">
+        <div class="ds-swatch">
+          <div class="ds-swatch-color" style="background: var(--neutral-50);"></div>
+          <span class="ds-swatch-name">Neutral 50</span>
+          <span class="ds-swatch-value">#f3f4f6</span>
+        </div>
+        <div class="ds-swatch">
+          <div class="ds-swatch-color" style="background: var(--neutral-150);"></div>
+          <span class="ds-swatch-name">Neutral 150</span>
+          <span class="ds-swatch-value">#dadfe3</span>
+        </div>
+        <div class="ds-swatch">
+          <div class="ds-swatch-color" style="background: var(--neutral-300);"></div>
+          <span class="ds-swatch-name">Neutral 300</span>
+          <span class="ds-swatch-value">#b6bec8</span>
+        </div>
+        <div class="ds-swatch">
+          <div class="ds-swatch-color" style="background: var(--neutral-500);"></div>
+          <span class="ds-swatch-name">Neutral 500</span>
+          <span class="ds-swatch-value">#8593a3</span>
+        </div>
+        <div class="ds-swatch">
+          <div class="ds-swatch-color" style="background: var(--neutral-700);"></div>
+          <span class="ds-swatch-name">Neutral 700</span>
+          <span class="ds-swatch-value">#505862</span>
+        </div>
+        <div class="ds-swatch">
+          <div class="ds-swatch-color" style="background: var(--white); border: 1px solid #dadfe3;"></div>
+          <span class="ds-swatch-name">White</span>
+          <span class="ds-swatch-value">#ffffff</span>
+        </div>
+      </div>
+
+      <span class="ds-label">Backgrounds</span>
+      <div class="ds-colors">
+        <div class="ds-swatch">
+          <div class="ds-swatch-color" style="background: #ecf6fc;"></div>
+          <span class="ds-swatch-name">Light Blue</span>
+          <span class="ds-swatch-value">#ecf6fc</span>
+        </div>
+        <div class="ds-swatch">
+          <div class="ds-swatch-color" style="background: #b2e9f8;"></div>
+          <span class="ds-swatch-name">Cyan Light</span>
+          <span class="ds-swatch-value">#b2e9f8</span>
+        </div>
+        <div class="ds-swatch">
+          <div class="ds-swatch-color" style="background: #d9edf9;"></div>
+          <span class="ds-swatch-name">Blue Wash</span>
+          <span class="ds-swatch-value">#d9edf9</span>
+        </div>
+        <div class="ds-swatch">
+          <div class="ds-swatch-color" style="background: #e6f8fd;"></div>
+          <span class="ds-swatch-name">Cyan Wash</span>
+          <span class="ds-swatch-value">#e6f8fd</span>
+        </div>
+        <div class="ds-swatch">
+          <div class="ds-swatch-color" style="background: #fff3e6;"></div>
+          <span class="ds-swatch-name">Orange Wash</span>
+          <span class="ds-swatch-value">#fff3e6</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== TYPOGRAPHY ==================== -->
+    <div class="ds-section">
+      <h2 class="ds-section-title">Typografie</h2>
+
+      <div class="ds-type-row">
+        <div class="ds-type-meta">32/36 · 700<br>-0.5px</div>
+        <span class="hero-title" style="color: var(--brand-darkblue);">Hero Title</span>
+      </div>
+      <div class="ds-type-row">
+        <div class="ds-type-meta">24/30 · 700<br>-0.5px</div>
+        <span style="font-size:24px; font-weight:700; color:var(--brand-darkblue); letter-spacing:-0.5px;">Page Title</span>
+      </div>
+      <div class="ds-type-row">
+        <div class="ds-type-meta">20/1 · 700</div>
+        <span style="font-size:20px; font-weight:700; color:var(--brand-orange);">Section Title</span>
+      </div>
+      <div class="ds-type-row">
+        <div class="ds-type-meta">18/24 · 700<br>-0.5px</div>
+        <span style="font-size:18px; font-weight:700; color:var(--brand-darkblue); letter-spacing:-0.5px;">Subsection Title</span>
+      </div>
+      <div class="ds-type-row">
+        <div class="ds-type-meta">16/22 · 500</div>
+        <span class="menu-item-title">Menu Item Title</span>
+      </div>
+      <div class="ds-type-row">
+        <div class="ds-type-meta">16/22 · 400</div>
+        <span style="font-size:16px; font-weight:400; color:var(--neutral-700); line-height:22px;">Body Text</span>
+      </div>
+      <div class="ds-type-row">
+        <div class="ds-type-meta">15/1 · 500</div>
+        <span style="font-size:15px; font-weight:500; color:var(--brand-darkblue);">Tab Label Active</span>
+      </div>
+      <div class="ds-type-row">
+        <div class="ds-type-meta">14/18 · 400</div>
+        <span class="menu-item-subtitle">Subtitle / Caption</span>
+      </div>
+      <div class="ds-type-row">
+        <div class="ds-type-meta">13/1.35 · 400</div>
+        <span style="font-size:13px; font-weight:400; color:var(--neutral-700);">Card Name</span>
+      </div>
+      <div class="ds-type-row">
+        <div class="ds-type-meta">12/1.2 · 400</div>
+        <span style="font-size:12px; font-weight:400; color:var(--neutral-700);">Small Label</span>
+      </div>
+      <div class="ds-type-row">
+        <div class="ds-type-meta">11/12 · 400<br>-0.3px</div>
+        <span class="tabbar-tab-label" style="position:static;">Tab Bar Label</span>
+      </div>
+      <div class="ds-type-row">
+        <div class="ds-type-meta">18/1 · 700</div>
+        <span class="product-card-price"><sup>&euro;</sup>12,99</span>
+      </div>
+      <div class="ds-type-row">
+        <div class="ds-type-meta">48+28 · 700</div>
+        <span style="display:flex; align-items:flex-start;">
+          <span class="wa-price-euros">5</span><span class="wa-price-cents">99</span>
+        </span>
+      </div>
+    </div>
+
+    <!-- ==================== COMPONENTS ==================== -->
+    <div class="ds-section">
+      <h2 class="ds-section-title">Componenten</h2>
+
+      <!-- Webshop Header (web) -->
+      <div class="ds-subsection">
+        <span class="ds-label">Webshop Header (web)</span>
+        <div class="ds-showcase" style="padding:0; overflow:hidden; border-radius:12px; max-width:375px;">
+          <!-- USP bar -->
+          <div style="background:#000c52; display:flex; align-items:center; justify-content:center; padding:8px 16px; gap:4px;">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M14.17 4.17a1 1 0 00-1.41 0L6.67 10.25 3.25 6.83a1 1 0 10-1.41 1.41l4.24 4.24a1 1 0 001.41 0l6.68-6.68a1 1 0 000-1.41z" fill="white"/>
+            </svg>
+            <span style="font-family:'Ubuntu',sans-serif; font-size:12px; color:white; white-space:nowrap;">Uniek assortiment voor de webshop</span>
+          </div>
+          <!-- Topbar -->
+          <div style="background:var(--brand-darkblue); display:flex; align-items:center; padding:16px; gap:12px;">
+            <!-- Hamburger -->
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" style="flex-shrink:0;">
+              <path d="M3 6h18M3 12h18M3 18h18" stroke="white" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+            <!-- Logo -->
+            <div style="flex:1; display:flex; align-items:center;">
+              <img src="../images/webshop-logo.png" alt="Action Webshop" style="height:24px; object-fit:contain;">
+            </div>
+            <!-- Account -->
+            <div style="display:flex; align-items:center; gap:4px;">
+              <div style="width:44px; height:44px; display:flex; align-items:center; justify-content:center;">
+                <svg width="24" height="24" viewBox="0 0 18.67 23.33" fill="white">
+                  <path d="M17.5 23.3333C16.8558 23.3333 16.3333 22.8115 16.3333 22.1667C16.3333 18.3066 13.1934 15.1667 9.33333 15.1667C5.4733 15.1667 2.33333 18.3066 2.33333 22.1667C2.33333 22.8115 1.8109 23.3333 1.16667 23.3333C0.522433 23.3333 0 22.8115 0 22.1667C0 17.0204 4.18705 12.8333 9.33333 12.8333C14.4796 12.8333 18.6667 17.0204 18.6667 22.1667C18.6667 22.8115 18.1442 23.3333 17.5 23.3333ZM9.33333 11.6667C6.11707 11.6667 3.5 9.0496 3.5 5.83333C3.5 2.61707 6.11707 0 9.33333 0C12.5496 0 15.1667 2.61707 15.1667 5.83333C15.1667 9.0496 12.5496 11.6667 9.33333 11.6667ZM9.33333 2.33333C7.40332 2.33333 5.83333 3.90332 5.83333 5.83333C5.83333 7.76335 7.40332 9.33333 9.33333 9.33333C11.2633 9.33333 12.8333 7.76335 12.8333 5.83333C12.8333 3.90332 11.2633 2.33333 9.33333 2.33333Z"/>
+                </svg>
+              </div>
+              <!-- Basket -->
+              <div style="width:44px; height:44px; display:flex; align-items:center; justify-content:center; position:relative;">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="white">
+                  <path d="M13.5839 1.63194C14.0634 1.35793 14.6741 1.52449 14.9481 2.00401L18.6601 8.5001H20.4394C21.4152 8.5001 22.1311 9.41764 21.8944 10.3644L19.4286 20.2276C19.0947 21.5631 17.8951 22.5001 16.5185 22.5001H5.64151C4.26492 22.5001 3.06522 21.5631 2.73135 20.2276L0.265531 10.3644C0.0288506 9.41764 0.744754 8.5001 1.72061 8.5001H2.49991L6.21182 2.00401C6.48583 1.52449 7.09656 1.35793 7.57608 1.63194C8.0556 1.90595 8.22216 2.51668 7.94815 2.99619L4.80264 8.5001H16.3573L13.2118 2.99619C12.9378 2.51668 13.1044 1.90595 13.5839 1.63194ZM4.67178 19.7423C4.78307 20.1874 5.18265 20.5001 5.64151 20.5001H16.5185C16.9773 20.5001 17.3769 20.1874 17.4882 19.7423L19.7997 10.5001H2.36026L4.67178 19.7423Z"/>
+                </svg>
+                <div style="position:absolute; top:4px; right:2px; background:var(--brand-orange); color:white; font-family:'Ubuntu',sans-serif; font-size:12px; min-width:16px; height:16px; border-radius:360px; display:flex; align-items:center; justify-content:center;">2</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Top Tabs -->
+      <div class="ds-subsection">
+        <span class="ds-label">Top Tabs</span>
+        <div class="ds-showcase">
+          <div class="top-tabs" style="width:100%;">
+            <div class="top-tab active">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.6536 4C20.2788 4.00007 20.8384 4.38822 21.0579 4.97363L23.6829 11.9736C24.0504 12.9541 23.3258 13.9999 22.2786 14H20.9803V24H18.9803V14H13.9803V24H2.98031V14H1.72101C0.674079 13.9997-0.0506501 12.954 0.316717 11.9736L2.94172 4.97363C3.16121 4.38832 3.72093 4.00019 4.34601 4H19.6536ZM4.98031 22H11.9803V19H4.98031V22ZM4.98031 17H11.9803V14H4.98031V17ZM2.44367 12H21.556L19.306 6H4.69367L2.44367 12Z"/></svg>
+              In de winkel
+            </div>
+            <div class="top-tab">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M13.5839 1.63194C14.0634 1.35793 14.6741 1.52449 14.9481 2.00401L18.6601 8.5001H20.4394C21.4152 8.5001 22.1311 9.41764 21.8944 10.3644L19.4286 20.2276C19.0947 21.5631 17.8951 22.5001 16.5185 22.5001H5.64151C4.26492 22.5001 3.06522 21.5631 2.73135 20.2276L0.265531 10.3644C0.0288506 9.41764 0.744754 8.5001 1.72061 8.5001H2.49991L6.21182 2.00401C6.48583 1.52449 7.09656 1.35793 7.57608 1.63194C8.0556 1.90595 8.22216 2.51668 7.94815 2.99619L4.80264 8.5001H16.3573L13.2118 2.99619C12.9378 2.51668 13.1044 1.90595 13.5839 1.63194ZM4.67178 19.7423C4.78307 20.1874 5.18265 20.5001 5.64151 20.5001H16.5185C16.9773 20.5001 17.3769 20.1874 17.4882 19.7423L19.7997 10.5001H2.36026L4.67178 19.7423Z"/></svg>
+              Online only
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Search Bar (standaard) -->
+      <div class="ds-subsection">
+        <span class="ds-label">Search Bar (standaard)</span>
+        <div class="ds-showcase">
+          <div class="search-bar" style="margin:0;">
+            <input type="search" class="search-label" placeholder="Waar ben je naar op zoek?">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M21 22C20.7441 22 20.4883 21.9023 20.293 21.707L14.9033 16.3174C13.5478 17.3716 11.8457 18 10 18C5.5889 18 2 14.4111 2 10C2 5.5889 5.5889 2 10 2C14.4111 2 18 5.5889 18 10C18 11.8457 17.3711 13.5479 16.3174 14.9033L21.707 20.2929C22.0976 20.6835 22.0976 21.3163 21.707 21.707C21.5117 21.9023 21.2559 22 21 22ZM10 4C6.6914 4 4 6.6914 4 10C4 13.3086 6.6914 16 10 16C13.3086 16 16 13.3086 16 10C16 6.6914 13.3086 4 10 4Z"/></svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- Search Bar (ecom / trapeze) -->
+      <div class="ds-subsection">
+        <span class="ds-label">Search Bar (ecom / trapeze)</span>
+        <div class="ds-showcase ds-showcase-dark" style="padding:16px; border-radius:12px; max-width:375px;">
+          <div class="section-header online-mode" style="position:static; padding:0;">
+            <div class="search-bar" style="margin:0;">
+              <img class="search-trapeze left" src="images/search-trapeze-left.svg" alt="">
+              <div class="search-center">
+                <input type="search" class="search-label" placeholder="Waar ben je naar op zoek?" enterkeyhint="search">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M21 22C20.7441 22 20.4883 21.9023 20.293 21.707L14.9033 16.3174C13.5478 17.3716 11.8457 18 10 18C5.5889 18 2 14.4111 2 10C2 5.5889 5.5889 2 10 2C14.4111 2 18 5.5889 18 10C18 11.8457 17.3711 13.5479 16.3174 14.9033L21.707 20.2929C22.0976 20.6835 22.0976 21.3163 21.707 21.707C21.5117 21.9023 21.2559 22 21 22ZM10 4C6.6914 4 4 6.6914 4 10C4 13.3086 6.6914 16 10 16C13.3086 16 16 13.3086 16 10C16 6.6914 13.3086 4 10 4Z"/></svg>
+              </div>
+              <img class="search-trapeze right" src="images/search-trapeze-right.svg" alt="">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Menu Items -->
+      <div class="ds-subsection">
+        <span class="ds-label">Menu Items</span>
+        <div class="ds-showcase">
+          <div class="menu-item">
+            <div class="menu-item-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="3" stroke="white" stroke-width="2"/></svg>
+            </div>
+            <div class="menu-item-text">
+              <span class="menu-item-title">Klantenkaart</span>
+              <span class="menu-item-subtitle">Scan je kaart bij de kassa</span>
+            </div>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-icon" style="background: var(--brand-darkblue);">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5" stroke="white" stroke-width="2"/></svg>
+            </div>
+            <div class="menu-item-text">
+              <span class="menu-item-title">Weekactie</span>
+              <span class="menu-item-subtitle">Bekijk de weekactie aanbiedingen</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Badges -->
+      <div class="ds-subsection">
+        <span class="ds-label">Badges</span>
+        <div class="ds-showcase">
+          <div class="ds-inline-row">
+            <span class="product-card-badge" style="position:static; display:inline-block;">Actie</span>
+            <span class="webshop-card-badge" style="position:static; display:inline-block;">Nieuw</span>
+            <span class="tab-badge" style="position:static;">2</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Buttons -->
+      <div class="ds-subsection">
+        <span class="ds-label">Buttons</span>
+        <div class="ds-showcase">
+          <div style="display:flex; flex-direction:column; gap:12px; max-width:300px;">
+            <button class="basket-empty-btn" style="margin:0;">Bekijk alle deals</button>
+            <button class="new-lijstje-btn" style="width:100%; margin:0;">+ Maak nieuw lijstje</button>
+            <button class="myaction-logout" style="width:100%;">Uitloggen</button>
+            <div class="ds-inline-row">
+              <div class="hero-cta" style="position:static;">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 4v12M4 10h12" stroke="white" stroke-width="2" stroke-linecap="round"/></svg>
+              </div>
+              <div class="webshop-card-cta" style="position:static;">
+                <svg viewBox="0 0 14 14" fill="none"><path d="M7 1v12M1 7h12" stroke="white" stroke-width="2" stroke-linecap="round"/></svg>
+              </div>
+              <div class="wa-card-cta" style="position:static;">
+                <svg viewBox="0 0 14 14" fill="none"><path d="M7 1v12M1 7h12" stroke="white" stroke-width="2" stroke-linecap="round"/></svg>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hero Banner -->
+      <div class="ds-subsection">
+        <span class="ds-label">Hero Banner</span>
+        <div class="ds-showcase" style="padding:0; overflow:hidden; border-radius:12px; max-width:375px;">
+          <div class="hero-banner">
+            <div class="hero-bg">
+              <div class="hero-bg-trapeze"></div>
+            </div>
+            <div class="hero-content">
+              <div class="hero-text">
+                <div class="hero-title">Disney Stitch knuffel</div>
+                <div class="hero-subtitle">25 cm | diverse kleuren</div>
+              </div>
+              <div class="hero-image-container">
+                <img src="images/hero-stitch.avif" alt="Disney Stitch knuffel">
+              </div>
+            </div>
+            <div class="hero-bottom">
+              <div class="hero-price-tag">
+                <div class="hero-price-tag-side left">
+                  <div class="tag-shadow"><img src="images/price-tag-left-shadow.svg" alt=""></div>
+                  <div class="tag-shape"><img src="images/price-tag-left-shape.svg" alt=""></div>
+                </div>
+                <div class="hero-price-tag-body">
+                  <div class="hero-price-main">
+                    <span class="hero-price-whole">9</span>
+                    <span class="hero-price-decimal">99</span>
+                  </div>
+                  <div class="hero-price-unit">9,99/st</div>
+                </div>
+                <div class="hero-price-tag-side right">
+                  <div class="tag-shadow"><img src="images/price-tag-right-shadow.svg" alt=""></div>
+                  <div class="tag-shape"><img src="images/price-tag-right-shape.svg" alt=""></div>
+                </div>
+              </div>
+              <div class="hero-cta">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <path d="M9 18l6-6-6-6" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hero Price Tag -->
+      <div class="ds-subsection">
+        <span class="ds-label">Hero Price Tag</span>
+        <div class="ds-showcase" style="background: var(--brand-orange); padding: 24px 20px;">
+          <div class="hero-price-tag" style="position:static;">
+            <div class="hero-price-tag-side left">
+              <div class="tag-shadow"><img src="images/price-tag-left-shadow.svg" alt=""></div>
+              <div class="tag-shape"><img src="images/price-tag-left-shape.svg" alt=""></div>
+            </div>
+            <div class="hero-price-tag-body">
+              <div class="hero-price-main">
+                <span class="hero-price-whole">9</span>
+                <span class="hero-price-decimal">99</span>
+              </div>
+              <div class="hero-price-unit">9,99/st</div>
+            </div>
+            <div class="hero-price-tag-side right">
+              <div class="tag-shadow"><img src="images/price-tag-right-shadow.svg" alt=""></div>
+              <div class="tag-shape"><img src="images/price-tag-right-shape.svg" alt=""></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hero CTA Button -->
+      <div class="ds-subsection">
+        <span class="ds-label">Hero CTA Button</span>
+        <div class="ds-showcase">
+          <div class="ds-inline-row" style="align-items:center; gap:16px;">
+            <div class="hero-cta" style="position:static;">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M9 18l6-6-6-6" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <span style="font-size:12px; color:var(--neutral-500);">Chevron button (hero, navigatie)</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Product Cards -->
+      <div class="ds-subsection">
+        <span class="ds-label">Product Cards (3-kolom)</span>
+        <div class="ds-showcase">
+          <div class="product-cards-grid">
+            <div class="product-card">
+              <div class="product-card-img">
+                <span class="product-card-badge">Actie</span>
+                <img src="https://asset.action.com/image/upload/t_digital_product_image/w_400/36717700.webp" alt="">
+              </div>
+              <div class="product-card-body">
+                <div class="product-card-name">Haribo Fun Mix</div>
+                <div class="product-card-price"><sup>&euro;</sup>2,49</div>
+              </div>
+            </div>
+            <div class="product-card">
+              <div class="product-card-img">
+                <img src="https://asset.action.com/image/upload/t_digital_product_image/w_400/37642579.webp" alt="">
+              </div>
+              <div class="product-card-body">
+                <div class="product-card-name">Curver Prullenbak 10L</div>
+                <div class="product-card-price"><sup>&euro;</sup>2,99</div>
+              </div>
+            </div>
+            <div class="product-card">
+              <div class="product-card-img">
+                <img src="https://asset.action.com/image/upload/t_digital_product_image/w_400/20607409.webp" alt="">
+              </div>
+              <div class="product-card-body">
+                <div class="product-card-name">Kappa Sneakersokken 3 paar</div>
+                <div class="product-card-price"><sup>&euro;</sup>1,98</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Webshop Cards -->
+      <div class="ds-subsection">
+        <span class="ds-label">Webshop Cards (2-kolom)</span>
+        <div class="ds-showcase">
+          <div class="webshop-cards-grid" style="border:none;">
+            <div class="webshop-card">
+              <div class="webshop-card-img">
+                <span class="webshop-card-badge">Nieuw</span>
+                <img src="https://shop.action.com/static/images/800/5707256753784_d0bdb440-e606-4578-b9f1-5f97951d07cc.jpg" alt="">
+              </div>
+              <div class="webshop-card-body">
+                <div class="webshop-card-name">Wandplantenbakken set</div>
+                <div class="webshop-card-desc">3 stuks | S-M-L</div>
+                <div class="webshop-card-footer">
+                  <div class="webshop-card-price"><sup>&euro;</sup>39,95</div>
+                  <div class="webshop-card-cta"><svg viewBox="0 0 14 14" fill="none"><path d="M7 1v12M1 7h12" stroke="white" stroke-width="2" stroke-linecap="round"/></svg></div>
+                </div>
+              </div>
+            </div>
+            <div class="webshop-card">
+              <div class="webshop-card-img">
+                <img src="https://shop.action.com/static/images/800/8718964273676_5d4665f1-fa06-48da-9792-e92bd1aa9397.jpg" alt="">
+              </div>
+              <div class="webshop-card-body">
+                <div class="webshop-card-name">Luxe kunsthagen</div>
+                <div class="webshop-card-desc">4 stuks | 1 m&sup2;</div>
+                <div class="webshop-card-footer">
+                  <div class="webshop-card-price"><sup>&euro;</sup>39,95</div>
+                  <div class="webshop-card-cta"><svg viewBox="0 0 14 14" fill="none"><path d="M7 1v12M1 7h12" stroke="white" stroke-width="2" stroke-linecap="round"/></svg></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Weekactie Header -->
+      <div class="ds-subsection">
+        <span class="ds-label">Weekactie Header</span>
+        <div class="ds-showcase" style="max-width:375px; padding:0; overflow:hidden; border-radius:12px;">
+          <div class="weekactie-header">
+            <img class="weekactie-header-logo" src="images/weekactie-logo.png" alt="Weekactie">
+          </div>
+          <div class="weekactie-date">28 september t/m 4 oktober</div>
+        </div>
+      </div>
+
+      <!-- Weekactie Cards -->
+      <div class="ds-subsection">
+        <span class="ds-label">Weekactie Cards</span>
+        <div class="ds-showcase">
+          <div class="weekactie-grid" style="background:none; border:none; gap:16px;">
+            <div class="wa-card">
+              <span class="wa-card-badge">Weekactie</span>
+              <svg class="wa-card-heart" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+              <img class="wa-card-img" src="images/wa-prod1.png" alt="Tulpenbollen">
+              <div class="wa-card-info"><span class="wa-card-name">Tulpenbollen</span><span class="wa-card-desc">15 stuks | diverse varianten</span></div>
+              <div class="wa-card-pricing"><div class="wa-price-unit">&euro; 0,11/st</div><div class="wa-card-price"><span class="wa-price-euros">1</span><span class="wa-price-cents">69</span></div></div>
+            </div>
+            <div class="wa-card">
+              <span class="wa-card-badge">Weekactie</span>
+              <svg class="wa-card-heart" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+              <img class="wa-card-img" src="images/wa-prod2.png" alt="Deurmat">
+              <div class="wa-card-info"><span class="wa-card-name">Deurmat</span><span class="wa-card-desc">40 x 60 cm | diverse kleuren</span></div>
+              <div class="wa-card-pricing"><div class="wa-price-unit">&euro; 2,49/st</div><div class="wa-card-price"><span class="wa-price-euros">2</span><span class="wa-price-cents">49</span></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Category Bubbles -->
+      <div class="ds-subsection">
+        <span class="ds-label">Category Bubbles</span>
+        <div class="ds-showcase">
+          <div class="category-bubble-lane" style="max-width:100%;">
+            <div class="category-bubble-track">
+              <div class="category-bubble-item">
+                <div class="category-bubble-circle">
+                  <img src="https://asset.action.com/image/upload/t_digital_square/w_200/Categoryslider_Decoration_Home__2024_qatudm.webp" alt="Wonen">
+                </div>
+                <span class="category-bubble-label">Wonen</span>
+              </div>
+              <div class="category-bubble-item">
+                <div class="category-bubble-circle">
+                  <img src="https://asset.action.com/image/upload/t_digital_square/w_200/Categoryslider_Kitchen_2024_fi7jou.webp" alt="Keuken">
+                </div>
+                <span class="category-bubble-label">Keuken</span>
+              </div>
+              <div class="category-bubble-item">
+                <div class="category-bubble-circle">
+                  <img src="https://asset.action.com/image/upload/t_digital_square/w_200/Categoryslider_GardenAndOutdoor_2024_dqquea.webp" alt="Tuin">
+                </div>
+                <span class="category-bubble-label">Tuin</span>
+              </div>
+              <div class="category-bubble-item">
+                <div class="category-bubble-circle">
+                  <img src="https://asset.action.com/image/upload/t_digital_square/w_200/Categoryslider_Toys_Entertainment_Toys__2024_ujx4hs.webp" alt="Speelgoed">
+                </div>
+                <span class="category-bubble-label">Speelgoed</span>
+              </div>
+              <div class="category-bubble-item">
+                <div class="category-bubble-circle">
+                  <img src="https://asset.action.com/image/upload/t_digital_square/w_200/Categoryslider_PersonalCare_2024_ci5mv5.webp" alt="Verzorging">
+                </div>
+                <span class="category-bubble-label">Verzorging</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Category List Items -->
+      <div class="ds-subsection">
+        <span class="ds-label">Category List Items</span>
+        <div class="ds-showcase" style="padding:0; overflow:hidden;">
+          <div class="category-list-item">
+            <div class="category-list-item-left">
+              <div class="category-list-item-img"><img src="images/cat-wonen.png" alt=""></div>
+              <span class="category-list-item-name">Wonen</span>
+            </div>
+            <svg class="category-list-item-arrow" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M7.5 15l5-5-5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div class="category-list-item">
+            <div class="category-list-item-left">
+              <div class="category-list-item-img"><img src="images/cat-keuken.png" alt=""></div>
+              <span class="category-list-item-name">Keuken</span>
+            </div>
+            <svg class="category-list-item-arrow" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M7.5 15l5-5-5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div class="category-list-item">
+            <div class="category-list-item-left">
+              <div class="category-list-item-img"><img src="images/cat-tuin.png" alt=""></div>
+              <span class="category-list-item-name">Tuin</span>
+            </div>
+            <svg class="category-list-item-arrow" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M7.5 15l5-5-5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- Webshop Category Items -->
+      <div class="ds-subsection">
+        <span class="ds-label">Webshop Category Items</span>
+        <div class="ds-showcase" style="padding:0; overflow:hidden;">
+          <div class="ws-category-item">
+            <div class="ws-category-item-img"><img src="images/ws-cat-tuin.png" alt=""></div>
+            <span class="ws-category-item-name">Tuin</span>
+          </div>
+          <div class="ws-category-item">
+            <div class="ws-category-item-img"><img src="images/ws-cat-wonen.png" alt=""></div>
+            <span class="ws-category-item-name">Wonen</span>
+          </div>
+          <div class="ws-category-item">
+            <div class="ws-category-item-img"><img src="images/ws-cat-keuken.png" alt=""></div>
+            <span class="ws-category-item-name">Keuken</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Lijstje Cards -->
+      <div class="ds-subsection">
+        <span class="ds-label">Lijstje Cards</span>
+        <div class="ds-showcase">
+          <div class="lijstjes-grid" style="max-width:300px;">
+            <div class="lijstje-card">
+              <div class="lijstje-card-thumb">
+                <img class="lijstje-icon" src="" alt="" style="width:48px;height:48px;background:#b2e9f8;border-radius:8px;">
+              </div>
+              <div class="lijstje-card-info">
+                <span class="lijstje-card-name">Mijn verlanglijst</span>
+                <span class="lijstje-card-count">12 producten</span>
+              </div>
+            </div>
+            <div class="lijstje-card">
+              <div class="lijstje-card-thumb orange">
+                <img class="lijstje-icon" src="" alt="" style="width:48px;height:48px;background:#ffcc80;border-radius:8px;">
+              </div>
+              <div class="lijstje-card-info">
+                <span class="lijstje-card-name">Boodschappenlijst</span>
+                <span class="lijstje-card-count">5 producten</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Profile Card -->
+      <div class="ds-subsection">
+        <span class="ds-label">Profile Card</span>
+        <div class="ds-showcase" style="background: #d9edf9;">
+          <div class="myaction-profile-card">
+            <div class="myaction-profile-info">
+              <span class="myaction-profile-name">Jan de Vries</span>
+              <span class="myaction-profile-sub">jan@voorbeeld.nl</span>
+            </div>
+            <div class="myaction-profile-barcode" style="width:56px;height:56px;background:var(--neutral-150);border-radius:4px;"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Menu List Items -->
+      <div class="ds-subsection">
+        <span class="ds-label">My Action Menu Items</span>
+        <div class="ds-showcase" style="background: #d9edf9; padding: 12px;">
+          <div class="myaction-menu-list">
+            <div class="myaction-menu-item">
+              <span class="myaction-menu-label">Mijn gegevens</span>
+              <svg class="myaction-menu-arrow" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M7.5 15l5-5-5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div class="myaction-menu-item">
+              <span class="myaction-menu-label">Instellingen</span>
+              <svg class="myaction-menu-arrow" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M7.5 15l5-5-5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab Bar -->
+      <div class="ds-subsection">
+        <span class="ds-label">Tab Bar</span>
+        <div class="ds-showcase" style="padding: 0; overflow:hidden; border-radius:12px;">
+          <div class="tabbar" style="position:static;">
+            <div class="tabbar-tabs">
+              <div class="tabbar-tab active">
+                <div class="tabbar-tab-icon">
+                  <svg viewBox="0 0 21 21.4" fill="currentColor">
+                    <path d="M16.3333 21.4005C15.1325 21.4005 14.4717 21.4004 13.8302 21.1401C12.9792 20.7926 12.308 20.125 11.9367 19.2585C11.6666 18.5948 11.6667 17.9341 11.6667 16.7338V15.5671C11.6667 14.924 11.1438 14.4005 10.5 14.4005C9.85623 14.4005 9.33333 14.924 9.33333 15.5671V16.7338C9.33333 17.9341 9.33329 18.5949 9.07243 19.238C8.69186 20.1251 8.02079 20.7926 7.17204 21.139C6.52827 21.4005 5.86752 21.4005 4.66667 21.4005C3.46582 21.4005 2.80501 21.4004 2.16357 21.1401C1.31249 20.7926 0.64137 20.125 0.27002 19.2585C-6.38068e-05 18.5948 0 17.9341 0 16.7338V10.259C0 9.58972-3.82811e-05 9.18635 0.103678 8.75912C0.214162 8.34787 0.382916 7.98549 0.611816 7.65113C0.835116 7.31793 1.11315 7.06847 1.53467 6.69082L1.65771 6.57974L7.36686 1.58494C8.25668 0.813078 8.79337 0.347676 9.51449 0.141993C10.1559-0.0482907 10.844-0.0476864 11.4992 0.14598C12.2067 0.347697 12.7433 0.813078 13.6331 1.58494L13.7266 1.66527L19.4653 6.69082C19.8868 7.06847 20.1648 7.31803 20.395 7.66266C20.632 8.00788 20.8007 8.38611 20.8895 8.77578C21 9.16428 21 9.57668 21 10.2592V16.7338C21 17.9341 21 18.5949 20.7391 19.238C20.3585 20.1251 19.6875 20.7926 18.8387 21.139C18.1949 21.4005 17.5342 21.4005 16.3333 21.4005Z"/>
+                  </svg>
+                </div>
+                <span class="tabbar-tab-label">Start</span>
+              </div>
+              <div class="tabbar-tab">
+                <div class="tabbar-tab-icon">
+                  <svg viewBox="0 0 23.33 23.33" fill="currentColor">
+                    <path d="M22.1667 23.3333C21.8681 23.3333 21.5696 23.2193 21.3418 22.9915L15.0539 16.7036C13.4725 17.9335 11.4866 18.6667 9.33333 18.6667C4.18705 18.6667 0 14.4796 0 9.33333C0 4.18705 4.18705 0 9.33333 0C14.4796 0 18.6667 4.18705 18.6667 9.33333C18.6667 11.4867 17.9329 13.4726 16.7036 15.0539L22.9915 21.3417C23.4472 21.7974 23.4472 22.5357 22.9915 22.9915C22.7637 23.2193 22.4652 23.3333 22.1667 23.3333ZM9.33333 2.33333C5.4733 2.33333 2.33333 5.4733 2.33333 9.33333C2.33333 13.1934 5.4733 16.3333 9.33333 16.3333C13.1934 16.3333 16.3333 13.1934 16.3333 9.33333C16.3333 5.4733 13.1934 2.33333 9.33333 2.33333Z"/>
+                  </svg>
+                </div>
+                <span class="tabbar-tab-label">Producten</span>
+              </div>
+              <div class="tabbar-tab">
+                <div class="tabbar-tab-icon">
+                  <svg viewBox="0 0 21.08 21.07" fill="currentColor">
+                    <path d="M10.9679 21.0738C10.6056 21.0738 10.2432 21.0169 9.89008 20.9023C9.11425 20.65 8.56051 20.1014 7.64106 19.1934L7.51687 19.0709L1.4796 13.0215C1.033 12.5858 0.714046 12.2622 0.46788 11.8567C0.24913 11.4631 0.115836 11.0854 0.0474695 10.694C-0.0345472 10.2679 0.00306868 9.86617 0.060002 9.25775L0.457626 4.89358C0.554459 3.72749 0.622868 3.00918 0.976018 2.35573C1.29615 1.7696 1.77215 1.29349 2.35431 0.976156C3.0276 0.612156 3.76843 0.548874 4.88959 0.453207L9.11762 0.0686856C9.85705 0.0020689 10.2672-0.0366936 10.7172 0.0504564C11.1137 0.119406 11.5033 0.264113 11.8566 0.476563C12.236 0.69018 12.5378 0.981845 13.0346 1.47803L19.0571 7.51131C20.1087 8.56353 20.6465 9.10012 20.9028 9.8868C21.1318 10.5887 21.1318 11.3354 20.9062 12.048C20.6373 12.8528 20.0756 13.4146 19.0559 14.4343L14.436 19.0542C13.414 20.0768 12.8498 20.6402 12.0465 20.9016C11.6935 21.0168 11.3314 21.0738 10.9679 21.0738ZM10.135 2.33366C9.97555 2.33366 9.74654 2.35478 9.44461 2.38208L5.09467 2.778C4.2311 2.8515 3.6944 2.90444 3.46772 3.02694C3.28315 3.12774 3.12935 3.28163 3.0268 3.46899C2.90605 3.69171 2.85365 4.22493 2.77957 5.07601V5.10449L2.38337 9.4738C2.34463 9.88341 2.31957 10.1539 2.34349 10.274C2.36974 10.429 2.41734 10.5617 2.48676 10.6876C2.54824 10.7868 2.70092 10.9536 3.12022 11.3621L9.28168 17.5338C9.93221 18.177 10.3618 18.6018 10.6124 18.6828C10.8448 18.7591 11.0965 18.7581 11.3245 18.6828C11.5956 18.5945 12.0697 18.1212 12.7862 17.4045L17.4062 12.7845C18.099 12.0918 18.5991 11.5916 18.6879 11.3256C18.7597 11.0978 18.7608 10.8436 18.6845 10.6094C18.6013 10.3553 18.157 9.91119 17.4848 9.23895L11.3852 3.12805C10.9967 2.74072 10.8132 2.56597 10.6811 2.49188C10.5477 2.41162 10.4281 2.36809 10.296 2.34534C10.2536 2.33705 10.1999 2.33366 10.135 2.33366Z"/>
+                    <path d="M6.58155 8.91035C5.95948 8.91035 5.37383 8.66764 4.93294 8.22676C4.02609 7.31874 4.02609 5.84099 4.93294 4.93298C5.84213 4.02379 7.31982 4.02439 8.22901 4.93241C9.13702 5.84101 9.137 7.31874 8.23015 8.22676C7.78915 8.66764 7.20361 8.91035 6.58155 8.91035Z"/>
+                  </svg>
+                </div>
+                <span class="tabbar-tab-label">Weekactie</span>
+              </div>
+              <div class="tabbar-tab" style="position:relative;">
+                <div class="tabbar-tab-icon">
+                  <svg viewBox="0 0 23.33 20.96" fill="currentColor">
+                    <path d="M11.6667 20.9582C11.4713 20.9582 11.2764 20.9092 11.0999 20.8112C10.647 20.5595 0 14.5575 0 6.9582C0 2.68178 2.58738 0.629299 5.00903 0.134866C7.54175-0.378934 10.058 0.603684 11.6667 2.59915C13.2766 0.602517 15.7933-0.377884 18.3249 0.134866C20.7459 0.629299 23.3333 2.68178 23.3333 6.9582C23.3333 14.5575 12.6863 20.5595 12.2329 20.8112C12.0574 20.9092 11.8615 20.9582 11.6667 20.9582ZM6.29989 2.33938C6.0151 2.33938 5.7382 2.36728 5.47559 2.42142C3.50789 2.8231 2.33333 4.51893 2.33333 6.9582C2.33333 12.3068 9.56293 17.1415 11.6667 18.4346C13.771 17.1415 21 12.3068 21 6.9582C21 4.51893 19.8254 2.8231 17.8577 2.42142C16.1294 2.07048 13.7995 2.82409 12.7399 5.30839C12.5565 5.73854 12.1338 6.01762 11.6667 6.01762C11.199 6.01762 10.7768 5.73842 10.5934 5.30839C9.69556 3.20186 7.8813 2.33938 6.29989 2.33938Z"/>
+                  </svg>
+                </div>
+                <span class="tabbar-tab-label">Mijn lijstjes</span>
+                <div class="tab-badge">2</div>
+              </div>
+              <div class="tabbar-tab">
+                <div class="tabbar-tab-icon">
+                  <svg viewBox="0 0 18.67 23.33" fill="currentColor">
+                    <path d="M17.5 23.3333C16.8558 23.3333 16.3333 22.8115 16.3333 22.1667C16.3333 18.3066 13.1934 15.1667 9.33333 15.1667C5.4733 15.1667 2.33333 18.3066 2.33333 22.1667C2.33333 22.8115 1.8109 23.3333 1.16667 23.3333C0.522433 23.3333 0 22.8115 0 22.1667C0 17.0204 4.18705 12.8333 9.33333 12.8333C14.4796 12.8333 18.6667 17.0204 18.6667 22.1667C18.6667 22.8115 18.1442 23.3333 17.5 23.3333ZM9.33333 11.6667C6.11707 11.6667 3.5 9.0496 3.5 5.83333C3.5 2.61707 6.11707 0 9.33333 0C12.5496 0 15.1667 2.61707 15.1667 5.83333C15.1667 9.0496 12.5496 11.6667 9.33333 11.6667ZM9.33333 2.33333C7.40332 2.33333 5.83333 3.90332 5.83333 5.83333C5.83333 7.76335 7.40332 9.33333 9.33333 9.33333C11.2633 9.33333 12.8333 7.76335 12.8333 5.83333C12.8333 3.90332 11.2633 2.33333 9.33333 2.33333Z"/>
+                  </svg>
+                </div>
+                <span class="tabbar-tab-label">Mijn Action</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Empty State -->
+      <div class="ds-subsection">
+        <span class="ds-label">Empty State</span>
+        <div class="ds-showcase">
+          <div class="placeholder-page" style="padding: 32px 16px;">
+            <div class="placeholder-icon">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5" stroke="currentColor" stroke-width="2"/></svg>
+            </div>
+            <span class="placeholder-title">Geen resultaten</span>
+            <span class="placeholder-subtitle">Probeer een andere zoekterm of filter</span>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /ds-section Components -->
+
+    <!-- ==================== SPACING & RADII ==================== -->
+    <div class="ds-section">
+      <h2 class="ds-section-title">Spacing & Radii</h2>
+      <div class="ds-showcase">
+        <div style="display:flex; flex-direction:column; gap:12px;">
+          <span class="ds-label" style="margin:0;">Border Radius</span>
+          <div class="ds-inline-row">
+            <div style="width:48px;height:48px;background:var(--brand-darkblue);border-radius:var(--radius-xs);"></div>
+            <div style="width:48px;height:48px;background:var(--brand-darkblue);border-radius:var(--radius-sm);"></div>
+            <div style="width:48px;height:48px;background:var(--brand-darkblue);border-radius:var(--radius-round);"></div>
+          </div>
+          <div class="ds-inline-row" style="gap:24px;">
+            <span style="font-size:11px; color:var(--neutral-500); font-family:monospace;">4px xs</span>
+            <span style="font-size:11px; color:var(--neutral-500); font-family:monospace;">8px sm</span>
+            <span style="font-size:11px; color:var(--neutral-500); font-family:monospace;">360px round</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>
