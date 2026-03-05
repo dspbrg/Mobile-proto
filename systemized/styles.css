@@ -503,7 +503,10 @@
 
     /* ===== Hero Banner ===== */
     .hero-banner {
-      width: 100%;
+      width: calc(100% - 32px);
+      aspect-ratio: 343 / 323;
+      margin: 0 16px;
+      border-radius: var(--radius-sm);
       position: relative;
       overflow: hidden;
       flex-shrink: 0;
@@ -567,6 +570,7 @@
       align-items: flex-start;
       justify-content: center;
       overflow: hidden;
+      margin-top: -30px;
     }
 
     .hero-image-container img {
@@ -776,7 +780,7 @@
       font-weight: 700;
       letter-spacing: 0.4px;
       text-transform: none;
-      padding: 3px 14px 3px 6px;
+      padding: 3px 10px 3px 6px;
       border-radius: 0;
       clip-path: polygon(0 0, 100% 0, calc(100% - 8px) 100%, 0 100%);
     }
@@ -895,10 +899,13 @@
       line-height: 16px;
     }
 
-    .category-list-item-arrow {
+    .chevron {
+      width: 20px;
+      height: 20px;
       color: var(--neutral-300);
       flex-shrink: 0;
     }
+
 
     /* Webshop category list overrides */
     .ws-category-list {
@@ -1300,7 +1307,7 @@
     .new-lijstje-btn {
       width: calc(100% - 32px);
       margin: 16px 16px 24px;
-      padding: 14px;
+      height: 44px;
       border-radius: var(--radius-sm);
       border: 2px dashed var(--neutral-300);
       background: transparent;
@@ -1404,10 +1411,6 @@
       line-height: 22px;
     }
 
-    .myaction-menu-arrow {
-      color: var(--neutral-300);
-      flex-shrink: 0;
-    }
 
     .myaction-profile-card {
       background: white;
@@ -1453,8 +1456,9 @@
       border: 1px solid var(--brand-darkblue);
       border-radius: 360px;
       background: white;
-      padding: 6px 12px;
-      font-size: 14px;
+      height: 44px;
+      font-family: inherit;
+      font-size: 16px;
       font-weight: 500;
       color: var(--brand-darkblue);
       cursor: pointer;
@@ -1828,9 +1832,3 @@
       line-height: 16px;
     }
 
-    .category-item-caret {
-      width: 16px;
-      height: 16px;
-      flex-shrink: 0;
-      color: var(--neutral-500);
-    }
