@@ -173,6 +173,37 @@
       <a href="./" class="ds-back">Prototype</a>
     </div>
 
+    <!-- ==================== LOGO ==================== -->
+    <div class="ds-section">
+      <h2 class="ds-section-title">Logo</h2>
+
+      <span class="ds-label">Action logo (vector)</span>
+      <div style="display:flex;flex-direction:column;gap:16px;">
+        <!-- Op donkere achtergrond -->
+        <div style="background:var(--brand-darkblue);border-radius:12px;padding:24px 20px;display:flex;align-items:center;gap:8px;">
+          <img src="../images/action-logo.svg" alt="Action" style="height:28px;width:auto;">
+        </div>
+        <!-- Op lichte achtergrond -->
+        <div style="background:var(--neutral-100);border-radius:12px;padding:24px 20px;display:flex;align-items:center;gap:8px;">
+          <img src="../images/action-logo.svg" alt="Action" style="height:28px;width:auto;filter:brightness(0) saturate(100%);">
+        </div>
+      </div>
+
+      <span class="ds-label" style="margin-top:16px;">Logo + webshop (samengesteld)</span>
+      <div style="display:flex;flex-direction:column;gap:16px;">
+        <div style="background:var(--brand-darkblue);border-radius:12px;padding:24px 20px;display:flex;align-items:center;">
+          <img src="../images/action-logo.svg" alt="Action" style="height:28px;width:auto;">
+          <span style="font-size:16px;font-weight:700;font-style:italic;color:#66D3F1;margin-left:8px;">webshop</span>
+        </div>
+      </div>
+
+      <div style="margin-top:16px;font-size:13px;color:var(--neutral-500);line-height:1.5;">
+        <strong>Bestand:</strong> <code style="background:var(--neutral-100);padding:2px 6px;border-radius:4px;font-size:12px;">images/action-logo.svg</code><br>
+        <strong>Formaat:</strong> SVG, 127×24 viewBox<br>
+        <strong>Opmerking:</strong> Logo is wit — gebruik op donkere achtergrond. "webshop" wordt als tekst-element toegevoegd (Ubuntu Bold Italic, #66D3F1).
+      </div>
+    </div>
+
     <!-- ==================== COLORS ==================== -->
     <div class="ds-section">
       <h2 class="ds-section-title">Kleuren</h2>
@@ -357,7 +388,8 @@
             </svg>
             <!-- Logo -->
             <div style="flex:1; display:flex; align-items:center;">
-              <img src="../images/webshop-logo.png" alt="Action Webshop" style="height:24px; object-fit:contain;">
+              <img src="../images/action-logo.svg" alt="Action" style="height:24px;width:auto;">
+              <span style="font-size:14px;font-weight:700;font-style:italic;color:#66D3F1;margin-left:6px;">webshop</span>
             </div>
             <!-- Account -->
             <div style="display:flex; align-items:center; gap:4px;">
