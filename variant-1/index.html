@@ -50,9 +50,8 @@
 
     /* ===== Phone Frame ===== */
     .phone-frame {
-      width: 100%;
-      max-width: 375px;
-      height: 100dvh;
+      width: 375px;
+      height: 844px;
       background: var(--white);
       position: relative;
       overflow: hidden;
@@ -63,7 +62,8 @@
 
     @media (max-width: 500px) {
       .phone-frame {
-        max-width: 100%;
+        width: 100%;
+        height: 100dvh;
         box-shadow: none;
       }
     }
@@ -240,23 +240,14 @@
     }
 
     /* ===== Quick Actions ===== */
-    .section-quick-actions {
-      display: flex;
-      gap: 8px;
-      padding: 0 16px;
-      width: 100%;
-    }
-
-    .quick-actions-column {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      flex: 1;
-    }
+    .section-quick-actions { overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+    .section-quick-actions::-webkit-scrollbar { display: none; }
+    .quick-actions-track { display: flex; gap: 12px; width: max-content; padding: 0 16px; }
+    .quick-actions-column { display: flex; flex-direction: column; gap: 8px; min-width: 155px; }
 
     .menu-item {
       display: flex;
-      gap: 16px;
+      gap: 10px;
       align-items: center;
       padding: 8px 0;
       cursor: pointer;
@@ -474,6 +465,101 @@
       line-height: 20px;
     }
 
+    /* ===== Mini Hero Banner ===== */
+    .mini-hero {
+      position: relative;
+      width: calc(100% - 32px);
+      margin: 0 16px;
+      height: 140px;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .mini-hero-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #1a3a9e;
+    }
+
+    .mini-hero-image {
+      position: absolute;
+      top: 50px;
+      right: 0;
+      left: 50%;
+      height: 100%;
+      object-fit: contain;
+      object-position: center bottom;
+      transform: scale(1.65);
+      transform-origin: bottom center;
+      z-index: 2;
+    }
+
+    .mini-hero-trapeze {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: calc(60% - 50px);
+      height: 100%;
+      background: #001489;
+      clip-path: polygon(0 0, 100% 0, calc(100% - 45px) 100%, 0 100%);
+      z-index: 1;
+    }
+
+    .mini-hero-content {
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      z-index: 3;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .mini-hero-title {
+      font-size: 22px;
+      font-weight: 700;
+      color: white;
+      line-height: 1.1;
+    }
+
+    .mini-hero-price {
+      display: flex;
+      align-items: flex-start;
+      color: white;
+    }
+
+    .mini-hero-price-whole {
+      font-size: 52px;
+      font-weight: 700;
+      line-height: 0.85;
+      letter-spacing: -1.5px;
+    }
+
+    .mini-hero-price-decimal {
+      font-size: 26px;
+      font-weight: 700;
+      line-height: 1;
+      margin-top: 2px;
+    }
+
+    .mini-hero-cta {
+      position: absolute;
+      bottom: 16px;
+      right: 16px;
+      z-index: 3;
+      width: 36px;
+      height: 36px;
+      background: #001489;
+      border: 2px solid white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
     /* ===== Category Bubble Lane ===== */
     .category-bubble-lane {
       width: 100%;
@@ -510,9 +596,10 @@
     }
 
     .category-bubble-circle {
-      width: 68px;
-      height: 68px;
+      width: 88px;
+      height: 88px;
       border-radius: 50%;
+      background: #00b6e7;
       overflow: hidden;
       flex-shrink: 0;
     }
@@ -532,12 +619,36 @@
       max-width: 68px;
     }
 
-    /* ===== Hero Banner ===== */
-    .hero-banner {
+    /* ===== Hero Lane ===== */
+    .hero-lane {
       width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      scroll-snap-type: x mandatory;
+      scroll-padding-left: 16px;
+    }
+    .hero-lane::-webkit-scrollbar { display: none; }
+
+    .hero-track {
+      display: flex;
+      gap: 12px;
+      width: max-content;
+    }
+
+    .hero-spacer {
+      width: 4px;
+      flex-shrink: 0;
+    }
+
+    .hero-banner {
+      width: 260px;
+      aspect-ratio: 260 / 320;
+      border-radius: 8px;
       position: relative;
       overflow: hidden;
       flex-shrink: 0;
+      scroll-snap-align: start;
     }
 
     .hero-bg {
@@ -546,7 +657,7 @@
       left: 0;
       right: 0;
       bottom: 0;
-      background: var(--brand-orange);
+      background: #1a3a9e;
       overflow: hidden;
     }
 
@@ -556,7 +667,7 @@
       bottom: -50%;
       left: 0;
       width: 60%;
-      background: #e6f8fd;
+      background: var(--brand-darkblue);
       clip-path: polygon(0 0, 100% 0, calc(100% - 66px) 100%, 0 100%);
     }
 
@@ -565,8 +676,8 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding-top: 24px;
-      gap: 24px;
+      padding-top: 16px;
+      gap: 12px;
     }
 
     .hero-text {
@@ -575,42 +686,43 @@
       display: flex;
       flex-direction: column;
       gap: 8px;
-      color: var(--brand-darkblue);
+      color: white;
     }
 
     .hero-title {
-      font-size: 32px;
+      font-size: 24px;
       font-weight: 700;
-      line-height: 36px;
+      line-height: 28px;
       letter-spacing: -0.5px;
     }
 
     .hero-subtitle {
-      font-size: 16px;
+      font-size: 13px;
       font-weight: 400;
-      line-height: 22px;
+      line-height: 18px;
     }
 
     .hero-image-container {
-      width: 289px;
-      height: 248px;
+      width: 200px;
+      height: 200px;
       display: flex;
-      align-items: flex-start;
+      align-items: center;
       justify-content: center;
       overflow: hidden;
+      margin-top: -12px;
     }
 
     .hero-image-container img {
-      width: 288px;
-      height: 288px;
+      width: 200px;
+      height: 200px;
       object-fit: contain;
     }
 
     .hero-bottom {
       position: absolute;
-      bottom: 16px;
-      left: 16px;
-      right: 16px;
+      bottom: 12px;
+      left: 12px;
+      right: 12px;
       display: flex;
       align-items: flex-end;
       justify-content: space-between;
@@ -623,34 +735,34 @@
 
     .hero-price-tag-side {
       position: relative;
-      height: 80px;
+      height: 60px;
       flex-shrink: 0;
     }
 
     .hero-price-tag-side.left {
-      width: 28px;
+      width: 21px;
       margin-right: -1px;
     }
 
     .hero-price-tag-side.right {
-      width: 32px;
+      width: 24px;
       margin-left: -1px;
     }
 
     .hero-price-tag-side .tag-shadow {
       position: absolute;
       bottom: 0;
-      height: 80px;
+      height: 60px;
     }
 
     .hero-price-tag-side.left .tag-shadow {
       right: 0;
-      width: 26.75px;
+      width: 20px;
     }
 
     .hero-price-tag-side.right .tag-shadow {
       right: 0;
-      width: 31.5px;
+      width: 23px;
       transform: rotate(180deg);
     }
 
@@ -688,29 +800,29 @@
     .hero-price-tag-body {
       background: var(--brand-orange);
       border-top: 1px solid var(--brand-darkblue);
-      box-shadow: 0 7px 0 0 var(--brand-darkblue);
-      height: 73px;
-      padding: 8px 4px;
+      box-shadow: 0 5px 0 0 var(--brand-darkblue);
+      height: 53px;
+      padding: 6px 4px;
       display: flex;
       flex-direction: column;
-      gap: 4px;
+      gap: 2px;
       align-items: center;
       justify-content: center;
-      min-width: 68px;
+      min-width: 52px;
       overflow: hidden;
       position: relative;
     }
 
     .hero-price-main {
       display: flex;
-      align-items: baseline;
+      align-items: flex-start;
       gap: 2px;
     }
 
     .hero-price-whole {
       font-weight: 700;
-      font-size: 48px;
-      line-height: 40px;
+      font-size: 36px;
+      line-height: 30px;
       color: white;
       -webkit-text-stroke: 2px var(--brand-darkblue);
       text-shadow: 2px 2px 0 var(--brand-darkblue);
@@ -719,8 +831,8 @@
 
     .hero-price-decimal {
       font-weight: 700;
-      font-size: 28px;
-      line-height: 28px;
+      font-size: 20px;
+      line-height: 20px;
       color: white;
       -webkit-text-stroke: 1.5px var(--brand-darkblue);
       text-shadow: 1px 1px 0 var(--brand-darkblue);
@@ -734,8 +846,8 @@
     }
 
     .hero-cta {
-      width: 40px;
-      height: 40px;
+      width: 32px;
+      height: 32px;
       border-radius: 50%;
       background: var(--brand-darkblue);
       border: 2px solid white;
@@ -749,32 +861,73 @@
     /* ===== Product Cards Lane ===== */
     .product-lane {
       width: 100%;
-      padding: 0 16px;
       display: flex;
       flex-direction: column;
       gap: 12px;
+      padding: 16px 0;
+    }
+
+    .product-lane-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding: 0 16px;
+    }
+
+    .product-lane-header-left {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
     }
 
     .product-lane-title {
       font-size: 20px;
       font-weight: 700;
-      color: var(--brand-orange);
-      line-height: 1;
+      color: var(--brand-darkblue);
+      line-height: 1.2;
     }
 
-    .product-cards-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
+    .product-lane-subtitle {
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--neutral-500);
+    }
+
+    .product-lane-link {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--brand-darkblue);
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .product-cards-scroll {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+
+    .product-cards-scroll::-webkit-scrollbar {
+      display: none;
+    }
+
+    .product-cards-track {
+      display: flex;
       gap: 8px;
+      width: max-content;
+      padding: 0 16px;
     }
 
     .product-card {
+      flex: 0 0 148px;
       background: white;
-      border-radius: 0;
+      border-radius: 8px;
       overflow: hidden;
       display: flex;
       flex-direction: column;
       cursor: pointer;
+      scroll-snap-align: start;
+      border: 1px solid #f0f0f0;
     }
 
     .product-card:active {
@@ -803,26 +956,31 @@
       left: 0;
       background: var(--brand-orange);
       color: white;
-      font-size: 9px;
+      font-size: 10px;
       font-weight: 700;
       letter-spacing: 0.4px;
       text-transform: none;
-      padding: 3px 14px 3px 6px;
+      padding: 3px 12px 3px 6px;
       border-radius: 0;
       clip-path: polygon(0 0, 100% 0, calc(100% - 8px) 100%, 0 100%);
     }
 
+    .product-card-badge.badge-blue {
+      background: #0077c8;
+    }
+
     .product-card-body {
-      padding: 10px 10px 12px;
+      padding: 8px 10px 12px;
       display: flex;
       flex-direction: column;
-      gap: 4px;
+      gap: 2px;
+      flex: 1;
     }
 
     .product-card-name {
       font-size: 12px;
-      font-weight: 400;
-      color: var(--neutral-700);
+      font-weight: 500;
+      color: var(--brand-darkblue);
       line-height: 1.35;
       display: -webkit-box;
       -webkit-line-clamp: 2;
@@ -830,25 +988,43 @@
       overflow: hidden;
     }
 
-    .product-card-price {
-      font-size: 18px;
-      font-weight: 700;
-      color: var(--brand-darkblue);
-      line-height: 1;
-      margin-top: 4px;
-    }
-
-    .product-card-price sup {
-      font-size: 11px;
-      vertical-align: super;
-      line-height: 0;
-    }
-
-    .product-card-price-old {
+    .product-card-detail {
       font-size: 11px;
       color: var(--neutral-500);
-      text-decoration: line-through;
+      line-height: 1.3;
     }
+
+    .product-card-price { display: flex; align-items: flex-start; font-weight: 700; color: #001489; line-height: 1; }
+    .price-euros { font-size: 32px; }
+    .price-cents { font-size: 16px; padding-top: 2px; }
+
+    .product-card-unit {
+      font-size: 11px;
+      color: var(--neutral-500);
+      font-weight: 400;
+      margin-top: auto;
+      padding-top: 4px;
+    }
+
+    .product-lane.lane-weekactie .product-card-price { color: var(--brand-orange); }
+    .product-lane.lane-grey { background: #f5f5f5; }
+
+    .product-card-category { flex: 0 0 148px; border-radius: 8px; overflow: hidden; cursor: pointer; scroll-snap-align: start; position: relative; }
+    .product-card-category:active { opacity: 0.85; }
+    .product-card-category-img { width: 100%; height: 100%; position: absolute; top: 0; left: 0; }
+    .product-card-category-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .product-card-category-arrow { position: absolute; right: 10px; bottom: calc(32% - 16px); width: 32px; height: 32px; background: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; z-index: 2; }
+    .product-card-category-arrow svg { width: 14px; height: 14px; }
+    .product-card-category-body { position: absolute; bottom: 0; left: 0; right: 0; height: 40%; background: #001489; clip-path: polygon(0 0, 100% 20%, 100% 100%, 0 100%); padding: 24px 10px 12px; display: flex; align-items: flex-end; z-index: 1; }
+    .product-card-category-title { font-size: 14px; font-weight: 700; color: white; line-height: 1.3; }
+    .product-card-folder { flex: 0 0 148px; background: #f5c078; border-radius: 8px; overflow: hidden; display: flex; flex-direction: column; cursor: pointer; scroll-snap-align: start; }
+    .product-card-folder:active { opacity: 0.85; }
+    .product-card-folder-img { width: 100%; aspect-ratio: 1; display: flex; align-items: center; justify-content: center; }
+    .product-card-folder-img img { width: 70%; height: 70%; object-fit: contain; }
+    .product-card-folder-body { padding: 8px 10px 12px; display: flex; flex-direction: column; flex: 1; }
+    .product-card-folder-title { font-size: 13px; font-weight: 700; color: #001489; line-height: 1.3; }
+    .product-card-folder-cta { width: 32px; height: 32px; background: #001489; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-top: auto; }
+    .product-card-folder-cta svg { width: 14px; height: 14px; }
 
     /* ===== Toggle page content ===== */
     .toggle-page {
@@ -1161,9 +1337,9 @@
       left: 0;
       background: var(--brand-orange);
       color: white;
-      font-size: 11px;
+      font-size: 10px;
       font-weight: 700;
-      padding: 3px 14px 3px 6px;
+      padding: 3px 12px 3px 6px;
       clip-path: polygon(0 0, 100% 0, calc(100% - 8px) 100%, 0 100%);
     }
 
@@ -1231,8 +1407,8 @@
       position: absolute;
       bottom: 10px;
       right: 10px;
-      width: 30px;
-      height: 30px;
+      width: 32px;
+      height: 32px;
       border-radius: 50%;
       background: var(--brand-orange);
       color: white;
@@ -1697,11 +1873,11 @@
       left: 0;
       background: #00b6e7;
       color: white;
-      font-size: 9px;
+      font-size: 10px;
       font-weight: 700;
       letter-spacing: 0.4px;
       text-transform: none;
-      padding: 3px 14px 3px 6px;
+      padding: 3px 12px 3px 6px;
       border-radius: 0;
       clip-path: polygon(0 0, 100% 0, calc(100% - 8px) 100%, 0 100%);
     }
@@ -1754,8 +1930,8 @@
     }
 
     .webshop-card-cta {
-      width: 30px;
-      height: 30px;
+      width: 32px;
+      height: 32px;
       border-radius: 50%;
       background: #00b6e7;
       color: white;
@@ -1845,6 +2021,86 @@
       flex-shrink: 0;
       color: var(--neutral-500);
     }
+    /* ===== iOS Keyboard Simulation ===== */
+    .ios-keyboard {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 291px;
+      background: #D1D3D9;
+      z-index: 999;
+      transform: translateY(100%);
+      transition: transform 0.3s ease-out;
+      display: flex;
+      flex-direction: column;
+      padding: 8px 3px 20px;
+      gap: 10px;
+      font-family: -apple-system, 'SF Pro Display', 'Ubuntu', sans-serif;
+    }
+
+    .ios-keyboard.active {
+      transform: translateY(0);
+    }
+
+    .ios-kb-row {
+      display: flex;
+      justify-content: center;
+      gap: 6px;
+      height: 42px;
+    }
+
+    .ios-kb-key {
+      background: #FFFFFF;
+      border: none;
+      border-radius: 5px;
+      font-size: 22px;
+      font-weight: 400;
+      color: #000;
+      min-width: 32px;
+      height: 42px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 1px 0 rgba(0,0,0,0.35);
+      cursor: pointer;
+      flex: 0 0 auto;
+      -webkit-tap-highlight-color: transparent;
+      user-select: none;
+    }
+
+    .ios-kb-key:active {
+      background: #B8B8B8;
+    }
+
+    .ios-kb-key.special {
+      background: #ADB3BC;
+      font-size: 15px;
+      font-weight: 500;
+      min-width: 42px;
+    }
+
+    .ios-kb-key.space {
+      flex: 1;
+      font-size: 16px;
+      min-width: 0;
+    }
+
+    .ios-kb-key.search-key {
+      background: #007AFF;
+      color: white;
+      font-size: 16px;
+      font-weight: 500;
+      min-width: 88px;
+    }
+
+    .ios-kb-key.backspace {
+      min-width: 42px;
+    }
+
+    .ios-kb-key.shift {
+      min-width: 42px;
+    }
   </style>
 </head>
 <body>
@@ -1903,7 +2159,7 @@
       <!-- Toggle Content: In de winkel -->
       <div class="toggle-page active" id="content-winkel">
 
-        <div class="section-quick-actions">
+        <div class="section-quick-actions"><div class="quick-actions-track">
           <div class="quick-actions-column">
             <div class="menu-item">
               <div class="menu-item-icon">
@@ -1956,45 +2212,108 @@
               </div>
             </div>
           </div>
+        </div></div>
+
+        <!-- Hero Lane -->
+        <div class="hero-lane">
+          <div class="hero-track">
+            <div class="hero-spacer"></div>
+            <div class="hero-banner">
+              <div class="hero-bg">
+                <div class="hero-bg-trapeze"></div>
+              </div>
+              <div class="hero-content">
+                <div class="hero-text">
+                  <div class="hero-title">Disney Stitch<br>knuffel</div>
+                  <div class="hero-subtitle">25 cm | diverse kleuren</div>
+                </div>
+                <div class="hero-image-container">
+                  <img src="images/hero-stitch.avif" alt="Disney Stitch knuffel">
+                </div>
+              </div>
+              <div class="hero-bottom">
+                <div class="hero-price-tag">
+                  <div class="hero-price-tag-side left">
+                    <div class="tag-shadow"><img src="images/price-tag-left-shadow.svg" alt=""></div>
+                    <div class="tag-shape"><img src="images/price-tag-left-shape.svg" alt=""></div>
+                  </div>
+                  <div class="hero-price-tag-body">
+                    <div class="hero-price-main">
+                      <span class="hero-price-whole">9</span>
+                      <span class="hero-price-decimal">99</span>
+                    </div>
+                    <div class="hero-price-unit">9,99/st</div>
+                  </div>
+                  <div class="hero-price-tag-side right">
+                    <div class="tag-shadow"><img src="images/price-tag-right-shadow.svg" alt=""></div>
+                    <div class="tag-shape"><img src="images/price-tag-right-shape.svg" alt=""></div>
+                  </div>
+                </div>
+                <div class="hero-cta">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                    <path d="M9 18l6-6-6-6" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </div>
+              </div>
+            </div>
+            <div class="hero-banner">
+              <div class="hero-bg">
+                <div class="hero-bg-trapeze"></div>
+              </div>
+              <div class="hero-content">
+                <div class="hero-text">
+                  <div class="hero-title">Haribo<br>Fun Mix</div>
+                  <div class="hero-subtitle">375 gram | mixzak</div>
+                </div>
+                <div class="hero-image-container">
+                  <img src="../systemized/images/products/haribo-fun-mix.webp" alt="Haribo Fun Mix">
+                </div>
+              </div>
+              <div class="hero-bottom">
+                <div class="hero-price-tag">
+                  <div class="hero-price-tag-side left">
+                    <div class="tag-shadow"><img src="images/price-tag-left-shadow.svg" alt=""></div>
+                    <div class="tag-shape"><img src="images/price-tag-left-shape.svg" alt=""></div>
+                  </div>
+                  <div class="hero-price-tag-body">
+                    <div class="hero-price-main">
+                      <span class="hero-price-whole">1</span>
+                      <span class="hero-price-decimal">99</span>
+                    </div>
+                    <div class="hero-price-unit">5,31/kg</div>
+                  </div>
+                  <div class="hero-price-tag-side right">
+                    <div class="tag-shadow"><img src="images/price-tag-right-shadow.svg" alt=""></div>
+                    <div class="tag-shape"><img src="images/price-tag-right-shape.svg" alt=""></div>
+                  </div>
+                </div>
+                <div class="hero-cta">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                    <path d="M9 18l6-6-6-6" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </div>
+              </div>
+            </div>
+            <div class="hero-spacer"></div>
+          </div>
         </div>
 
-        <!-- Hero Banner -->
-        <div class="hero-banner">
-          <div class="hero-bg">
-            <div class="hero-bg-trapeze"></div>
-          </div>
-          <div class="hero-content">
-            <div class="hero-text">
-              <div class="hero-title">Disney Stitch knuffel</div>
-              <div class="hero-subtitle">25 cm | diverse kleuren</div>
-            </div>
-            <div class="hero-image-container">
-              <img src="images/hero-stitch.avif" alt="Disney Stitch knuffel">
+        <!-- Mini Hero Banner -->
+        <div class="mini-hero">
+          <div class="mini-hero-bg"></div>
+          <div class="mini-hero-trapeze"></div>
+          <img class="mini-hero-image" src="../systemized/images/products/toblerone.webp" alt="Chocola">
+          <div class="mini-hero-content">
+            <div class="mini-hero-title">Alle<br>chocola</div>
+            <div class="mini-hero-price">
+              <span class="mini-hero-price-whole">2</span>
+              <span class="mini-hero-price-decimal">95</span>
             </div>
           </div>
-          <div class="hero-bottom">
-            <div class="hero-price-tag">
-              <div class="hero-price-tag-side left">
-                <div class="tag-shadow"><img src="images/price-tag-left-shadow.svg" alt=""></div>
-                <div class="tag-shape"><img src="images/price-tag-left-shape.svg" alt=""></div>
-              </div>
-              <div class="hero-price-tag-body">
-                <div class="hero-price-main">
-                  <span class="hero-price-whole">9</span>
-                  <span class="hero-price-decimal">99</span>
-                </div>
-                <div class="hero-price-unit">9,99/st</div>
-              </div>
-              <div class="hero-price-tag-side right">
-                <div class="tag-shadow"><img src="images/price-tag-right-shadow.svg" alt=""></div>
-                <div class="tag-shape"><img src="images/price-tag-right-shape.svg" alt=""></div>
-              </div>
-            </div>
-            <div class="hero-cta">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                <path d="M9 18l6-6-6-6" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </div>
+          <div class="mini-hero-cta">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+              <path d="M9 18l6-6-6-6" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
           </div>
         </div>
 
@@ -2061,84 +2380,344 @@
           </div>
         </div>
 
-        <!-- Product Cards Lane -->
-        <div class="product-lane">
-          <div class="product-lane-title">Weekactie</div>
-          <div class="product-cards-grid">
-
-            <!-- Kaart 1: Haribo Fun Mix -->
+        <!-- Product Lane: Weekactie -->
+        <div class="product-lane lane-weekactie lane-grey">
+          <div class="product-lane-header">
+            <div class="product-lane-header-left">
+              <div class="product-lane-title">Weekactie</div>
+              <div class="product-lane-subtitle">16-03 t/m 22-03</div>
+            </div>
+            <a class="product-lane-link" href="#">Bekijk alles &rsaquo;</a>
+          </div>
+          <div class="product-cards-scroll"><div class="product-cards-track">
+            <div class="product-card-folder">
+              <div class="product-card-folder-img">
+                <img src="../systemized/images/products/folder-weekactie.webp" alt="Weekactie folder">
+              </div>
+              <div class="product-card-folder-body">
+                <div class="product-card-folder-title">Blader door de weekactie folder</div>
+                <div class="product-card-folder-cta">
+                  <svg viewBox="0 0 24 24" fill="none"><path d="M9 18l6-6-6-6" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </div>
+              </div>
+            </div>
             <div class="product-card">
               <div class="product-card-img">
-                <span class="product-card-badge">Actie</span>
-                <img src="https://asset.action.com/image/upload/t_digital_product_image/w_400/36717700.webp" alt="Haribo Fun Mix">
+                <span class="product-card-badge">Weekactie</span>
+                <img src="../systemized/images/products/sneakersokken.webp" alt="Sneakersokken">
+              </div>
+              <div class="product-card-body">
+                <div class="product-card-name">Sneakersokken</div>
+                <div class="product-card-detail">Maten 39-46, 7 paar</div>
+                <div class="product-card-unit">€0,28/st</div>
+                <div class="product-card-price"><span class="price-euros">1</span><span class="price-cents">98</span></div>
+              </div>
+            </div>
+            <div class="product-card">
+              <div class="product-card-img">
+                <span class="product-card-badge">Weekactie</span>
+                <img src="../systemized/images/products/curver-prullenbak.webp" alt="Curver Prullenbak">
+              </div>
+              <div class="product-card-body">
+                <div class="product-card-name">Curver Prullenbak</div>
+                <div class="product-card-detail">10 liter</div>
+                <div class="product-card-unit">€2,99/st</div>
+                <div class="product-card-price"><span class="price-euros">2</span><span class="price-cents">99</span></div>
+              </div>
+            </div>
+            <div class="product-card">
+              <div class="product-card-img">
+                <span class="product-card-badge">Weekactie</span>
+                <img src="../systemized/images/products/haribo-fun-mix.webp" alt="Haribo Fun Mix">
               </div>
               <div class="product-card-body">
                 <div class="product-card-name">Haribo Fun Mix</div>
-                <div class="product-card-price"><sup>€</sup>2,49</div>
+                <div class="product-card-detail">250 gram</div>
+                <div class="product-card-unit">€9,96/kg</div>
+                <div class="product-card-price"><span class="price-euros">2</span><span class="price-cents">49</span></div>
               </div>
             </div>
-
-            <!-- Kaart 2: Curver Prullenbak -->
             <div class="product-card">
               <div class="product-card-img">
-                <span class="product-card-badge">Actie</span>
-                <img src="https://asset.action.com/image/upload/t_digital_product_image/w_400/37642579.webp" alt="Curver Prullenbak">
+                <span class="product-card-badge">Weekactie</span>
+                <img src="../systemized/images/products/hotel-royal-handdoek.webp" alt="Hotel Royal Handdoek">
               </div>
               <div class="product-card-body">
-                <div class="product-card-name">Curver Prullenbak 10L</div>
-                <div class="product-card-price"><sup>€</sup>2,99</div>
+                <div class="product-card-name">Hotel Royal Handdoek</div>
+                <div class="product-card-detail">50×100 cm</div>
+                <div class="product-card-unit">€2,48/st</div>
+                <div class="product-card-price"><span class="price-euros">2</span><span class="price-cents">48</span></div>
               </div>
             </div>
-
-            <!-- Kaart 3: Kappa Sneakersokken -->
             <div class="product-card">
               <div class="product-card-img">
-                <span class="product-card-badge">Actie</span>
-                <img src="https://asset.action.com/image/upload/t_digital_product_image/w_400/20607409.webp" alt="Kappa Sneakersokken">
+                <span class="product-card-badge">Weekactie</span>
+                <img src="../systemized/images/products/palazzo-koffiecups.webp" alt="Palazzo Koffiecups">
               </div>
               <div class="product-card-body">
-                <div class="product-card-name">Kappa Sneakersokken 3 paar</div>
-                <div class="product-card-price"><sup>€</sup>1,98</div>
+                <div class="product-card-name">Palazzo Koffiecups Espresso</div>
+                <div class="product-card-detail">20 stuks</div>
+                <div class="product-card-unit">€0,12/st</div>
+                <div class="product-card-price"><span class="price-euros">2</span><span class="price-cents">49</span></div>
               </div>
             </div>
-
-            <!-- Kaart 4: Curver Vershouddoos -->
             <div class="product-card">
               <div class="product-card-img">
-                <span class="product-card-badge">Actie</span>
-                <img src="https://asset.action.com/image/upload/t_digital_product_image/w_400/35501029.webp" alt="Curver Vershouddoos">
+                <span class="product-card-badge">Weekactie</span>
+                <img src="../systemized/images/products/curver-vershouddoos.webp" alt="Curver Vershouddoos">
               </div>
               <div class="product-card-body">
-                <div class="product-card-name">Curver Vershouddoos 1,3L</div>
-                <div class="product-card-price"><sup>€</sup>2,62</div>
+                <div class="product-card-name">Curver Vershouddoos</div>
+                <div class="product-card-detail">1,3 liter</div>
+                <div class="product-card-unit">€2,62/st</div>
+                <div class="product-card-price"><span class="price-euros">2</span><span class="price-cents">62</span></div>
               </div>
             </div>
+          </div></div>
+        </div>
 
-            <!-- Kaart 5: Palazzo Koffiecups -->
-            <div class="product-card">
-              <div class="product-card-img">
-                <span class="product-card-badge">Actie</span>
-                <img src="https://asset.action.com/image/upload/t_digital_product_image/w_400/31670299.webp" alt="Palazzo Koffiecups">
-              </div>
-              <div class="product-card-body">
-                <div class="product-card-name">Palazzo Koffiecups Espresso 20 stuks</div>
-                <div class="product-card-price"><sup>€</sup>2,49</div>
-              </div>
+        <!-- Product Lane: Nieuw -->
+        <div class="product-lane">
+          <div class="product-lane-header">
+            <div class="product-lane-header-left">
+              <div class="product-lane-title">Nieuw</div>
+              <div class="product-lane-subtitle">Elke week meer dan 150 nieuwe producten</div>
             </div>
-
-            <!-- Kaart 6: Hotel Royal Handdoek -->
-            <div class="product-card">
-              <div class="product-card-img">
-                <span class="product-card-badge">Actie</span>
-                <img src="https://asset.action.com/image/upload/t_digital_product_image/w_400/37787563.webp" alt="Hotel Royal Handdoek">
-              </div>
-              <div class="product-card-body">
-                <div class="product-card-name">Hotel Royal Handdoek 50×100 cm</div>
-                <div class="product-card-price"><sup>€</sup>2,48</div>
-              </div>
-            </div>
-
+            <a class="product-lane-link" href="#">Bekijk alles &rsaquo;</a>
           </div>
+          <div class="product-cards-scroll"><div class="product-cards-track">
+            <div class="product-card">
+              <div class="product-card-img">
+                <span class="product-card-badge badge-blue">Nieuw</span>
+                <img src="../systemized/images/products/toblerone.webp" alt="Toblerone">
+              </div>
+              <div class="product-card-body">
+                <div class="product-card-name">Toblerone</div>
+                <div class="product-card-detail">340 gram</div>
+                <div class="product-card-unit">€16,15/kg</div>
+                <div class="product-card-price"><span class="price-euros">5</span><span class="price-cents">49</span></div>
+              </div>
+            </div>
+            <div class="product-card">
+              <div class="product-card-img">
+                <span class="product-card-badge badge-blue">Nieuw</span>
+                <img src="../systemized/images/products/haarklemmen.webp" alt="Haarklemmen">
+              </div>
+              <div class="product-card-body">
+                <div class="product-card-name">Haarklemmen</div>
+                <div class="product-card-detail">Diverse varianten</div>
+                <div class="product-card-unit">€1,99/st</div>
+                <div class="product-card-price"><span class="price-euros">1</span><span class="price-cents">99</span></div>
+              </div>
+            </div>
+            <div class="product-card">
+              <div class="product-card-img">
+                <span class="product-card-badge badge-blue">Nieuw</span>
+                <img src="../systemized/images/products/mokojifiguur.webp" alt="Mokojifiguur">
+              </div>
+              <div class="product-card-body">
+                <div class="product-card-name">Mokojifiguur in blind box</div>
+                <div class="product-card-detail">13 cm</div>
+                <div class="product-card-unit">€3,99/st</div>
+                <div class="product-card-price"><span class="price-euros">3</span><span class="price-cents">99</span></div>
+              </div>
+            </div>
+            <div class="product-card">
+              <div class="product-card-img">
+                <span class="product-card-badge badge-blue">Nieuw</span>
+                <img src="../systemized/images/products/rijstcake-topokki.webp" alt="Instant rijstcake">
+              </div>
+              <div class="product-card-body">
+                <div class="product-card-name">Youmi Instant Rijstcake Topokki</div>
+                <div class="product-card-detail">120 gram</div>
+                <div class="product-card-unit">€14,92/kg</div>
+                <div class="product-card-price"><span class="price-euros">1</span><span class="price-cents">79</span></div>
+              </div>
+            </div>
+            <div class="product-card">
+              <div class="product-card-img">
+                <span class="product-card-badge badge-blue">Nieuw</span>
+                <img src="../systemized/images/products/tuinhandschoenen.webp" alt="Tuinhandschoenen">
+              </div>
+              <div class="product-card-body">
+                <div class="product-card-name">Tuinhandschoenen</div>
+                <div class="product-card-detail">Maat M-XL</div>
+                <div class="product-card-unit">€2,59/st</div>
+                <div class="product-card-price"><span class="price-euros">2</span><span class="price-cents">59</span></div>
+              </div>
+            </div>
+            <div class="product-card">
+              <div class="product-card-img">
+                <span class="product-card-badge badge-blue">Nieuw</span>
+                <img src="../systemized/images/products/bloempot-keramiek.webp" alt="Bloempot">
+              </div>
+              <div class="product-card-body">
+                <div class="product-card-name">Bloempot keramiek</div>
+                <div class="product-card-detail">Diverse kleuren</div>
+                <div class="product-card-unit">€4,29/st</div>
+                <div class="product-card-price"><span class="price-euros">4</span><span class="price-cents">29</span></div>
+              </div>
+            </div>
+          </div></div>
+        </div>
+
+        <!-- Product Lane: A-merken -->
+        <div class="product-lane lane-grey">
+          <div class="product-lane-header">
+            <div class="product-lane-header-left">
+              <div class="product-lane-title">A-merken</div>
+              <div class="product-lane-subtitle">Altijd goedkoop</div>
+            </div>
+            <a class="product-lane-link" href="#">Bekijk alles &rsaquo;</a>
+          </div>
+          <div class="product-cards-scroll"><div class="product-cards-track">
+            <div class="product-card">
+              <div class="product-card-img">
+                <img src="../systemized/images/products/ajax-allesreiniger.webp" alt="Ajax Allesreiniger">
+              </div>
+              <div class="product-card-body">
+                <div class="product-card-name">Ajax Allesreiniger Mediterranean</div>
+                <div class="product-card-detail">1 liter</div>
+                <div class="product-card-unit">€1,59/l</div>
+                <div class="product-card-price"><span class="price-euros">1</span><span class="price-cents">59</span></div>
+              </div>
+            </div>
+            <div class="product-card">
+              <div class="product-card-img">
+                <img src="../systemized/images/products/coca-cola.webp" alt="Coca-Cola">
+              </div>
+              <div class="product-card-body">
+                <div class="product-card-name">Coca-Cola</div>
+                <div class="product-card-detail">375 ml</div>
+                <div class="product-card-unit">€2,64/l</div>
+                <div class="product-card-price"><span class="price-euros">0</span><span class="price-cents">99</span></div>
+              </div>
+            </div>
+            <div class="product-card">
+              <div class="product-card-img">
+                <img src="../systemized/images/products/duracell-batterijen.webp" alt="Duracell Batterijen">
+              </div>
+              <div class="product-card-body">
+                <div class="product-card-name">Duracell Batterijen AA</div>
+                <div class="product-card-detail">12 stuks</div>
+                <div class="product-card-unit">€0,46/st</div>
+                <div class="product-card-price"><span class="price-euros">5</span><span class="price-cents">49</span></div>
+              </div>
+            </div>
+            <div class="product-card">
+              <div class="product-card-img">
+                <img src="../systemized/images/products/gillette-blue3.webp" alt="Gillette Blue3">
+              </div>
+              <div class="product-card-body">
+                <div class="product-card-name">Gillette Blue3 Scheermesjes</div>
+                <div class="product-card-detail">12 stuks</div>
+                <div class="product-card-unit">€0,58/st</div>
+                <div class="product-card-price"><span class="price-euros">6</span><span class="price-cents">95</span></div>
+              </div>
+            </div>
+            <div class="product-card">
+              <div class="product-card-img">
+                <img src="../systemized/images/products/panasonic-batterijen.webp" alt="Panasonic Batterijen">
+              </div>
+              <div class="product-card-body">
+                <div class="product-card-name">Panasonic Batterijen AA</div>
+                <div class="product-card-detail">10 stuks</div>
+                <div class="product-card-unit">€0,23/st</div>
+                <div class="product-card-price"><span class="price-euros">2</span><span class="price-cents">28</span></div>
+              </div>
+            </div>
+            <div class="product-card">
+              <div class="product-card-img">
+                <span class="product-card-badge">Weekactie</span>
+                <img src="../systemized/images/products/maoam-kracher.webp" alt="MAOAM Kracher">
+              </div>
+              <div class="product-card-body">
+                <div class="product-card-name">MAOAM Kracher Easter Eggzz</div>
+                <div class="product-card-detail">275 gram</div>
+                <div class="product-card-unit">€6,51/kg</div>
+                <div class="product-card-price"><span class="price-euros">1</span><span class="price-cents">79</span></div>
+              </div>
+            </div>
+          </div></div>
+        </div>
+
+        <!-- Product Lane: Keuken -->
+        <div class="product-lane">
+          <div class="product-lane-header">
+            <div class="product-lane-header-left">
+              <div class="product-lane-title">Keuken</div>
+              <div class="product-lane-subtitle">Voor de allerlaagste prijs</div>
+            </div>
+            <a class="product-lane-link" href="#">Bekijk alles &rsaquo;</a>
+          </div>
+          <div class="product-cards-scroll"><div class="product-cards-track">
+            <div class="product-card-category">
+              <div class="product-card-category-img">
+                <img src="../systemized/images/products/keuken-content.webp" alt="Keuken">
+              </div>
+              <div class="product-card-category-arrow">
+                <svg viewBox="0 0 16 16" fill="none"><path d="M6 3l5 5-5 5" stroke="#001489" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+              <div class="product-card-category-body">
+                <div class="product-card-category-title">Voor de allerlaagste prijs</div>
+              </div>
+            </div>
+            <div class="product-card">
+              <div class="product-card-img">
+                <img src="../systemized/images/products/afwasborstel.webp" alt="Afwasborstel">
+              </div>
+              <div class="product-card-body">
+                <div class="product-card-name">Afwasborstel</div>
+                <div class="product-card-detail">Diverse kleuren</div>
+                <div class="product-card-unit">€0,49/st</div>
+                <div class="product-card-price"><span class="price-euros">0</span><span class="price-cents">49</span></div>
+              </div>
+            </div>
+            <div class="product-card">
+              <div class="product-card-img">
+                <img src="../systemized/images/products/curver-vershouddoos.webp" alt="Curver Vershouddoos">
+              </div>
+              <div class="product-card-body">
+                <div class="product-card-name">Curver Vershouddoos</div>
+                <div class="product-card-detail">1,3 liter</div>
+                <div class="product-card-unit">€2,62/st</div>
+                <div class="product-card-price"><span class="price-euros">2</span><span class="price-cents">62</span></div>
+              </div>
+            </div>
+            <div class="product-card">
+              <div class="product-card-img">
+                <img src="../systemized/images/products/huishouddoekjes.webp" alt="Huishouddoekjes">
+              </div>
+              <div class="product-card-body">
+                <div class="product-card-name">Spargo Vochtige Huishouddoekjes</div>
+                <div class="product-card-detail">80 stuks</div>
+                <div class="product-card-unit">€0,01/st</div>
+                <div class="product-card-price"><span class="price-euros">0</span><span class="price-cents">59</span></div>
+              </div>
+            </div>
+            <div class="product-card">
+              <div class="product-card-img">
+                <img src="../systemized/images/products/curver-prullenbak.webp" alt="Curver Prullenbak">
+              </div>
+              <div class="product-card-body">
+                <div class="product-card-name">Curver Prullenbak</div>
+                <div class="product-card-detail">10 liter</div>
+                <div class="product-card-unit">€2,99/st</div>
+                <div class="product-card-price"><span class="price-euros">2</span><span class="price-cents">99</span></div>
+              </div>
+            </div>
+            <div class="product-card">
+              <div class="product-card-img">
+                <img src="../systemized/images/products/palazzo-koffiecups.webp" alt="Palazzo Koffiecups">
+              </div>
+              <div class="product-card-body">
+                <div class="product-card-name">Palazzo Koffiecups Espresso</div>
+                <div class="product-card-detail">20 stuks</div>
+                <div class="product-card-unit">€0,12/st</div>
+                <div class="product-card-price"><span class="price-euros">2</span><span class="price-cents">49</span></div>
+              </div>
+            </div>
+          </div></div>
         </div>
 
       </div>
@@ -2407,7 +2986,7 @@
         <div class="weekactie-header">
           <img class="weekactie-header-logo" src="images/weekactie-logo.png" alt="Weekactie">
         </div>
-        <div class="weekactie-date">28 september t/m 4 oktober</div>
+        <div class="weekactie-date">16 maart t/m 22 maart</div>
         <div class="weekactie-grid">
           <div class="wa-card">
             <span class="wa-card-badge">Weekactie</span>
@@ -2496,7 +3075,7 @@
         <div class="weekactie-header">
           <img class="weekactie-header-logo" src="images/weekactie-logo.png" alt="Weekactie">
         </div>
-        <div class="weekactie-date">28 september t/m 4 oktober</div>
+        <div class="weekactie-date">16 maart t/m 22 maart</div>
         <div class="weekactie-grid">
           <div class="wa-card">
             <span class="wa-card-badge">Online deal</span>
@@ -2776,6 +3355,49 @@
       <div class="home-indicator-bar"></div>
     </div>
   </div>
+  <!-- iOS Keyboard Simulation -->
+  <div class="ios-keyboard" id="iosKeyboard">
+    <div class="ios-kb-row">
+      <button class="ios-kb-key" type="button">q</button>
+      <button class="ios-kb-key" type="button">w</button>
+      <button class="ios-kb-key" type="button">e</button>
+      <button class="ios-kb-key" type="button">r</button>
+      <button class="ios-kb-key" type="button">t</button>
+      <button class="ios-kb-key" type="button">y</button>
+      <button class="ios-kb-key" type="button">u</button>
+      <button class="ios-kb-key" type="button">i</button>
+      <button class="ios-kb-key" type="button">o</button>
+      <button class="ios-kb-key" type="button">p</button>
+    </div>
+    <div class="ios-kb-row">
+      <button class="ios-kb-key" type="button">a</button>
+      <button class="ios-kb-key" type="button">s</button>
+      <button class="ios-kb-key" type="button">d</button>
+      <button class="ios-kb-key" type="button">f</button>
+      <button class="ios-kb-key" type="button">g</button>
+      <button class="ios-kb-key" type="button">h</button>
+      <button class="ios-kb-key" type="button">j</button>
+      <button class="ios-kb-key" type="button">k</button>
+      <button class="ios-kb-key" type="button">l</button>
+    </div>
+    <div class="ios-kb-row">
+      <button class="ios-kb-key special shift" type="button">&#x21E7;</button>
+      <button class="ios-kb-key" type="button">z</button>
+      <button class="ios-kb-key" type="button">x</button>
+      <button class="ios-kb-key" type="button">c</button>
+      <button class="ios-kb-key" type="button">v</button>
+      <button class="ios-kb-key" type="button">b</button>
+      <button class="ios-kb-key" type="button">n</button>
+      <button class="ios-kb-key" type="button">m</button>
+      <button class="ios-kb-key special backspace" type="button">&#x232B;</button>
+    </div>
+    <div class="ios-kb-row">
+      <button class="ios-kb-key special" type="button">123</button>
+      <button class="ios-kb-key special" type="button">&#x1F310;</button>
+      <button class="ios-kb-key space" type="button">space</button>
+      <button class="ios-kb-key search-key" type="button" id="iosKbSearch">search</button>
+    </div>
+  </div>
 </div>
 
 <script>
@@ -2891,6 +3513,63 @@
       });
     });
   });
+</script>
+
+<script>
+(function() {
+  const keyboard = document.getElementById('iosKeyboard');
+  const phoneFrame = document.querySelector('.phone-frame');
+  const searchKey = document.getElementById('iosKbSearch');
+
+  const searchInputs = phoneFrame.querySelectorAll('input[type="search"], input.search-label');
+  const searchSpans = phoneFrame.querySelectorAll('span.search-label');
+
+  function showKeyboard() {
+    keyboard.classList.add('active');
+  }
+
+  function hideKeyboard() {
+    keyboard.classList.remove('active');
+    if (document.activeElement && document.activeElement.closest('.search-bar')) {
+      document.activeElement.blur();
+    }
+  }
+
+  searchInputs.forEach(function(input) {
+    input.addEventListener('focus', function(e) {
+      e.preventDefault();
+      showKeyboard();
+    });
+  });
+
+  searchSpans.forEach(function(span) {
+    span.addEventListener('click', showKeyboard);
+    span.closest('.search-bar').addEventListener('click', showKeyboard);
+  });
+
+  searchInputs.forEach(function(input) {
+    var bar = input.closest('.search-bar');
+    if (bar) {
+      bar.addEventListener('click', function() {
+        input.focus();
+      });
+    }
+  });
+
+  searchKey.addEventListener('click', hideKeyboard);
+
+  phoneFrame.addEventListener('click', function(e) {
+    if (keyboard.classList.contains('active') &&
+        !e.target.closest('.ios-keyboard') &&
+        !e.target.closest('.search-bar')) {
+      hideKeyboard();
+    }
+  });
+
+  keyboard.addEventListener('click', function(e) {
+    e.stopPropagation();
+  });
+})();
 </script>
 
 </body>
