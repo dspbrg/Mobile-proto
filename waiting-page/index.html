@@ -170,14 +170,35 @@
       color: var(--white);
     }
 
-    .btn-ghost {
-      background: transparent;
-      color: var(--white);
-      border: 1.5px solid rgba(255, 255, 255, 0.35);
-    }
-
     .btn:active {
       transform: scale(0.98);
+    }
+
+    .btn-notify {
+      height: 56px;
+      padding: 0 16px 0 24px;
+      font-size: 17px;
+      font-weight: 700;
+    }
+
+    .counter-badge {
+      background: rgba(255, 255, 255, 0.22);
+      color: var(--white);
+      font-weight: 700;
+      min-width: 32px;
+      height: 32px;
+      border-radius: 16px;
+      padding: 0 10px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 15px;
+      font-variant-numeric: tabular-nums;
+      transition: transform 0.18s ease;
+    }
+
+    .counter-badge.bump {
+      transform: scale(1.18);
     }
 
     .toast {
@@ -226,8 +247,10 @@
       </p>
 
       <div class="actions">
-        <button class="btn btn-primary" id="share-btn">Share this page</button>
-        <button class="btn btn-ghost" id="reset-btn">Reset to now</button>
+        <button class="btn btn-primary btn-notify" id="notify-btn">
+          <span>Laat Daan weten dat we komen</span>
+          <span class="counter-badge" id="counter">–</span>
+        </button>
       </div>
     </div>
   </div>
@@ -248,8 +271,8 @@
     const timerUnitEl = document.getElementById('timer-unit');
     const sinceLabelEl = document.getElementById('since-label');
     const displayDurationEl = document.getElementById('display-duration');
-    const shareBtn = document.getElementById('share-btn');
-    const resetBtn = document.getElementById('reset-btn');
+    const notifyBtn = document.getElementById('notify-btn');
+    const counterEl = document.getElementById('counter');
     const toast = document.getElementById('toast');
 
     function pad(n) {
@@ -306,38 +329,50 @@
       showToast._t = setTimeout(() => toast.classList.remove('show'), 1800);
     }
 
-    shareBtn.addEventListener('click', async () => {
-      const url = window.location.href;
-      const shareData = {
-        title: 'Daan is waiting',
-        text: `Daan is waiting for ${displayDurationEl.textContent}.`,
-        url,
-      };
-      try {
-        if (navigator.share) {
-          await navigator.share(shareData);
-          return;
-        }
-      } catch (_) { /* user cancelled */ }
-      try {
-        await navigator.clipboard.writeText(url);
-        showToast('Link copied');
-      } catch (_) {
-        showToast(url);
-      }
-    });
+    const COUNTER_API = 'https://abacus.jasoncameron.dev';
+    const COUNTER_NS = 'dspbrg-mobile-proto';
+    const COUNTER_KEY = 'daan-comes-2026-05-13';
 
-    resetBtn.addEventListener('click', () => {
-      startMs = Date.now();
-      const url = new URL(window.location.href);
-      url.searchParams.set('since', String(startMs));
-      window.history.replaceState({}, '', url.toString());
-      render();
-      showToast('Timer reset');
-    });
+    function setCount(value) {
+      counterEl.textContent = value;
+      counterEl.classList.remove('bump');
+      void counterEl.offsetWidth;
+      counterEl.classList.add('bump');
+    }
+
+    async function loadCount() {
+      try {
+        const res = await fetch(`${COUNTER_API}/get/${COUNTER_NS}/${COUNTER_KEY}`);
+        if (!res.ok) throw new Error('not ok');
+        const data = await res.json();
+        counterEl.textContent = data.value ?? 0;
+      } catch (_) {
+        counterEl.textContent = '0';
+      }
+    }
+
+    async function hitCount() {
+      notifyBtn.disabled = true;
+      try {
+        const res = await fetch(`${COUNTER_API}/hit/${COUNTER_NS}/${COUNTER_KEY}`);
+        if (!res.ok) throw new Error('not ok');
+        const data = await res.json();
+        setCount(data.value);
+        showToast('Daan is op de hoogte');
+      } catch (_) {
+        const current = parseInt(counterEl.textContent, 10);
+        if (!Number.isNaN(current)) setCount(current + 1);
+        showToast('Offline — telt lokaal');
+      } finally {
+        setTimeout(() => { notifyBtn.disabled = false; }, 400);
+      }
+    }
+
+    notifyBtn.addEventListener('click', hitCount);
 
     render();
     setInterval(render, 1000);
+    loadCount();
   </script>
 </body>
 </html>
