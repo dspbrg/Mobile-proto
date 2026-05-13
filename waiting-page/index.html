@@ -236,14 +236,13 @@
   <div class="toast" id="toast">Link copied</div>
 
   <script>
+    const DEFAULT_START_MS = new Date('2026-05-13T18:13:00+02:00').getTime();
+
     const params = new URLSearchParams(window.location.search);
     let startMs = parseInt(params.get('since'), 10);
 
     if (!startMs || Number.isNaN(startMs)) {
-      startMs = Date.now();
-      const url = new URL(window.location.href);
-      url.searchParams.set('since', String(startMs));
-      window.history.replaceState({}, '', url.toString());
+      startMs = DEFAULT_START_MS;
     }
 
     const timerEl = document.getElementById('timer');
