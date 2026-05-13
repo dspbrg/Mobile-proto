@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="nl">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
@@ -17,6 +17,7 @@
       --brand-darkblue: #001489;
       --brand-orange: #ff8200;
       --brand-cyan: #00b6e7;
+      --brand-cyan-light: #66D3F1;
       --neutral-50: #f3f4f6;
       --neutral-300: #b6bec8;
       --neutral-700: #505862;
@@ -28,42 +29,23 @@
     html, body {
       height: 100%;
       font-family: 'Ubuntu', sans-serif;
-      background: #e8e8e8;
+      background: var(--brand-darkblue);
       display: flex;
       justify-content: center;
-      align-items: flex-start;
+      align-items: stretch;
+      color: var(--white);
     }
 
-    @media (max-width: 500px) {
-      html, body {
-        background: var(--white);
-        height: 100dvh;
-        overflow: hidden;
-      }
-    }
-
-    .phone-frame {
-      width: 375px;
-      height: 844px;
-      background: var(--white);
-      position: relative;
-      overflow: hidden;
-      box-shadow: 0 0 40px rgba(0,0,0,0.15);
+    .page {
+      width: 100%;
+      max-width: 480px;
+      min-height: 100dvh;
       display: flex;
       flex-direction: column;
     }
 
-    @media (max-width: 500px) {
-      .phone-frame {
-        width: 100%;
-        height: 100dvh;
-        box-shadow: none;
-      }
-    }
-
     .header {
-      background: var(--brand-darkblue);
-      padding: 16px 20px;
+      padding: 20px 24px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -71,17 +53,15 @@
     }
 
     .header img {
-      height: 24px;
+      height: 22px;
       width: auto;
     }
 
     .header .webshop {
-      font-family: 'Ubuntu', sans-serif;
       font-weight: 700;
       font-style: italic;
-      color: #66D3F1;
-      font-size: 16px;
-      line-height: 24px;
+      color: var(--brand-cyan-light);
+      font-size: 14px;
     }
 
     .content {
@@ -90,42 +70,42 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 24px;
+      padding: 24px 24px 40px;
       gap: 32px;
       text-align: center;
     }
 
-    .waiting-title {
-      font-size: 24px;
-      font-weight: 700;
-      color: var(--brand-darkblue);
-      line-height: 1.2;
+    .eyebrow {
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--brand-cyan-light);
     }
 
-    .waiting-title .name {
+    .title {
+      font-size: 32px;
+      font-weight: 700;
+      line-height: 1.15;
+      color: var(--white);
+    }
+
+    .title .name {
       color: var(--brand-orange);
     }
 
     .timer-card {
       width: 100%;
-      max-width: 280px;
+      max-width: 320px;
       aspect-ratio: 1 / 1;
       border-radius: var(--radius-round);
-      background: var(--brand-darkblue);
+      background: rgba(255, 255, 255, 0.06);
+      border: 2px dashed rgba(102, 211, 241, 0.35);
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      position: relative;
-      box-shadow: 0 8px 24px rgba(0, 20, 137, 0.25);
-    }
-
-    .timer-card::before {
-      content: '';
-      position: absolute;
-      inset: 12px;
-      border-radius: var(--radius-round);
-      border: 2px dashed rgba(102, 211, 241, 0.4);
+      gap: 6px;
     }
 
     .timer-value {
@@ -138,30 +118,41 @@
     }
 
     .timer-unit {
-      margin-top: 8px;
-      font-size: 14px;
+      font-size: 13px;
       font-weight: 500;
-      color: #66D3F1;
+      color: var(--brand-cyan-light);
       text-transform: uppercase;
-      letter-spacing: 1px;
+      letter-spacing: 2px;
     }
 
-    .timer-sub {
-      font-size: 14px;
-      color: var(--neutral-700);
-      max-width: 260px;
+    .timer-since {
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.55);
+      margin-top: 4px;
     }
 
-    .controls {
+    .subtitle {
+      font-size: 16px;
+      line-height: 1.45;
+      color: rgba(255, 255, 255, 0.78);
+      max-width: 320px;
+    }
+
+    .subtitle b {
+      color: var(--white);
+      font-weight: 700;
+    }
+
+    .actions {
       display: flex;
-      gap: 12px;
+      flex-direction: column;
+      gap: 10px;
       width: 100%;
       max-width: 320px;
     }
 
     .btn {
-      flex: 1;
-      height: 44px;
+      height: 48px;
       border-radius: var(--radius-round);
       border: none;
       font-family: inherit;
@@ -171,116 +162,184 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 6px;
+      gap: 8px;
     }
 
     .btn-primary {
-      background: var(--brand-cyan);
+      background: var(--brand-orange);
       color: var(--white);
     }
 
-    .btn-secondary {
+    .btn-ghost {
       background: transparent;
-      color: var(--brand-darkblue);
-      border: 1.5px solid var(--brand-darkblue);
+      color: var(--white);
+      border: 1.5px solid rgba(255, 255, 255, 0.35);
     }
 
     .btn:active {
       transform: scale(0.98);
     }
+
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(120%);
+      background: var(--white);
+      color: var(--brand-darkblue);
+      font-weight: 500;
+      font-size: 14px;
+      padding: 12px 20px;
+      border-radius: var(--radius-round);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+      transition: transform 0.25s ease;
+      pointer-events: none;
+    }
+
+    .toast.show {
+      transform: translateX(-50%) translateY(0);
+    }
   </style>
 </head>
 <body>
-  <div class="phone-frame">
+  <div class="page">
     <div class="header">
       <img src="../images/action-logo.svg" alt="Action" />
       <span class="webshop">webshop</span>
     </div>
 
     <div class="content">
-      <h1 class="waiting-title">
-        <span class="name">Daan</span> is waiting for<br />
-        <span id="display-minutes">5</span> minutes.
+      <span class="eyebrow">Still waiting</span>
+
+      <h1 class="title">
+        <span class="name">Daan</span> is waiting<br />
+        for <span id="display-duration">0 minutes</span>.
       </h1>
 
       <div class="timer-card" aria-live="polite">
-        <div class="timer-value" id="timer">05:00</div>
-        <div class="timer-unit">minutes</div>
+        <div class="timer-value" id="timer">00:00</div>
+        <div class="timer-unit" id="timer-unit">minutes</div>
+        <div class="timer-since" id="since-label"></div>
       </div>
 
-      <p class="timer-sub">We laten je weten zodra het zover is.</p>
+      <p class="subtitle">
+        While you're busy in the <b>AI prototype workshop</b>, the clock keeps ticking.
+      </p>
 
-      <div class="controls">
-        <button class="btn btn-secondary" id="reset-btn">Reset</button>
-        <button class="btn btn-primary" id="toggle-btn">Pauze</button>
+      <div class="actions">
+        <button class="btn btn-primary" id="share-btn">Share this page</button>
+        <button class="btn btn-ghost" id="reset-btn">Reset to now</button>
       </div>
     </div>
   </div>
 
+  <div class="toast" id="toast">Link copied</div>
+
   <script>
-    const START_SECONDS = 5 * 60;
-    let remaining = START_SECONDS;
-    let running = true;
-    let intervalId = null;
+    const params = new URLSearchParams(window.location.search);
+    let startMs = parseInt(params.get('since'), 10);
+
+    if (!startMs || Number.isNaN(startMs)) {
+      startMs = Date.now();
+      const url = new URL(window.location.href);
+      url.searchParams.set('since', String(startMs));
+      window.history.replaceState({}, '', url.toString());
+    }
 
     const timerEl = document.getElementById('timer');
-    const displayMinutesEl = document.getElementById('display-minutes');
-    const toggleBtn = document.getElementById('toggle-btn');
+    const timerUnitEl = document.getElementById('timer-unit');
+    const sinceLabelEl = document.getElementById('since-label');
+    const displayDurationEl = document.getElementById('display-duration');
+    const shareBtn = document.getElementById('share-btn');
     const resetBtn = document.getElementById('reset-btn');
+    const toast = document.getElementById('toast');
 
-    function format(seconds) {
-      const m = Math.floor(seconds / 60).toString().padStart(2, '0');
-      const s = (seconds % 60).toString().padStart(2, '0');
-      return `${m}:${s}`;
+    function pad(n) {
+      return String(n).padStart(2, '0');
+    }
+
+    function formatDuration(ms) {
+      const totalSeconds = Math.max(0, Math.floor(ms / 1000));
+      const hours = Math.floor(totalSeconds / 3600);
+      const minutes = Math.floor((totalSeconds % 3600) / 60);
+      const seconds = totalSeconds % 60;
+      return { hours, minutes, seconds, totalSeconds };
+    }
+
+    function naturalDuration({ hours, minutes, totalSeconds }) {
+      if (totalSeconds < 60) {
+        return `${totalSeconds} second${totalSeconds === 1 ? '' : 's'}`;
+      }
+      if (hours === 0) {
+        return `${minutes} minute${minutes === 1 ? '' : 's'}`;
+      }
+      const mPart = minutes === 0 ? '' : ` ${minutes}m`;
+      return `${hours}h${mPart}`;
+    }
+
+    function formatSinceLabel(ts) {
+      const d = new Date(ts);
+      const today = new Date();
+      const sameDay = d.toDateString() === today.toDateString();
+      const time = `${pad(d.getHours())}:${pad(d.getMinutes())}`;
+      return sameDay ? `since ${time}` : `since ${d.toLocaleString()}`;
     }
 
     function render() {
-      timerEl.textContent = format(remaining);
-      const minutesLeft = Math.ceil(remaining / 60);
-      displayMinutesEl.textContent = minutesLeft;
-    }
+      const elapsed = Date.now() - startMs;
+      const parts = formatDuration(elapsed);
 
-    function tick() {
-      if (remaining <= 0) {
-        clearInterval(intervalId);
-        intervalId = null;
-        running = false;
-        toggleBtn.textContent = 'Klaar';
-        toggleBtn.disabled = true;
-        return;
+      if (parts.hours > 0) {
+        timerEl.textContent = `${pad(parts.hours)}:${pad(parts.minutes)}:${pad(parts.seconds)}`;
+        timerUnitEl.textContent = 'hours';
+      } else {
+        timerEl.textContent = `${pad(parts.minutes)}:${pad(parts.seconds)}`;
+        timerUnitEl.textContent = 'minutes';
       }
-      remaining -= 1;
-      render();
+
+      displayDurationEl.textContent = naturalDuration(parts);
+      sinceLabelEl.textContent = formatSinceLabel(startMs);
     }
 
-    function start() {
-      if (intervalId) return;
-      intervalId = setInterval(tick, 1000);
-      running = true;
-      toggleBtn.textContent = 'Pauze';
+    function showToast(message) {
+      toast.textContent = message;
+      toast.classList.add('show');
+      clearTimeout(showToast._t);
+      showToast._t = setTimeout(() => toast.classList.remove('show'), 1800);
     }
 
-    function pause() {
-      clearInterval(intervalId);
-      intervalId = null;
-      running = false;
-      toggleBtn.textContent = 'Hervat';
-    }
-
-    toggleBtn.addEventListener('click', () => {
-      if (running) pause(); else start();
+    shareBtn.addEventListener('click', async () => {
+      const url = window.location.href;
+      const shareData = {
+        title: 'Daan is waiting',
+        text: `Daan is waiting for ${displayDurationEl.textContent}.`,
+        url,
+      };
+      try {
+        if (navigator.share) {
+          await navigator.share(shareData);
+          return;
+        }
+      } catch (_) { /* user cancelled */ }
+      try {
+        await navigator.clipboard.writeText(url);
+        showToast('Link copied');
+      } catch (_) {
+        showToast(url);
+      }
     });
 
     resetBtn.addEventListener('click', () => {
-      remaining = START_SECONDS;
-      toggleBtn.disabled = false;
+      startMs = Date.now();
+      const url = new URL(window.location.href);
+      url.searchParams.set('since', String(startMs));
+      window.history.replaceState({}, '', url.toString());
       render();
-      pause();
-      start();
+      showToast('Timer reset');
     });
 
     render();
-    start();
+    setInterval(render, 1000);
   </script>
 </body>
 </html>
