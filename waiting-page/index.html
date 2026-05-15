@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Daan is waiting…</title>
+  <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    :root {
+      --brand-darkblue: #001489;
+      --brand-orange: #ff8200;
+      --brand-cyan: #00b6e7;
+      --brand-cyan-light: #66D3F1;
+      --neutral-50: #f3f4f6;
+      --neutral-300: #b6bec8;
+      --neutral-700: #505862;
+      --white: #ffffff;
+      --radius-sm: 8px;
+      --radius-round: 360px;
+    }
+
+    html, body {
+      height: 100%;
+      font-family: 'Ubuntu', sans-serif;
+      background: var(--brand-darkblue);
+      display: flex;
+      justify-content: center;
+      align-items: stretch;
+      color: var(--white);
+    }
+
+    .page {
+      width: 100%;
+      max-width: 480px;
+      min-height: 100dvh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .header {
+      padding: 20px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    .header img {
+      height: 22px;
+      width: auto;
+    }
+
+    .header .webshop {
+      font-weight: 700;
+      font-style: italic;
+      color: var(--brand-cyan-light);
+      font-size: 14px;
+    }
+
+    .content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 24px 24px 40px;
+      gap: 32px;
+      text-align: center;
+    }
+
+    .eyebrow {
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--brand-cyan-light);
+    }
+
+    .title {
+      font-size: 32px;
+      font-weight: 700;
+      line-height: 1.15;
+      color: var(--white);
+    }
+
+    .title .name {
+      color: var(--brand-orange);
+    }
+
+    .timer-card {
+      width: 100%;
+      max-width: 320px;
+      aspect-ratio: 1 / 1;
+      border-radius: var(--radius-round);
+      background: rgba(255, 255, 255, 0.06);
+      border: 2px dashed rgba(102, 211, 241, 0.35);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    .timer-value {
+      font-size: 72px;
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1;
+      font-variant-numeric: tabular-nums;
+      letter-spacing: -2px;
+    }
+
+    .timer-unit {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--brand-cyan-light);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    .timer-since {
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.55);
+      margin-top: 4px;
+    }
+
+    .subtitle {
+      font-size: 16px;
+      line-height: 1.45;
+      color: rgba(255, 255, 255, 0.78);
+      max-width: 320px;
+    }
+
+    .subtitle b {
+      color: var(--white);
+      font-weight: 700;
+    }
+
+    .actions {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      width: 100%;
+      max-width: 320px;
+    }
+
+    .btn {
+      height: 48px;
+      border-radius: var(--radius-round);
+      border: none;
+      font-family: inherit;
+      font-size: 16px;
+      font-weight: 500;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .btn-primary {
+      background: var(--brand-orange);
+      color: var(--white);
+    }
+
+    .btn:active {
+      transform: scale(0.98);
+    }
+
+    .btn-notify {
+      height: 56px;
+      padding: 0 16px 0 24px;
+      font-size: 17px;
+      font-weight: 700;
+    }
+
+    .counter-badge {
+      background: rgba(255, 255, 255, 0.22);
+      color: var(--white);
+      font-weight: 700;
+      min-width: 32px;
+      height: 32px;
+      border-radius: 16px;
+      padding: 0 10px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 15px;
+      font-variant-numeric: tabular-nums;
+      transition: transform 0.18s ease;
+    }
+
+    .counter-badge.bump {
+      transform: scale(1.18);
+    }
+
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(120%);
+      background: var(--white);
+      color: var(--brand-darkblue);
+      font-weight: 500;
+      font-size: 14px;
+      padding: 12px 20px;
+      border-radius: var(--radius-round);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+      transition: transform 0.25s ease;
+      pointer-events: none;
+    }
+
+    .toast.show {
+      transform: translateX(-50%) translateY(0);
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="header">
+      <img src="../images/action-logo.svg" alt="Action" />
+    </div>
+
+    <div class="content">
+      <h1 class="title">
+        <span class="name">Daan</span> is waiting<br />
+        for <span id="display-duration">0 minutes</span>.
+      </h1>
+
+      <div class="timer-card" aria-live="polite">
+        <div class="timer-value" id="timer">00:00</div>
+        <div class="timer-unit" id="timer-unit">minutes</div>
+        <div class="timer-since" id="since-label"></div>
+      </div>
+
+      <p class="subtitle">
+        While you're busy in the <b>AI prototype workshop</b>, the clock keeps ticking.
+      </p>
+
+      <div class="actions">
+        <button class="btn btn-primary btn-notify" id="notify-btn">
+          <span>Laat Daan weten dat we komen</span>
+          <span class="counter-badge" id="counter">–</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast">Link copied</div>
+
+  <script>
+    const DEFAULT_START_MS = new Date('2026-05-13T18:13:00+02:00').getTime();
+
+    const params = new URLSearchParams(window.location.search);
+    let startMs = parseInt(params.get('since'), 10);
+
+    if (!startMs || Number.isNaN(startMs)) {
+      startMs = DEFAULT_START_MS;
+    }
+
+    const timerEl = document.getElementById('timer');
+    const timerUnitEl = document.getElementById('timer-unit');
+    const sinceLabelEl = document.getElementById('since-label');
+    const displayDurationEl = document.getElementById('display-duration');
+    const notifyBtn = document.getElementById('notify-btn');
+    const counterEl = document.getElementById('counter');
+    const toast = document.getElementById('toast');
+
+    function pad(n) {
+      return String(n).padStart(2, '0');
+    }
+
+    function formatDuration(ms) {
+      const totalSeconds = Math.max(0, Math.floor(ms / 1000));
+      const hours = Math.floor(totalSeconds / 3600);
+      const minutes = Math.floor((totalSeconds % 3600) / 60);
+      const seconds = totalSeconds % 60;
+      return { hours, minutes, seconds, totalSeconds };
+    }
+
+    function naturalDuration({ hours, minutes, totalSeconds }) {
+      if (totalSeconds < 60) {
+        return `${totalSeconds} second${totalSeconds === 1 ? '' : 's'}`;
+      }
+      if (hours === 0) {
+        return `${minutes} minute${minutes === 1 ? '' : 's'}`;
+      }
+      const mPart = minutes === 0 ? '' : ` ${minutes}m`;
+      return `${hours}h${mPart}`;
+    }
+
+    function formatSinceLabel(ts) {
+      const d = new Date(ts);
+      const today = new Date();
+      const sameDay = d.toDateString() === today.toDateString();
+      const time = `${pad(d.getHours())}:${pad(d.getMinutes())}`;
+      return sameDay ? `since ${time}` : `since ${d.toLocaleString()}`;
+    }
+
+    function render() {
+      const elapsed = Date.now() - startMs;
+      const parts = formatDuration(elapsed);
+
+      if (parts.hours > 0) {
+        timerEl.textContent = `${pad(parts.hours)}:${pad(parts.minutes)}:${pad(parts.seconds)}`;
+        timerUnitEl.textContent = 'hours';
+      } else {
+        timerEl.textContent = `${pad(parts.minutes)}:${pad(parts.seconds)}`;
+        timerUnitEl.textContent = 'minutes';
+      }
+
+      displayDurationEl.textContent = naturalDuration(parts);
+      sinceLabelEl.textContent = formatSinceLabel(startMs);
+    }
+
+    function showToast(message) {
+      toast.textContent = message;
+      toast.classList.add('show');
+      clearTimeout(showToast._t);
+      showToast._t = setTimeout(() => toast.classList.remove('show'), 1800);
+    }
+
+    const COUNTER_API = 'https://abacus.jasoncameron.dev';
+    const COUNTER_NS = 'dspbrg-mobile-proto';
+    const COUNTER_KEY = 'daan-comes-2026-05-13';
+
+    function setCount(value) {
+      counterEl.textContent = value;
+      counterEl.classList.remove('bump');
+      void counterEl.offsetWidth;
+      counterEl.classList.add('bump');
+    }
+
+    async function loadCount() {
+      try {
+        const res = await fetch(`${COUNTER_API}/get/${COUNTER_NS}/${COUNTER_KEY}`);
+        if (!res.ok) throw new Error('not ok');
+        const data = await res.json();
+        counterEl.textContent = data.value ?? 0;
+      } catch (_) {
+        counterEl.textContent = '0';
+      }
+    }
+
+    async function hitCount() {
+      notifyBtn.disabled = true;
+      try {
+        const res = await fetch(`${COUNTER_API}/hit/${COUNTER_NS}/${COUNTER_KEY}`);
+        if (!res.ok) throw new Error('not ok');
+        const data = await res.json();
+        setCount(data.value);
+        showToast('Daan is op de hoogte');
+      } catch (_) {
+        const current = parseInt(counterEl.textContent, 10);
+        if (!Number.isNaN(current)) setCount(current + 1);
+        showToast('Offline — telt lokaal');
+      } finally {
+        setTimeout(() => { notifyBtn.disabled = false; }, 400);
+      }
+    }
+
+    notifyBtn.addEventListener('click', hitCount);
+
+    render();
+    setInterval(render, 1000);
+    loadCount();
+  </script>
+</body>
+</html>
